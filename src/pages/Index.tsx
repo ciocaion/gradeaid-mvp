@@ -29,7 +29,7 @@ const Index = () => {
           transition={{ delay: 0.4 }}
         >
           Visualize integer addition and subtraction using balloons and sandbags.
-          Balloons represent positive numbers, sandbags represent negative numbers.
+          Explore our interactive 3D environment with draggable elements!
         </motion.p>
       </motion.header>
       
@@ -50,6 +50,7 @@ const Index = () => {
       >
         <p>
           Click on balloons or sandbags to remove them. Use the controls to add more.
+          Try dragging the balloons and sandbags to see how they interact!
         </p>
       </motion.footer>
     </div>

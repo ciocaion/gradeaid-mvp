@@ -21,6 +21,15 @@ export const Balloon: React.FC<BalloonProps> = ({ index, total, onClick }) => {
   const xOffset = Math.sin(angle) * radius;
   const yOffset = Math.cos(angle) * radius * 0.5; // Elliptical arrangement
   
+  // Random balloon color variants
+  const balloonColors = [
+    'bg-red-500', 'bg-blue-500', 'bg-green-500', 
+    'bg-yellow-500', 'bg-purple-500', 'bg-pink-500'
+  ];
+  const colorIndex = (index % balloonColors.length);
+  const balloonColor = balloonColors[colorIndex];
+  const balloonDarkColor = balloonColor.replace('500', '700');
+  
   return (
     <motion.div
       className="absolute z-10 cursor-pointer"
@@ -37,8 +46,21 @@ export const Balloon: React.FC<BalloonProps> = ({ index, total, onClick }) => {
         stiffness: 50,
         duration: 0.8
       }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ 
+        scale: 1.1,
+        y: -5,
+        transition: { duration: 0.2 }
+      }}
       onClick={onClick}
+      drag 
+      dragConstraints={{
+        top: -50,
+        right: 50,
+        bottom: 50,
+        left: -50
+      }}
+      dragElastic={0.7}
+      dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
     >
       {/* Balloon String */}
       <div 
@@ -52,7 +74,7 @@ export const Balloon: React.FC<BalloonProps> = ({ index, total, onClick }) => {
       
       {/* Balloon */}
       <motion.div
-        className="w-16 h-20 rounded-full bg-balloon shadow-md flex items-center justify-center relative overflow-hidden"
+        className={`w-16 h-20 rounded-full ${balloonColor} shadow-md flex items-center justify-center relative overflow-hidden`}
         animate={{ 
           y: [0, -5, 0],
           rotate: [0, xOffset > 0 ? 3 : -3, 0]
@@ -62,13 +84,14 @@ export const Balloon: React.FC<BalloonProps> = ({ index, total, onClick }) => {
           duration: 3 + (index % 3), 
           ease: "easeInOut" 
         }}
+        whileTap={{ scale: 0.9 }}
       >
-        <div className="absolute inset-0 bg-balloonDark rounded-full opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-8 h-8 blur-sm" />
+        <div className={`absolute inset-0 ${balloonDarkColor} rounded-full opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-8 h-8 blur-sm`} />
         <div className="w-4 h-4 rounded-full bg-white opacity-40 absolute top-1/4 left-1/4" />
       </motion.div>
       
       {/* Balloon Knot */}
-      <div className="w-3 h-4 bg-balloonDark rounded-b-full mx-auto" />
+      <div className={`w-3 h-4 ${balloonDarkColor} rounded-b-full mx-auto`} />
     </motion.div>
   );
 };
@@ -78,6 +101,12 @@ export const Sandbag: React.FC<SandbagProps> = ({ index, total, onClick }) => {
   const angle = (index / total) * 2 * Math.PI;
   const radius = 50 + (index % 3) * 15; // Varying distances from center
   const xOffset = Math.sin(angle) * radius;
+  
+  // Random sandbag color variants
+  const sandbagColors = ['bg-amber-700', 'bg-amber-800', 'bg-yellow-800', 'bg-amber-900'];
+  const colorIndex = (index % sandbagColors.length);
+  const sandbagColor = sandbagColors[colorIndex];
+  const sandbagDarkColor = 'bg-amber-950';
   
   return (
     <motion.div
@@ -95,8 +124,21 @@ export const Sandbag: React.FC<SandbagProps> = ({ index, total, onClick }) => {
         stiffness: 80,
         duration: 0.6 
       }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ 
+        scale: 1.1,
+        y: 5,
+        transition: { duration: 0.2 }
+      }}
       onClick={onClick}
+      drag 
+      dragConstraints={{
+        top: -50,
+        right: 50,
+        bottom: 50,
+        left: -50
+      }}
+      dragElastic={0.5}
+      dragTransition={{ bounceStiffness: 400, bounceDamping: 10 }}
     >
       {/* Sandbag String */}
       <div 
@@ -110,7 +152,7 @@ export const Sandbag: React.FC<SandbagProps> = ({ index, total, onClick }) => {
       
       {/* Sandbag */}
       <motion.div
-        className="w-12 h-16 bg-sandbag rounded-md shadow-md flex items-center justify-center relative overflow-hidden"
+        className={`w-12 h-16 ${sandbagColor} rounded-md shadow-md flex items-center justify-center relative overflow-hidden`}
         animate={{ 
           y: [0, 5, 0],
           rotate: [0, xOffset > 0 ? 3 : -3, 0]
@@ -120,13 +162,14 @@ export const Sandbag: React.FC<SandbagProps> = ({ index, total, onClick }) => {
           duration: 2.5 + (index % 2), 
           ease: "easeInOut" 
         }}
+        whileTap={{ scale: 0.9 }}
       >
-        <div className="absolute inset-0 bg-sandbagDark opacity-30 bottom-0 h-1/2 rounded-b-md" />
+        <div className={`absolute inset-0 ${sandbagDarkColor} opacity-30 bottom-0 h-1/2 rounded-b-md`} />
         <div className="absolute top-0 left-0 w-full h-full grid grid-cols-2 gap-1 p-1 opacity-30">
-          <div className="bg-sandbagDark rounded-sm"></div>
-          <div className="bg-sandbagDark rounded-sm"></div>
-          <div className="bg-sandbagDark rounded-sm"></div>
-          <div className="bg-sandbagDark rounded-sm"></div>
+          <div className={`${sandbagDarkColor} rounded-sm`}></div>
+          <div className={`${sandbagDarkColor} rounded-sm`}></div>
+          <div className={`${sandbagDarkColor} rounded-sm`}></div>
+          <div className={`${sandbagDarkColor} rounded-sm`}></div>
         </div>
       </motion.div>
     </motion.div>
@@ -145,7 +188,7 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
       
       {/* Basket */}
       <motion.div 
-        className="w-24 h-16 bg-gradient-to-b from-basket to-yellow-800 rounded-b-xl relative flex flex-col items-center overflow-hidden"
+        className="w-24 h-16 bg-gradient-to-b from-amber-600 to-amber-800 rounded-b-xl relative flex flex-col items-center overflow-hidden"
         initial={{ scale: 0.9 }}
         animate={{ 
           scale: [1, balloons > sandbags ? 1.03 : 0.97, 1],
@@ -156,6 +199,8 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
           repeat: Infinity,
           ease: "easeInOut" 
         }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
         {/* Basket weaving details */}
         <div className="w-full h-3 border-t border-b border-yellow-800/60 mt-2"></div>
@@ -163,14 +208,14 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
         
         {/* Display values - only shown if there are any */}
         {(balloons > 0 || sandbags > 0) && (
-          <div className="absolute -right-10 top-1/2 -translate-y-1/2 flex flex-col items-center">
+          <div className="absolute -right-14 top-1/2 -translate-y-1/2 flex flex-col items-center">
             {balloons > 0 && (
-              <div className="text-xs font-semibold mb-1 bg-balloon text-white px-2 py-0.5 rounded-full">
+              <div className="text-xs font-semibold mb-1 bg-blue-500 text-white px-2 py-0.5 rounded-full shadow-md">
                 +{balloons}
               </div>
             )}
             {sandbags > 0 && (
-              <div className="text-xs font-semibold mb-1 bg-sandbag text-white px-2 py-0.5 rounded-full">
+              <div className="text-xs font-semibold mb-1 bg-amber-800 text-white px-2 py-0.5 rounded-full shadow-md">
                 -{sandbags}
               </div>
             )}
