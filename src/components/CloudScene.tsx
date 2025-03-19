@@ -19,7 +19,7 @@ const CloudParticle = ({ position, speed, size }: { position: [number, number, n
   return (
     <mesh ref={mesh} position={position}>
       <sphereGeometry args={[size, 8, 8]} />
-      <meshStandardMaterial color="white" transparent opacity={0.8} />
+      <meshStandardMaterial color="#D3E4FD" transparent opacity={0.8} />
     </mesh>
   );
 };

@@ -10,13 +10,12 @@ interface NumberLineProps {
 }
 
 const NumberLine: React.FC<NumberLineProps> = ({ min, max, value, height }) => {
-  // Generate the tick marks
-  const ticks = [];
+  // Generate numbers for the number line
+  const numbers = [];
   for (let i = min; i <= max; i++) {
     const position = height - ((i - min) / (max - min)) * height;
-    const isMajor = i % 5 === 0 || i === min || i === max;
     
-    ticks.push(
+    numbers.push(
       <div 
         key={i} 
         className="absolute flex items-center"
@@ -24,15 +23,13 @@ const NumberLine: React.FC<NumberLineProps> = ({ min, max, value, height }) => {
       >
         {/* Line */}
         <div 
-          className={`h-px bg-gray-400 ${isMajor ? 'w-6' : 'w-3'}`}
+          className="h-px bg-gray-400 w-4"
         />
         
-        {/* Label (only for major ticks) */}
-        {isMajor && (
-          <div className="ml-2 text-sm font-medium text-gray-600">
-            {i}
-          </div>
-        )}
+        {/* Number label */}
+        <div className="ml-2 text-sm font-medium text-gray-700">
+          {i}
+        </div>
       </div>
     );
   }
@@ -41,7 +38,7 @@ const NumberLine: React.FC<NumberLineProps> = ({ min, max, value, height }) => {
     <div className="relative h-full flex items-center">
       {/* Vertical Line */}
       <div className="h-full w-px bg-gray-400 relative">
-        {ticks}
+        {numbers}
         
         {/* Current Value Indicator */}
         <motion.div 
