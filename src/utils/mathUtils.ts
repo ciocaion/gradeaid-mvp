@@ -67,8 +67,7 @@ export const formatExpression = (balloons: number, sandbags: number): string => 
   }
 };
 
-// Determine the basket position based on the total value
-// This is changed to work with a wider range of values
+// Determine the basket position based on the total value for the 2D number line
 export const getBasketPosition = (value: number, maxHeight: number, minHeight: number = 0): number => {
   // The max range we want to represent visually
   const visualRange = 15;
