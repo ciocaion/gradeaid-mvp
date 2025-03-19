@@ -3,17 +3,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 interface NumberLineProps {
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
   value: number;
   height: number;
 }
 
-const NumberLine: React.FC<NumberLineProps> = ({ min, max, value, height }) => {
+const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, height }) => {
+  // Dynamically adjust the range based on the current value
+  const adjustedMin = Math.min(min, value - 2);
+  const adjustedMax = Math.max(max, value + 2);
+  
   // Generate numbers for the number line
   const numbers = [];
-  for (let i = min; i <= max; i++) {
-    const position = height - ((i - min) / (max - min)) * height;
+  for (let i = adjustedMin; i <= adjustedMax; i++) {
+    const position = height - ((i - adjustedMin) / (adjustedMax - adjustedMin)) * height;
     
     numbers.push(
       <div 
@@ -44,7 +48,7 @@ const NumberLine: React.FC<NumberLineProps> = ({ min, max, value, height }) => {
         <motion.div 
           className="absolute -left-2 w-4 h-4 bg-primary rounded-full border-2 border-white"
           style={{ 
-            top: height - ((value - min) / (max - min)) * height 
+            top: height - ((value - adjustedMin) / (adjustedMax - adjustedMin)) * height 
           }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
