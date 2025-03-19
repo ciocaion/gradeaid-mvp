@@ -5,7 +5,7 @@ import Playground from '@/components/Playground';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky/30 to-sky-200/30 flex flex-col p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-b from-sky-100/30 to-sky-200/30 flex flex-col p-4 md:p-8">
       <motion.header 
         className="text-center mb-8"
         initial={{ opacity: 0, y: -20 }}
