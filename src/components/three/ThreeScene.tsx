@@ -35,7 +35,7 @@ const ThreeScene: React.FC<ThreeSceneProps> = ({
   return (
     <>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
       <directionalLight position={[-5, -5, -5]} intensity={0.2} />
       
       {/* Sky backdrop */}

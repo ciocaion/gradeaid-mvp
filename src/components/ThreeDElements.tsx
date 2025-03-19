@@ -17,7 +17,7 @@ const ThreeDElements: React.FC<ThreeDElementsProps> = (props) => {
     <div className="w-full h-full">
       <Canvas 
         camera={{ position: [0, 0, 5], fov: 50 }}
-        style={{ background: 'transparent' }}
+        gl={{ antialias: true, alpha: true }}
       >
         <ThreeScene {...props} />
         <OrbitControls 
