@@ -36,8 +36,8 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
         <NumberLine value={value} height={playgroundHeight} />
       </div>
       
-      {/* 3D Balloons and Sandbags */}
-      <div className="absolute inset-0 z-10 pointer-events-auto">
+      {/* 3D Balloons and Sandbags - now with proper pointer events handling */}
+      <div className="absolute inset-0 z-10">
         {balloons > 0 && (
           <div className="absolute inset-0 h-1/2">
             <ThreeDItems 

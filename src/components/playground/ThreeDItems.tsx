@@ -1,5 +1,5 @@
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { OrbitControls } from '@react-three/drei';
@@ -131,7 +131,13 @@ const Sandbag3D = ({ index, total, onRemove }: { index: number; total: number; o
 // Camera controls for interactivity
 const CameraController = () => {
   const { camera, gl } = useThree();
-  return <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} args={[camera, gl.domElement]} />;
+  return <OrbitControls 
+    enableZoom={false} 
+    enablePan={false} 
+    enableRotate={true} 
+    makeDefault
+    args={[camera, gl.domElement]} 
+  />;
 };
 
 // Main 3D scene for balloons or sandbags
@@ -141,8 +147,8 @@ const ThreeDItems: React.FC<ThreeDProps> = ({ count, type, onRemove }) => {
   const ItemComponent = type === 'balloon' ? Balloon3D : Sandbag3D;
   
   return (
-    <div className="absolute inset-0 z-10">
-      <Canvas camera={{ position: [0, 0, 6], fov: 40 }}>
+    <div className="absolute inset-0 z-10 pointer-events-none">
+      <Canvas className="pointer-events-auto" camera={{ position: [0, 0, 6], fov: 40 }}>
         <CameraController />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
