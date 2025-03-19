@@ -75,7 +75,8 @@ const CloudScene: React.FC<{ height?: number, animate?: boolean }> = ({ height =
           enablePan={false} 
           autoRotate 
           autoRotateSpeed={0.5} 
-          rotateSpeed={0.5} 
+          rotateSpeed={0.5}
+          makeDefault
         />}
       </Canvas>
     </div>
