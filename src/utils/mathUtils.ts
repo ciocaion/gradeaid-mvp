@@ -68,13 +68,17 @@ export const formatExpression = (balloons: number, sandbags: number): string => 
 };
 
 // Determine the basket position based on the total value
+// This is changed to work with a wider range of values
 export const getBasketPosition = (value: number, maxHeight: number, minHeight: number = 0): number => {
-  // Clamp value between -10 and 10 for positioning
-  const clampedValue = Math.max(-10, Math.min(10, value));
+  // The max range we want to represent visually
+  const visualRange = 15;
   
-  // Map from [-10, 10] to [minHeight, maxHeight]
+  // Clamp value between -visualRange and visualRange for positioning
+  const clampedValue = Math.max(-visualRange, Math.min(visualRange, value));
+  
+  // Map from [-visualRange, visualRange] to [minHeight, maxHeight]
   const range = maxHeight - minHeight;
-  const mappedValue = ((clampedValue + 10) / 20) * range + minHeight;
+  const mappedValue = ((clampedValue + visualRange) / (2 * visualRange)) * range + minHeight;
   
   return mappedValue;
 };

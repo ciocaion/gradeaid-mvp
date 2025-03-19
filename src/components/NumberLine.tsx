@@ -10,15 +10,20 @@ interface NumberLineProps {
 }
 
 const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, height }) => {
-  // Adjust the range to include the current value with padding
-  // If value is outside current range, expand to include it with some padding
-  const adjustedMin = Math.min(min, value - 2);
-  const adjustedMax = Math.max(max, value + 2);
+  // Always center the current value and show a range around it
+  const rangeSize = 5; // How many numbers to show above and below the current value
+  const adjustedMin = value - rangeSize;
+  const adjustedMax = value + rangeSize;
   
   // Generate numbers for the number line
   const numbers = [];
   for (let i = adjustedMin; i <= adjustedMax; i++) {
-    const position = height - ((i - adjustedMin) / (adjustedMax - adjustedMin)) * height;
+    // Position calculation: middle of the height is for the current value
+    // Values above the current are positioned above the middle, values below are positioned below
+    const middlePosition = height / 2;
+    const stepSize = height / (2 * rangeSize + 1); // Height divided by total visible numbers
+    const position = middlePosition - (i - value) * stepSize;
+    
     const isCurrentValue = i === value;
     
     numbers.push(
@@ -46,12 +51,10 @@ const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, heigh
       <div className="h-full w-px bg-gray-400 relative">
         {numbers}
         
-        {/* Current Value Indicator */}
+        {/* Current Value Indicator - always positioned at the middle */}
         <motion.div 
           className="absolute -left-2 w-4 h-4 bg-primary rounded-full border-2 border-white"
-          style={{ 
-            top: height - ((value - adjustedMin) / (adjustedMax - adjustedMin)) * height 
-          }}
+          style={{ top: height / 2 }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', damping: 10 }}
