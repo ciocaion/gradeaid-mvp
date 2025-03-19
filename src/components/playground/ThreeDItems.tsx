@@ -1,7 +1,8 @@
 
-import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, useState } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { OrbitControls } from '@react-three/drei';
 
 interface ThreeDProps {
   count: number;
@@ -15,9 +16,9 @@ const Balloon3D = ({ index, total, onRemove }: { index: number; total: number; o
   
   // Calculate position based on index and total
   const angle = (index / Math.max(1, total)) * 2 * Math.PI;
-  const radius = 3 + (index % 3);
+  const radius = 1.5 + (index % 2) * 0.5; // Reduced radius for better alignment
   const xPos = Math.sin(angle) * radius;
-  const yPos = index % 2 === 0 ? 0.5 : 0;
+  const yPos = 0.5 + index % 2 * 0.3; // Slightly higher position
   const zPos = Math.cos(angle) * radius;
   
   // Random balloon color variants
@@ -31,9 +32,9 @@ const Balloon3D = ({ index, total, onRemove }: { index: number; total: number; o
   useFrame(({ clock }) => {
     if (mesh.current) {
       // Gentle floating motion
-      mesh.current.position.y = Math.sin(clock.getElapsedTime() * 0.5 + index) * 0.2 + 2;
+      mesh.current.position.y = Math.sin(clock.getElapsedTime() * 0.5 + index) * 0.1 + yPos;
       mesh.current.rotation.y += 0.003;
-      mesh.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.3 + index) * 0.05;
+      mesh.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.3 + index) * 0.03;
     }
   });
   
@@ -46,27 +47,27 @@ const Balloon3D = ({ index, total, onRemove }: { index: number; total: number; o
         onRemove();
       }}
     >
-      {/* Balloon main body */}
+      {/* Balloon main body - smaller size */}
       <mesh>
-        <sphereGeometry args={[0.6, 16, 16]} />
+        <sphereGeometry args={[0.35, 16, 16]} />
         <meshStandardMaterial color={balloonColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
       {/* Balloon highlight */}
-      <mesh position={[-0.2, 0.2, 0.3]}>
-        <sphereGeometry args={[0.15, 8, 8]} />
+      <mesh position={[-0.12, 0.12, 0.18]}>
+        <sphereGeometry args={[0.08, 8, 8]} />
         <meshStandardMaterial color="white" transparent opacity={0.7} />
       </mesh>
       
       {/* Balloon string */}
-      <mesh position={[0, -0.8, 0]}>
-        <cylinderGeometry args={[0.02, 0.02, 1.2, 6]} />
+      <mesh position={[0, -0.5, 0]}>
+        <cylinderGeometry args={[0.01, 0.01, 0.8, 6]} />
         <meshStandardMaterial color="#AAAAAA" />
       </mesh>
       
       {/* Balloon knot */}
-      <mesh position={[0, -0.7, 0]}>
-        <sphereGeometry args={[0.08, 8, 8]} />
+      <mesh position={[0, -0.4, 0]}>
+        <sphereGeometry args={[0.04, 8, 8]} />
         <meshStandardMaterial color="#888888" />
       </mesh>
     </group>
@@ -79,9 +80,9 @@ const Sandbag3D = ({ index, total, onRemove }: { index: number; total: number; o
   
   // Calculate position based on index and total
   const angle = (index / Math.max(1, total)) * 2 * Math.PI;
-  const radius = 2.5 + (index % 2);
+  const radius = 1.2 + (index % 2) * 0.4; // Reduced radius for better alignment
   const xPos = Math.sin(angle) * radius;
-  const yPos = -2.5;
+  const yPos = -1.5; // Lower position
   const zPos = Math.cos(angle) * radius;
   
   // Sandbag colors
@@ -92,8 +93,8 @@ const Sandbag3D = ({ index, total, onRemove }: { index: number; total: number; o
   useFrame(({ clock }) => {
     if (mesh.current) {
       // Gentle swinging motion
-      mesh.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.5 + index) * 0.1;
-      mesh.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.3 + index) * 0.05;
+      mesh.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.5 + index) * 0.08;
+      mesh.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.3 + index) * 0.03;
     }
   });
   
@@ -106,25 +107,31 @@ const Sandbag3D = ({ index, total, onRemove }: { index: number; total: number; o
         onRemove();
       }}
     >
-      {/* Sandbag main body */}
+      {/* Sandbag main body - smaller size */}
       <mesh>
-        <boxGeometry args={[0.8, 1, 0.6]} />
+        <boxGeometry args={[0.5, 0.6, 0.4]} />
         <meshStandardMaterial color={sandbagColor} roughness={0.9} metalness={0} />
       </mesh>
       
       {/* Sandbag texture details */}
-      <mesh position={[0, 0, 0.305]} rotation={[0, 0, 0]}>
-        <planeGeometry args={[0.7, 0.9]} />
+      <mesh position={[0, 0, 0.201]} rotation={[0, 0, 0]}>
+        <planeGeometry args={[0.45, 0.55]} />
         <meshStandardMaterial color="#000000" transparent opacity={0.1} />
       </mesh>
       
       {/* Rope */}
-      <mesh position={[0, 0.8, 0]}>
-        <cylinderGeometry args={[0.03, 0.03, 0.8, 6]} />
+      <mesh position={[0, 0.5, 0]}>
+        <cylinderGeometry args={[0.02, 0.02, 0.5, 6]} />
         <meshStandardMaterial color="#AAAAAA" />
       </mesh>
     </group>
   );
+};
+
+// Camera controls for interactivity
+const CameraController = () => {
+  const { camera, gl } = useThree();
+  return <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} args={[camera, gl.domElement]} />;
 };
 
 // Main 3D scene for balloons or sandbags
@@ -135,7 +142,8 @@ const ThreeDItems: React.FC<ThreeDProps> = ({ count, type, onRemove }) => {
   
   return (
     <div className="absolute inset-0 z-10">
-      <Canvas camera={{ position: [0, 0, 10], fov: 40 }}>
+      <Canvas camera={{ position: [0, 0, 6], fov: 40 }}>
+        <CameraController />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <directionalLight position={[-5, -5, -5]} intensity={0.5} />

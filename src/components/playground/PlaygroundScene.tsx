@@ -37,9 +37,9 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
       </div>
       
       {/* 3D Balloons and Sandbags */}
-      <div className="absolute inset-0" style={{ pointerEvents: 'none' }}>
+      <div className="absolute inset-0 z-10 pointer-events-auto">
         {balloons > 0 && (
-          <div style={{ pointerEvents: 'auto' }}>
+          <div className="absolute inset-0 h-1/2">
             <ThreeDItems 
               count={balloons} 
               type="balloon" 
@@ -49,7 +49,7 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
         )}
         
         {sandbags > 0 && (
-          <div style={{ pointerEvents: 'auto' }}>
+          <div className="absolute inset-0 top-1/2">
             <ThreeDItems 
               count={sandbags} 
               type="sandbag" 
