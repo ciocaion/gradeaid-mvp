@@ -7,7 +7,8 @@ import * as THREE from 'three';
 // 3D Balloon Component
 const Balloon3D = ({ index, total, onClick = () => {} }: { index: number, total: number, onClick?: () => void }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const lineRef = useRef<THREE.Line>(null);
+  // Fix: change ref type to any to avoid TypeScript errors with Three.js objects
+  const lineRef = useRef<any>(null);
   
   // Calculate position based on index and total
   const angle = (index / Math.max(1, total)) * 2 * Math.PI;
@@ -73,7 +74,8 @@ const Balloon3D = ({ index, total, onClick = () => {} }: { index: number, total:
         
         {/* Balloon knot */}
         <Sphere args={[0.05, 8, 8]} position={[0, -0.25, 0]}>
-          <meshStandardMaterial color={new THREE.Color(balloonColor).darken(0.5).getHexString()} />
+          {/* Fix: use THREE.Color helper functions instead of .darken() */}
+          <meshStandardMaterial color={new THREE.Color(balloonColor).multiplyScalar(0.7).getStyle()} />
         </Sphere>
         
         {/* Balloon highlight/reflection */}
@@ -88,7 +90,8 @@ const Balloon3D = ({ index, total, onClick = () => {} }: { index: number, total:
 // 3D Sandbag Component
 const Sandbag3D = ({ index, total, onClick = () => {} }: { index: number, total: number, onClick?: () => void }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const lineRef = useRef<THREE.Line>(null);
+  // Fix: change ref type to any to avoid TypeScript errors with Three.js objects
+  const lineRef = useRef<any>(null);
   
   // Calculate position based on index and total
   const angle = (index / Math.max(1, total)) * 2 * Math.PI;
