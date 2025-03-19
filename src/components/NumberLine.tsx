@@ -10,9 +10,9 @@ interface NumberLineProps {
 }
 
 const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, height }) => {
-  // Dynamically adjust the range based on the current value
-  const adjustedMin = Math.min(min, value - 2);
-  const adjustedMax = Math.max(max, value + 2);
+  // Dynamically adjust the range based on the current value, but limit the expansion
+  const adjustedMin = Math.max(-5, Math.min(min, value - 2));
+  const adjustedMax = Math.min(5, Math.max(max, value + 2));
   
   // Generate numbers for the number line
   const numbers = [];
