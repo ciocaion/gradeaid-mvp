@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom colors
+				sky: "#D3E4FD",
+				skyDark: "#B3C4E0",
+				balloon: "#FF99A8",
+				balloonDark: "#E57F8C",
+				sandbag: "#D4A76A",
+				sandbagDark: "#B38C56",
+				basket: "#8B5E3C",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,12 +93,64 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float-up': {
+					'0%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+					'100%': { transform: 'translateY(0)' }
+				},
+				'sink-down': {
+					'0%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(10px)' },
+					'100%': { transform: 'translateY(0)' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0', transform: 'scale(0.9)' },
+					'100%': { opacity: '1', transform: 'scale(1)' }
+				},
+				'fade-out': {
+					'0%': { opacity: '1', transform: 'scale(1)' },
+					'100%': { opacity: '0', transform: 'scale(0.9)' }
+				},
+				'bounce-in': {
+					'0%': { transform: 'scale(0)' },
+					'60%': { transform: 'scale(1.1)' },
+					'100%': { transform: 'scale(1)' }
+				},
+				'slide-in': {
+					'0%': { transform: 'translateY(20px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'pulse': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' }
+				},
+				'wiggle': {
+					'0%, 100%': { transform: 'rotate(-3deg)' },
+					'50%': { transform: 'rotate(3deg)' }
+				},
+				'cloud-float': {
+					'0%': { transform: 'translateX(0)' },
+					'50%': { transform: 'translateX(20px)' },
+					'100%': { transform: 'translateX(0)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float-up': 'float-up 4s ease-in-out infinite',
+				'sink-down': 'sink-down 4s ease-in-out infinite',
+				'fade-in': 'fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+				'fade-out': 'fade-out 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+				'bounce-in': 'bounce-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+				'slide-in': 'slide-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+				'pulse': 'pulse 3s infinite',
+				'wiggle': 'wiggle 2s ease-in-out infinite',
+				'cloud-float': 'cloud-float 15s ease-in-out infinite',
+			},
+			backdropBlur: {
+				xs: '2px',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
