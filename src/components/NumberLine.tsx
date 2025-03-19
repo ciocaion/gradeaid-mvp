@@ -10,14 +10,16 @@ interface NumberLineProps {
 }
 
 const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, height }) => {
-  // Dynamically adjust the range based on the current value, but limit the expansion
-  const adjustedMin = Math.max(-5, Math.min(min, value - 2));
-  const adjustedMax = Math.min(5, Math.max(max, value + 2));
+  // Adjust the range to include the current value with padding
+  // If value is outside current range, expand to include it with some padding
+  const adjustedMin = Math.min(min, value - 2);
+  const adjustedMax = Math.max(max, value + 2);
   
   // Generate numbers for the number line
   const numbers = [];
   for (let i = adjustedMin; i <= adjustedMax; i++) {
     const position = height - ((i - adjustedMin) / (adjustedMax - adjustedMin)) * height;
+    const isCurrentValue = i === value;
     
     numbers.push(
       <div 
@@ -27,11 +29,11 @@ const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, heigh
       >
         {/* Line */}
         <div 
-          className="h-px bg-gray-400 w-4"
+          className={`h-px ${isCurrentValue ? 'w-5 bg-primary' : 'w-4 bg-gray-400'}`}
         />
         
         {/* Number label */}
-        <div className="ml-2 text-sm font-medium text-gray-700">
+        <div className={`ml-2 font-medium ${isCurrentValue ? 'text-lg text-primary font-bold' : 'text-sm text-gray-700'}`}>
           {i}
         </div>
       </div>

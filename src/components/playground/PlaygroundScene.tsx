@@ -32,7 +32,7 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-amber-200/30 to-transparent" />
       
       <div className="absolute left-6 top-0 bottom-0 h-full">
-        <NumberLine min={-5} max={5} value={value} height={playgroundHeight} />
+        <NumberLine value={value} height={playgroundHeight} />
       </div>
       
       <motion.div 
