@@ -29,7 +29,7 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
     <>
       <CloudScene height={playgroundHeight} animate={true} />
       
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-amber-200/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-100/20 to-transparent" />
       
       <div className="absolute left-6 top-0 bottom-0 h-full">
         <NumberLine value={value} height={playgroundHeight} />

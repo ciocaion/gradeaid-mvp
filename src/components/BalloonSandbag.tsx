@@ -21,14 +21,13 @@ export const Balloon: React.FC<BalloonProps> = ({ index, total, onClick }) => {
   const xOffset = Math.sin(angle) * radius;
   const yOffset = Math.cos(angle) * radius * 0.5; // Elliptical arrangement
   
-  // Random balloon color variants
+  // Cloud-like colors for balloons
   const balloonColors = [
-    'bg-red-500', 'bg-blue-500', 'bg-green-500', 
-    'bg-yellow-500', 'bg-purple-500', 'bg-pink-500'
+    'bg-sky/90', 'bg-sky-100/90', 'bg-white/90', 
+    'bg-blue-50/90', 'bg-sky-50/90', 'bg-indigo-50/90'
   ];
   const colorIndex = (index % balloonColors.length);
   const balloonColor = balloonColors[colorIndex];
-  const balloonDarkColor = balloonColor.replace('500', '700');
   
   return (
     <motion.div
@@ -62,36 +61,44 @@ export const Balloon: React.FC<BalloonProps> = ({ index, total, onClick }) => {
       dragElastic={0.7}
       dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
     >
-      {/* Balloon String */}
+      {/* Cloud String */}
       <div 
-        className="absolute left-1/2 -translate-x-1/2 h-20 w-[2px] bg-gradient-to-b from-gray-400 to-gray-500"
+        className="absolute left-1/2 -translate-x-1/2 h-20 w-[2px] bg-gradient-to-b from-gray-300/70 to-gray-400/70"
         style={{ 
-          top: '30px',
+          top: '36px',
           transformOrigin: 'top',
           transform: `rotate(${xOffset > 0 ? 5 : -5}deg)`
         }}
       />
       
-      {/* Balloon */}
-      <motion.div
-        className={`w-16 h-20 rounded-full ${balloonColor} shadow-md flex items-center justify-center relative overflow-hidden`}
-        animate={{ 
-          y: [0, -5, 0],
-          rotate: [0, xOffset > 0 ? 3 : -3, 0]
-        }}
-        transition={{ 
-          repeat: Infinity, 
-          duration: 3 + (index % 3), 
-          ease: "easeInOut" 
-        }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <div className={`absolute inset-0 ${balloonDarkColor} rounded-full opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-8 h-8 blur-sm`} />
-        <div className="w-4 h-4 rounded-full bg-white opacity-40 absolute top-1/4 left-1/4" />
-      </motion.div>
-      
-      {/* Balloon Knot */}
-      <div className={`w-3 h-4 ${balloonDarkColor} rounded-b-full mx-auto`} />
+      {/* Cloud Balloon */}
+      <div className="relative">
+        <motion.div
+          className={`${balloonColor} shadow-lg flex items-center justify-center relative overflow-hidden`}
+          animate={{ 
+            y: [0, -5, 0],
+            rotate: [0, xOffset > 0 ? 3 : -3, 0]
+          }}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 3 + (index % 3), 
+            ease: "easeInOut" 
+          }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {/* Main cloud puff */}
+          <div className="w-16 h-16 rounded-full blur-[1px]"></div>
+          
+          {/* Additional cloud puffs */}
+          <div className="absolute w-10 h-10 rounded-full top-1 left-2 blur-[1px]"></div>
+          <div className="absolute w-12 h-12 rounded-full top-0 right-1 blur-[1px]"></div>
+          <div className="absolute w-10 h-10 rounded-full bottom-2 left-3 blur-[1px]"></div>
+          <div className="absolute w-11 h-11 rounded-full bottom-1 right-2 blur-[1px]"></div>
+        </motion.div>
+        
+        {/* Cloud base */}
+        <div className="w-3 h-4 bg-gray-200/70 rounded-b-full mx-auto"></div>
+      </div>
     </motion.div>
   );
 };
@@ -102,11 +109,12 @@ export const Sandbag: React.FC<SandbagProps> = ({ index, total, onClick }) => {
   const radius = 50 + (index % 3) * 15; // Varying distances from center
   const xOffset = Math.sin(angle) * radius;
   
-  // Random sandbag color variants
-  const sandbagColors = ['bg-amber-700', 'bg-amber-800', 'bg-yellow-800', 'bg-amber-900'];
+  // Cloud-like "heavy" colors for sandbags
+  const sandbagColors = [
+    'bg-gray-400/90', 'bg-gray-500/90', 'bg-gray-600/90', 'bg-slate-500/90'
+  ];
   const colorIndex = (index % sandbagColors.length);
   const sandbagColor = sandbagColors[colorIndex];
-  const sandbagDarkColor = 'bg-amber-950';
   
   return (
     <motion.div
@@ -140,38 +148,44 @@ export const Sandbag: React.FC<SandbagProps> = ({ index, total, onClick }) => {
       dragElastic={0.5}
       dragTransition={{ bounceStiffness: 400, bounceDamping: 10 }}
     >
-      {/* Sandbag String */}
+      {/* Cloud String */}
       <div 
-        className="absolute left-1/2 -translate-x-1/2 h-16 w-[2px] bg-gradient-to-b from-gray-500 to-gray-400"
+        className="absolute left-1/2 -translate-x-1/2 h-16 w-[2px] bg-gradient-to-b from-gray-500/70 to-gray-400/70"
         style={{ 
-          bottom: '30px',
+          bottom: '32px',
           transformOrigin: 'bottom',
           transform: `rotate(${xOffset > 0 ? 5 : -5}deg)`
         }}
       />
       
-      {/* Sandbag */}
-      <motion.div
-        className={`w-12 h-16 ${sandbagColor} rounded-md shadow-md flex items-center justify-center relative overflow-hidden`}
-        animate={{ 
-          y: [0, 5, 0],
-          rotate: [0, xOffset > 0 ? 3 : -3, 0]
-        }}
-        transition={{ 
-          repeat: Infinity, 
-          duration: 2.5 + (index % 2), 
-          ease: "easeInOut" 
-        }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <div className={`absolute inset-0 ${sandbagDarkColor} opacity-30 bottom-0 h-1/2 rounded-b-md`} />
-        <div className="absolute top-0 left-0 w-full h-full grid grid-cols-2 gap-1 p-1 opacity-30">
-          <div className={`${sandbagDarkColor} rounded-sm`}></div>
-          <div className={`${sandbagDarkColor} rounded-sm`}></div>
-          <div className={`${sandbagDarkColor} rounded-sm`}></div>
-          <div className={`${sandbagDarkColor} rounded-sm`}></div>
-        </div>
-      </motion.div>
+      {/* Cloud Sandbag */}
+      <div className="relative">
+        <motion.div
+          className={`${sandbagColor} shadow-lg flex items-center justify-center relative overflow-hidden`}
+          animate={{ 
+            y: [0, 5, 0],
+            rotate: [0, xOffset > 0 ? 3 : -3, 0]
+          }}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 2.5 + (index % 2), 
+            ease: "easeInOut" 
+          }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {/* Main cloud puff */}
+          <div className="w-14 h-14 rounded-full blur-[1px]"></div>
+          
+          {/* Additional cloud puffs */}
+          <div className="absolute w-9 h-9 rounded-full top-1 left-1 blur-[1px]"></div>
+          <div className="absolute w-10 h-10 rounded-full top-0 right-0 blur-[1px]"></div>
+          <div className="absolute w-8 h-8 rounded-full bottom-1 left-1 blur-[1px]"></div>
+          <div className="absolute w-9 h-9 rounded-full bottom-0 right-0 blur-[1px]"></div>
+        </motion.div>
+        
+        {/* Cloud base */}
+        <div className="w-3 h-4 bg-gray-500/70 rounded-b-full mx-auto"></div>
+      </div>
     </motion.div>
   );
 };
@@ -210,12 +224,12 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
         {(balloons > 0 || sandbags > 0) && (
           <div className="absolute -right-14 top-1/2 -translate-y-1/2 flex flex-col items-center">
             {balloons > 0 && (
-              <div className="text-xs font-semibold mb-1 bg-blue-500 text-white px-2 py-0.5 rounded-full shadow-md">
+              <div className="text-xs font-semibold mb-1 bg-sky-300 text-white px-2 py-0.5 rounded-full shadow-md">
                 +{balloons}
               </div>
             )}
             {sandbags > 0 && (
-              <div className="text-xs font-semibold mb-1 bg-amber-800 text-white px-2 py-0.5 rounded-full shadow-md">
+              <div className="text-xs font-semibold mb-1 bg-gray-500 text-white px-2 py-0.5 rounded-full shadow-md">
                 -{sandbags}
               </div>
             )}
