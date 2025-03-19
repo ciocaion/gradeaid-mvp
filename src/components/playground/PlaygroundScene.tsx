@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Balloon, Sandbag, Basket } from '../BalloonSandbag';
+import { motion } from 'framer-motion';
+import { Basket } from '../BalloonSandbag';
 import NumberLine from '../NumberLine';
 import CloudScene from '../CloudScene';
+import ThreeDItems from './ThreeDItems';
 import { getBasketPosition } from '@/utils/mathUtils';
 
 interface PlaygroundSceneProps {
@@ -35,6 +36,29 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
         <NumberLine value={value} height={playgroundHeight} />
       </div>
       
+      {/* 3D Balloons and Sandbags */}
+      <div className="absolute inset-0" style={{ pointerEvents: 'none' }}>
+        {balloons > 0 && (
+          <div style={{ pointerEvents: 'auto' }}>
+            <ThreeDItems 
+              count={balloons} 
+              type="balloon" 
+              onRemove={handleRemoveBalloon} 
+            />
+          </div>
+        )}
+        
+        {sandbags > 0 && (
+          <div style={{ pointerEvents: 'auto' }}>
+            <ThreeDItems 
+              count={sandbags} 
+              type="sandbag" 
+              onRemove={handleRemoveSandbag} 
+            />
+          </div>
+        )}
+      </div>
+      
       <motion.div 
         className="absolute left-1/2 -translate-x-1/2 z-20"
         style={{ top: basketPosition }}
@@ -50,32 +74,6 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
       >
         <Basket balloons={balloons} sandbags={sandbags} />
       </motion.div>
-      
-      <div className="absolute top-10 left-0 right-0 h-20">
-        <AnimatePresence mode="popLayout">
-          {Array.from({ length: balloons }).map((_, index) => (
-            <Balloon 
-              key={`balloon-${index}`} 
-              index={index} 
-              total={Math.max(1, balloons)}
-              onClick={() => handleRemoveBalloon()}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
-      
-      <div className="absolute bottom-10 left-0 right-0 h-20">
-        <AnimatePresence mode="popLayout">
-          {Array.from({ length: sandbags }).map((_, index) => (
-            <Sandbag 
-              key={`sandbag-${index}`} 
-              index={index} 
-              total={Math.max(1, sandbags)}
-              onClick={() => handleRemoveSandbag()}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
     </>
   );
 };
