@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Playground from '@/components/Playground';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
 import { Star, Settings, ArrowLeft } from 'lucide-react';
@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const { preferences } = useUserPreferences();
+  const navigate = useNavigate();
+  
   const themeStyles = {
     minecraft: "from-green-500/30 to-emerald-200/30",
     roblox: "from-red-500/30 to-rose-200/30",
@@ -17,6 +19,10 @@ const Index = () => {
   };
 
   const gradientClass = themeStyles[preferences.theme] || themeStyles.default;
+  
+  const goBackToLearningMaterials = () => {
+    navigate('/features');
+  };
 
   return (
     <div className={`min-h-screen bg-gradient-to-b ${gradientClass} flex flex-col p-4 md:p-8`}>
@@ -33,10 +39,13 @@ const Index = () => {
           transition={{ delay: 0.2 }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <Button variant="outline" size="icon" asChild className="h-8 w-8">
-              <Link to="/">
-                <ArrowLeft className="h-4 w-4" />
-              </Link>
+            <Button 
+              variant="outline" 
+              size="icon" 
+              className="h-8 w-8"
+              onClick={goBackToLearningMaterials}
+            >
+              <ArrowLeft className="h-4 w-4" />
             </Button>
             <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight inline-block">
               Balloon & Sandbag Math

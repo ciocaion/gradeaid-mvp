@@ -14,8 +14,6 @@ import {
   OperationType
 } from '@/utils/mathUtils';
 import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 
 const PlaygroundContainer: React.FC = () => {
   const navigate = useNavigate();
@@ -103,23 +101,8 @@ const PlaygroundContainer: React.FC = () => {
     });
   };
   
-  const goBackToLearningMaterials = () => {
-    navigate('/features');
-  };
-  
   return (
     <div className="flex flex-col w-full h-full gap-4">
-      <div className="flex justify-between items-center">
-        <Button 
-          variant="outline" 
-          onClick={goBackToLearningMaterials}
-          className="flex items-center"
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Learning Materials
-        </Button>
-      </div>
-      
       <div className="flex flex-col md:flex-row gap-6 w-full h-full">
         <div 
           className="flex-1 relative overflow-hidden rounded-xl glass bg-gradient-to-b from-sky-200/60 to-sky/60 shadow-lg" 
