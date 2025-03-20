@@ -1,36 +1,71 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Playground from '@/components/Playground';
+import { useUserPreferences } from '@/contexts/UserPreferencesContext';
+import { Star, Settings } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
+  const { preferences } = useUserPreferences();
+  const themeStyles = {
+    minecraft: "from-green-500/30 to-emerald-200/30",
+    roblox: "from-red-500/30 to-rose-200/30",
+    fortnite: "from-blue-500/30 to-purple-200/30",
+    default: "from-sky/30 to-sky-200/30",
+  };
+
+  const gradientClass = themeStyles[preferences.theme] || themeStyles.default;
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky/30 to-sky-200/30 flex flex-col p-4 md:p-8">
+    <div className={`min-h-screen bg-gradient-to-b ${gradientClass} flex flex-col p-4 md:p-8`}>
       <motion.header 
-        className="text-center mb-8"
+        className="flex justify-between items-center mb-8"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <motion.div 
-          className="inline-block"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
+          className="flex-1"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight inline-block">
             Balloon & Sandbag Math
           </h1>
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            Visualize integer addition and subtraction using balloons and sandbags.
+            Explore our interactive 3D environment with draggable elements!
+          </motion.p>
         </motion.div>
-        <motion.p 
-          className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          Visualize integer addition and subtraction using balloons and sandbags.
-          Explore our interactive 3D environment with draggable elements!
-        </motion.p>
+
+        {preferences.hasCompletedOnboarding && (
+          <motion.div 
+            className="flex items-center space-x-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <div className="bg-primary/10 px-3 py-1.5 rounded-full flex items-center">
+              <Star className="h-5 w-5 mr-1.5 text-primary" />
+              <span className="font-bold">{preferences.points}</span>
+            </div>
+            
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/" className="flex items-center gap-1">
+                <Settings className="h-4 w-4" />
+                <span>Preferences</span>
+              </Link>
+            </Button>
+          </motion.div>
+        )}
       </motion.header>
       
       <motion.div 
