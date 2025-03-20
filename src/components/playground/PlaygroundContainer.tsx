@@ -103,7 +103,7 @@ const PlaygroundContainer: React.FC = () => {
     });
   };
   
-  const goBackToFeatures = () => {
+  const goBackToLearningMaterials = () => {
     navigate('/features');
   };
   
@@ -112,11 +112,11 @@ const PlaygroundContainer: React.FC = () => {
       <div className="flex justify-between items-center">
         <Button 
           variant="outline" 
-          onClick={goBackToFeatures}
+          onClick={goBackToLearningMaterials}
           className="flex items-center"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Features
+          Back to Learning Materials
         </Button>
       </div>
       
