@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,8 @@ import { Input } from '@/components/ui/input';
 import { 
   Book, Video, Headphones, PaintBucket, 
   Gamepad2, Brain, ArrowRight, Star, 
-  Camera, MessageSquare, Award, UserRound
+  Camera, MessageSquare, Award, UserRound,
+  ArrowLeft
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Card, CardContent } from '@/components/ui/card';
