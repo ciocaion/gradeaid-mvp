@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +15,6 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Guidance from '@/components/Guidance';
 
-// Step components
 const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
   const { updateName, preferences } = useUserPreferences();
   const [name, setName] = useState(preferences.name);
@@ -87,7 +85,7 @@ const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
   );
 };
 
-const LearningStyleStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
+const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
   const { toggleLearningStyle, preferences, addPoints } = useUserPreferences();
   const [selectedStyles, setSelectedStyles] = useState<LearningStyle[]>(preferences.learningStyles);
   
@@ -189,20 +187,30 @@ const LearningStyleStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
         ))}
       </div>
       
-      <Button
-        onClick={handleNext}
-        className="w-full text-lg py-6 mt-6"
-        disabled={selectedStyles.length === 0}
-      >
-        Next <ArrowRight className="ml-2 h-5 w-5" />
-      </Button>
+      <div className="flex gap-4 mt-6">
+        <Button
+          onClick={onBack}
+          variant="outline"
+          className="flex-1 text-lg py-6"
+        >
+          <ArrowLeft className="mr-2 h-5 w-5" /> Back
+        </Button>
+        
+        <Button
+          onClick={handleNext}
+          className="flex-1 text-lg py-6"
+          disabled={selectedStyles.length === 0}
+        >
+          Next <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      </div>
       
       <Guidance message="There's no wrong answer here! We'll use your choices to make learning work best for you." />
     </motion.div>
   );
 };
 
-const ThemeSelectionStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
+const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
   const { setTheme, preferences, addPoints, addBadge } = useUserPreferences();
   const [selectedTheme, setSelectedTheme] = useState<Theme>(preferences.theme);
   
@@ -300,19 +308,29 @@ const ThemeSelectionStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
         ))}
       </div>
       
-      <Button
-        onClick={handleNext}
-        className="w-full text-lg py-6 mt-6"
-      >
-        Next <ArrowRight className="ml-2 h-5 w-5" />
-      </Button>
+      <div className="flex gap-4 mt-6">
+        <Button
+          onClick={onBack}
+          variant="outline"
+          className="flex-1 text-lg py-6"
+        >
+          <ArrowLeft className="mr-2 h-5 w-5" /> Back
+        </Button>
+        
+        <Button
+          onClick={handleNext}
+          className="flex-1 text-lg py-6"
+        >
+          Next <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      </div>
       
       <Guidance message="Your theme will make your learning space look cool! You can always change it later." />
     </motion.div>
   );
 };
 
-const FeaturesStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
+const FeaturesStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
   const { preferences, addPoints } = useUserPreferences();
   const [activeTab, setActiveTab] = useState("math");
   
@@ -407,19 +425,29 @@ const FeaturesStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
         ))}
       </Tabs>
       
-      <Button
-        onClick={handleNext}
-        className="w-full text-lg py-6 mt-6"
-      >
-        Next <ArrowRight className="ml-2 h-5 w-5" />
-      </Button>
+      <div className="flex gap-4 mt-6">
+        <Button
+          onClick={onBack}
+          variant="outline"
+          className="flex-1 text-lg py-6"
+        >
+          <ArrowLeft className="mr-2 h-5 w-5" /> Back
+        </Button>
+        
+        <Button
+          onClick={handleNext}
+          className="flex-1 text-lg py-6"
+        >
+          Next <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      </div>
       
       <Guidance message="These are just some of the features you'll be able to use. We'll be adding more based on what you like!" />
     </motion.div>
   );
 };
 
-const FinalStep: React.FC<{onComplete: () => void}> = ({ onComplete }) => {
+const FinalStep: React.FC<{onComplete: () => void, onBack: () => void}> = ({ onComplete, onBack }) => {
   const { preferences, completeOnboarding } = useUserPreferences();
   const [isAnimating, setIsAnimating] = useState(false);
   
@@ -480,26 +508,40 @@ const FinalStep: React.FC<{onComplete: () => void}> = ({ onComplete }) => {
         </ul>
       </div>
       
-      <Button
-        onClick={handleComplete}
-        className="w-full text-lg py-6 mt-6"
-        variant="default"
-      >
-        Start Learning!
-      </Button>
+      <div className="flex gap-4 mt-6">
+        <Button
+          onClick={onBack}
+          variant="outline"
+          className="flex-1 text-lg py-6"
+        >
+          <ArrowLeft className="mr-2 h-5 w-5" /> Back
+        </Button>
+        
+        <Button
+          onClick={handleComplete}
+          className="flex-1 text-lg py-6"
+          variant="default"
+        >
+          Start Learning!
+        </Button>
+      </div>
       
       <Guidance message="You can always update your preferences later. Now let's start your learning adventure!" />
     </motion.div>
   );
 };
 
-// Main Onboarding component
 const Onboarding: React.FC = () => {
   const navigate = useNavigate();
   const { preferences } = useUserPreferences();
   const [currentStep, setCurrentStep] = useState(0);
   
-  // If the user has already completed onboarding, redirect to app
+  const goToPreviousStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+  
   useEffect(() => {
     if (preferences.hasCompletedOnboarding) {
       navigate('/app');
@@ -508,17 +550,16 @@ const Onboarding: React.FC = () => {
   
   const steps = [
     <WelcomeStep onNext={() => setCurrentStep(1)} key="welcome" />,
-    <LearningStyleStep onNext={() => setCurrentStep(2)} key="learning" />,
-    <ThemeSelectionStep onNext={() => setCurrentStep(3)} key="theme" />,
-    <FeaturesStep onNext={() => setCurrentStep(4)} key="features" />,
-    <FinalStep onComplete={() => navigate('/app')} key="final" />
+    <LearningStyleStep onNext={() => setCurrentStep(2)} onBack={goToPreviousStep} key="learning" />,
+    <ThemeSelectionStep onNext={() => setCurrentStep(3)} onBack={goToPreviousStep} key="theme" />,
+    <FeaturesStep onNext={() => setCurrentStep(4)} onBack={goToPreviousStep} key="features" />,
+    <FinalStep onComplete={() => navigate('/app')} onBack={goToPreviousStep} key="final" />
   ];
   
   return (
     <div 
       className={`min-h-screen w-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-background/90 to-background relative overflow-hidden`}
     >
-      {/* Animated background elements based on theme */}
       <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         {preferences.theme === 'minecraft' && (
           <>
@@ -611,7 +652,6 @@ const Onboarding: React.FC = () => {
         )}
       </div>
       
-      {/* Progress indicator */}
       <div className="fixed top-6 left-0 right-0 flex justify-center">
         <div className="flex space-x-2">
           {steps.map((_, index) => (
@@ -634,7 +674,6 @@ const Onboarding: React.FC = () => {
         </div>
       </div>
       
-      {/* Points display */}
       {preferences.points > 0 && (
         <motion.div 
           className="fixed top-6 right-6 bg-primary/90 text-white px-3 py-1.5 rounded-full flex items-center"
@@ -647,7 +686,6 @@ const Onboarding: React.FC = () => {
         </motion.div>
       )}
       
-      {/* Step content with animation */}
       <AnimatePresence mode="wait">
         <div className="flex items-center justify-center">
           {steps[currentStep]}

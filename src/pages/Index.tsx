@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Playground from '@/components/Playground';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
-import { Star, Settings } from 'lucide-react';
+import { Star, Settings, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -32,9 +32,16 @@ const Index = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight inline-block">
-            Balloon & Sandbag Math
-          </h1>
+          <div className="flex items-center gap-2 mb-2">
+            <Button variant="outline" size="icon" asChild className="h-8 w-8">
+              <Link to="/">
+                <ArrowLeft className="h-4 w-4" />
+              </Link>
+            </Button>
+            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight inline-block">
+              Balloon & Sandbag Math
+            </h1>
+          </div>
           <motion.p 
             className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"
             initial={{ opacity: 0, y: 10 }}
@@ -59,7 +66,7 @@ const Index = () => {
             </div>
             
             <Button variant="outline" size="sm" asChild>
-              <Link to="/" className="flex items-center gap-1">
+              <Link to="/settings" className="flex items-center gap-1">
                 <Settings className="h-4 w-4" />
                 <span>Preferences</span>
               </Link>

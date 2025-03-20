@@ -10,7 +10,9 @@ export const useOnboardingRedirect = () => {
   useEffect(() => {
     // If they haven't completed onboarding and aren't on the onboarding page, 
     // redirect to onboarding
-    if (!preferences.hasCompletedOnboarding && window.location.pathname !== '/') {
+    if (!preferences.hasCompletedOnboarding && 
+        window.location.pathname !== '/' && 
+        window.location.pathname !== '/settings') {
       navigate('/');
     }
     
