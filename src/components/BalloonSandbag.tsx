@@ -180,10 +180,12 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
   return (
     <div className="relative flex flex-col items-center">
       {/* Ropes connecting to balloons */}
-      <motion.div className="w-24 h-6 flex justify-between items-center mb-1">
-        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-500 to-gray-600 transform -rotate-12"></div>
-        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-500 to-gray-600"></div>
-        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-500 to-gray-600 transform rotate-12"></div>
+      <motion.div className="w-24 h-10 flex justify-between items-center mb-2">
+        <div className="w-[2px] h-10 bg-gradient-to-b from-gray-500 to-gray-600 transform -rotate-15"></div>
+        <div className="w-[2px] h-10 bg-gradient-to-b from-gray-500 to-gray-600 transform -rotate-6"></div>
+        <div className="w-[2px] h-10 bg-gradient-to-b from-gray-500 to-gray-600"></div>
+        <div className="w-[2px] h-10 bg-gradient-to-b from-gray-500 to-gray-600 transform rotate-6"></div>
+        <div className="w-[2px] h-10 bg-gradient-to-b from-gray-500 to-gray-600 transform rotate-15"></div>
       </motion.div>
       
       {/* Basket */}
@@ -202,6 +204,9 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
+        {/* Basket ring at top */}
+        <div className="w-24 h-3 bg-amber-700 border-t border-amber-500 rounded-t-sm -mt-1"></div>
+        
         {/* Basket weaving details */}
         <div className="w-full h-3 border-t border-b border-yellow-800/60 mt-2"></div>
         <div className="w-full h-3 border-t border-b border-yellow-800/60 mt-2"></div>
@@ -224,9 +229,11 @@ export const Basket: React.FC<{ balloons: number; sandbags: number }> = ({ ballo
       </motion.div>
       
       {/* Sandbag attachment points */}
-      <div className="w-20 flex justify-between mt-1">
-        <div className="w-[2px] h-4 bg-gradient-to-b from-gray-600 to-gray-500 transform -rotate-12"></div>
-        <div className="w-[2px] h-4 bg-gradient-to-b from-gray-600 to-gray-500 transform rotate-12"></div>
+      <div className="w-20 flex justify-between mt-2">
+        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-600 to-gray-500 transform -rotate-15"></div>
+        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-600 to-gray-500 transform -rotate-5"></div>
+        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-600 to-gray-500 transform rotate-5"></div>
+        <div className="w-[2px] h-6 bg-gradient-to-b from-gray-600 to-gray-500 transform rotate-15"></div>
       </div>
     </div>
   );

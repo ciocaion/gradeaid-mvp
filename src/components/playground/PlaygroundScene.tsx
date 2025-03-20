@@ -56,44 +56,51 @@ const PlaygroundScene: React.FC<PlaygroundSceneProps> = ({
         </Select>
       </div>
       
-      {/* 3D Balloons and Sandbags */}
-      <div className="absolute inset-0 pointer-events-none">
-        {balloons > 0 && (
-          <div className="absolute inset-0 h-1/2 pointer-events-auto">
-            <ThreeDItems 
-              count={balloons} 
-              type="balloon" 
-              onRemove={handleRemoveBalloon} 
-            />
-          </div>
-        )}
-        
-        {sandbags > 0 && (
-          <div className="absolute inset-0 top-1/2 pointer-events-auto">
-            <ThreeDItems 
-              count={sandbags} 
-              type="sandbag" 
-              onRemove={handleRemoveSandbag} 
-            />
-          </div>
-        )}
+      {/* The Balloon System as a cohesive unit */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <motion.div 
+          className="relative flex flex-col items-center z-20"
+          style={{ top: basketPosition - playgroundHeight/2 }}
+          animate={{ 
+            top: basketPosition - playgroundHeight/2,
+            transition: { 
+              type: "spring", 
+              stiffness: 60, 
+              damping: 12,
+              mass: balloons > 0 ? 0.8 : 1.2 
+            }
+          }}
+        >
+          {/* Balloon cluster area with connection to basket */}
+          {balloons > 0 && (
+            <div className="pointer-events-auto">
+              <ThreeDItems 
+                count={balloons} 
+                type="balloon" 
+                onRemove={handleRemoveBalloon}
+                offsetY={-120} // Position balloons above the basket
+                connectionToBasket={true}
+              />
+            </div>
+          )}
+          
+          {/* Basket */}
+          <Basket balloons={balloons} sandbags={sandbags} />
+          
+          {/* Sandbag area with connection to basket */}
+          {sandbags > 0 && (
+            <div className="pointer-events-auto">
+              <ThreeDItems 
+                count={sandbags} 
+                type="sandbag" 
+                onRemove={handleRemoveSandbag}
+                offsetY={80} // Position sandbags below the basket
+                connectionToBasket={true}
+              />
+            </div>
+          )}
+        </motion.div>
       </div>
-      
-      <motion.div 
-        className="absolute left-1/2 -translate-x-1/2 z-20"
-        style={{ top: basketPosition }}
-        animate={{ 
-          top: basketPosition,
-          transition: { 
-            type: "spring", 
-            stiffness: 60, 
-            damping: 12,
-            mass: balloons > 0 ? 0.8 : 1.2 
-          }
-        }}
-      >
-        <Basket balloons={balloons} sandbags={sandbags} />
-      </motion.div>
     </>
   );
 };
