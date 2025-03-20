@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import Guidance from '@/components/Guidance';
+import { getThemeBackgroundStyle } from '@/utils/themeUtils';
 
 const Features = () => {
   const navigate = useNavigate();
@@ -111,8 +112,15 @@ const Features = () => {
     }
   ];
 
+  const themeBackground = preferences.theme !== 'default' 
+    ? getThemeBackgroundStyle(preferences.theme)
+    : {};
+
   return (
-    <div className={`min-h-screen bg-gradient-to-b ${gradientClass} flex flex-col p-4 md:p-8`}>
+    <div 
+      className={`min-h-screen ${preferences.theme === 'default' ? `bg-gradient-to-b ${gradientClass}` : ''} flex flex-col p-4 md:p-8`}
+      style={themeBackground}
+    >
       <motion.header 
         className="flex justify-between items-center mb-8"
         initial={{ opacity: 0, y: -20 }}
@@ -152,7 +160,7 @@ const Features = () => {
       </motion.header>
       
       <motion.div 
-        className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+        className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 glass"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.8 }}
@@ -167,7 +175,7 @@ const Features = () => {
             whileTap={{ scale: 0.98 }}
           >
             <Card 
-              className={`cursor-pointer h-full transition-all ${
+              className={`cursor-pointer h-full transition-all bg-white/90 backdrop-blur-sm ${
                 selectedFeature === feature.id 
                   ? 'border-primary shadow-lg' 
                   : 'hover:border-gray-300'
@@ -218,7 +226,9 @@ const Features = () => {
         transition={{ delay: 1.2 }}
         className="flex justify-center mt-auto"
       >
-        <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
+        <div className="glass bg-white/70 rounded-lg">
+          <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
+        </div>
       </motion.div>
       
       <motion.div 

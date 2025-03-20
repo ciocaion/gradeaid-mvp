@@ -11,8 +11,8 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Card, CardContent } from '@/components/ui/card';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import Guidance from '@/components/Guidance';
+import { getThemeBackgroundStyle } from '@/utils/themeUtils';
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -88,36 +88,49 @@ const Settings = () => {
     }
   ];
   
-  const themes: {value: Theme, label: string, description: string, bgClass: string}[] = [
+  const themes: {value: Theme, label: string, description: string, bgClass: string, imagePath: string}[] = [
     {
       value: 'minecraft',
       label: 'Minecraft',
       description: 'Blocks, mining, and crafting adventures',
-      bgClass: 'bg-gradient-to-r from-green-600 to-emerald-700'
+      bgClass: 'bg-gradient-to-r from-green-600 to-emerald-700',
+      imagePath: '/lovable-uploads/37c25a3b-dbe7-493b-901d-2425230f5719.png'
     },
     {
       value: 'roblox',
       label: 'Roblox',
       description: 'Creative building and fun games',
-      bgClass: 'bg-gradient-to-r from-red-500 to-rose-600'
+      bgClass: 'bg-gradient-to-r from-red-500 to-rose-600',
+      imagePath: '/lovable-uploads/8cee8ce2-abb5-4b6f-aff4-6a5ba6e07d4b.png'
     },
     {
       value: 'fortnite',
       label: 'Fortnite',
       description: 'Battle royale and adventure',
-      bgClass: 'bg-gradient-to-r from-blue-500 to-purple-600'
+      bgClass: 'bg-gradient-to-r from-blue-500 to-purple-600',
+      imagePath: '/lovable-uploads/8b725ba7-fdb9-44ca-a050-8b61617aaf8d.png'
     },
     {
       value: 'default',
       label: 'Classic',
       description: 'Clean and simple design',
-      bgClass: 'bg-gradient-to-r from-sky-500 to-indigo-600'
+      bgClass: 'bg-gradient-to-r from-sky-500 to-indigo-600',
+      imagePath: ''
     }
   ];
   
+  const themeBackground = preferences.theme !== 'default' 
+    ? getThemeBackgroundStyle(preferences.theme)
+    : {};
+    
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background/90 to-background flex flex-col items-center p-4 md:p-8">
-      <div className="w-full max-w-md">
+    <div 
+      className={`min-h-screen ${
+        preferences.theme === 'default' ? 'bg-gradient-to-b from-background/90 to-background' : ''
+      } flex flex-col items-center p-4 md:p-8`}
+      style={themeBackground}
+    >
+      <div className="w-full max-w-md glass bg-white/70 backdrop-blur-sm rounded-lg p-4">
         <div className="flex items-center gap-4 mb-6">
           <Button variant="outline" size="icon" asChild>
             <Link to="/app">
@@ -195,7 +208,30 @@ const Settings = () => {
                     }`}
                     onClick={() => setSelectedTheme(theme.value)}
                   >
-                    <div className={`h-16 ${theme.bgClass}`}></div>
+                    {theme.imagePath ? (
+                      <div 
+                        className="h-20 bg-cover bg-center" 
+                        style={{ backgroundImage: `url(${theme.imagePath})` }}
+                      >
+                        {selectedTheme === theme.value && (
+                          <div className="h-full w-full flex items-center justify-center">
+                            <div className="bg-white rounded-full p-1">
+                              <Star className="h-5 w-5 text-yellow-500" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className={`h-16 ${theme.bgClass}`}>
+                        {selectedTheme === theme.value && (
+                          <div className="h-full w-full flex items-center justify-center">
+                            <div className="bg-white rounded-full p-1">
+                              <Star className="h-5 w-5 text-yellow-500" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                     <CardContent className="p-3 text-center">
                       <h3 className="font-semibold">{theme.label}</h3>
                     </CardContent>

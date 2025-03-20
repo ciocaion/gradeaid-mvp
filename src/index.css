@@ -105,11 +105,12 @@
 
 /* Glass Effect */
 .glass {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  border-radius: 10px;
 }
 
 .glass-dark {
@@ -135,4 +136,27 @@
 .sandbag-string {
   width: 1px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+}
+
+/* Theme background overlays */
+.theme-content {
+  position: relative;
+  z-index: 10;
+}
+
+.theme-overlay {
+  position: relative;
+}
+
+.theme-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  border-radius: inherit;
+  z-index: 0;
 }

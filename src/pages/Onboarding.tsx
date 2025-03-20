@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useUserPreferences, LearningStyle, Theme } from '@/contexts/UserPreferencesContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
-  Book, Video, Headphones, PaintBucket, 
+  Book, Headphones, PaintBucket, 
   Gamepad2, Brain, ArrowRight, Star, 
-  Camera, MessageSquare, Award, UserRound,
-  ArrowLeft
+  ArrowLeft, UserRound
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Card, CardContent } from '@/components/ui/card';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import Guidance from '@/components/Guidance';
+import { getThemeBackgroundStyle } from '@/utils/themeUtils';
 
 interface OnboardingProps {
   step?: number;
@@ -219,30 +218,34 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
   const [selectedTheme, setSelectedTheme] = useState<Theme>(preferences.theme);
   const navigate = useNavigate();
   
-  const themes: {value: Theme, label: string, description: string, bgClass: string}[] = [
+  const themes: {value: Theme, label: string, description: string, bgClass: string, imagePath: string}[] = [
     {
       value: 'minecraft',
       label: 'Minecraft',
       description: 'Blocks, mining, and crafting adventures',
-      bgClass: 'bg-gradient-to-r from-green-600 to-emerald-700'
+      bgClass: 'bg-gradient-to-r from-green-600 to-emerald-700',
+      imagePath: '/lovable-uploads/37c25a3b-dbe7-493b-901d-2425230f5719.png'
     },
     {
       value: 'roblox',
       label: 'Roblox',
       description: 'Creative building and fun games',
-      bgClass: 'bg-gradient-to-r from-red-500 to-rose-600'
+      bgClass: 'bg-gradient-to-r from-red-500 to-rose-600',
+      imagePath: '/lovable-uploads/8cee8ce2-abb5-4b6f-aff4-6a5ba6e07d4b.png'
     },
     {
       value: 'fortnite',
       label: 'Fortnite',
       description: 'Battle royale and adventure',
-      bgClass: 'bg-gradient-to-r from-blue-500 to-purple-600'
+      bgClass: 'bg-gradient-to-r from-blue-500 to-purple-600',
+      imagePath: '/lovable-uploads/8b725ba7-fdb9-44ca-a050-8b61617aaf8d.png'
     },
     {
       value: 'default',
       label: 'Classic',
       description: 'Clean and simple design',
-      bgClass: 'bg-gradient-to-r from-sky-500 to-indigo-600'
+      bgClass: 'bg-gradient-to-r from-sky-500 to-indigo-600',
+      imagePath: ''
     }
   ];
   
@@ -291,19 +294,35 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
               }`}
               onClick={() => setSelectedTheme(theme.value)}
             >
-              <div className={`h-16 ${theme.bgClass}`}>
-                <div className="h-full w-full flex items-center justify-center">
-                  {selectedTheme === theme.value && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="bg-white rounded-full p-1"
-                    >
-                      <Star className="h-6 w-6 text-yellow-500" />
-                    </motion.div>
-                  )}
+              {theme.imagePath ? (
+                <div className="h-32 bg-cover bg-center" style={{ backgroundImage: `url(${theme.imagePath})` }}>
+                  <div className="h-full w-full flex items-center justify-center">
+                    {selectedTheme === theme.value && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="bg-white rounded-full p-1"
+                      >
+                        <Star className="h-6 w-6 text-yellow-500" />
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className={`h-16 ${theme.bgClass}`}>
+                  <div className="h-full w-full flex items-center justify-center">
+                    {selectedTheme === theme.value && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="bg-white rounded-full p-1"
+                      >
+                        <Star className="h-6 w-6 text-yellow-500" />
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              )}
               <CardContent className="p-4">
                 <h3 className="font-semibold text-lg">{theme.label}</h3>
                 <p className="text-sm text-gray-600">{theme.description}</p>
@@ -330,7 +349,9 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
         </Button>
       </div>
       
-      <Guidance message="Your theme will make your learning space look cool! You can always change it later." />
+      <div className="glass bg-white/70 rounded-lg">
+        <Guidance message="Your theme will make your learning space look cool! You can always change it later." />
+      </div>
     </motion.div>
   );
 };
@@ -358,9 +379,16 @@ const Onboarding: React.FC<OnboardingProps> = ({ step = 0 }) => {
     <ThemeSelectionStep onNext={() => navigate('/features')} onBack={goToPreviousStep} key="theme" />,
   ];
   
+  const themeBackground = preferences.theme !== 'default' 
+    ? getThemeBackgroundStyle(preferences.theme)
+    : {};
+  
   return (
     <div 
-      className={`min-h-screen w-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-background/90 to-background relative overflow-hidden`}
+      className={`min-h-screen w-full flex flex-col items-center justify-center p-4 ${
+        preferences.theme === 'default' ? 'bg-gradient-to-b from-background/90 to-background' : ''
+      } relative overflow-hidden`}
+      style={themeBackground}
     >
       <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         {preferences.theme === 'minecraft' && (
@@ -489,7 +517,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ step = 0 }) => {
       )}
       
       <AnimatePresence mode="wait">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center glass bg-white/70 backdrop-blur-sm rounded-lg p-4">
           {steps[currentStep]}
         </div>
       </AnimatePresence>
