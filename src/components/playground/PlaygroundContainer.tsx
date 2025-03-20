@@ -9,24 +9,26 @@ import {
   addBalloons, 
   addSandbags, 
   removeBalloons, 
-  removeSandbags
+  removeSandbags,
+  OperationType
 } from '@/utils/mathUtils';
 import { toast } from 'sonner';
 
 const PlaygroundContainer: React.FC = () => {
   const [balloons, setBalloons] = useState(0);
   const [sandbags, setSandbags] = useState(0);
+  const [operation, setOperation] = useState<OperationType>('subtraction');
   const [hint, setHint] = useState("");
   const [playgroundHeight, setPlaygroundHeight] = useState(400);
   const [lastAction, setLastAction] = useState<'add-balloon' | 'add-sandbag' | 'remove-balloon' | 'remove-sandbag' | null>(null);
   
   const playgroundRef = useRef<HTMLDivElement>(null);
   
-  const value = calculateValue(balloons, sandbags);
+  const value = calculateValue(balloons, sandbags, operation);
   
   useEffect(() => {
-    setHint(generateHint(balloons, sandbags));
-  }, [balloons, sandbags]);
+    setHint(generateHint(balloons, sandbags, operation));
+  }, [balloons, sandbags, operation]);
   
   useEffect(() => {
     if (playgroundRef.current) {
@@ -42,6 +44,24 @@ const PlaygroundContainer: React.FC = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Handle operation change
+  const handleOperationChange = (newOperation: OperationType) => {
+    setOperation(newOperation);
+    
+    // Show toast with operation change
+    const operationNames = {
+      'addition': 'Addition',
+      'subtraction': 'Subtraction',
+      'multiplication': 'Multiplication',
+      'division': 'Division'
+    };
+    
+    toast.info(`Switched to ${operationNames[newOperation]} mode!`, {
+      position: 'bottom-center',
+      duration: 2000,
+    });
+  };
   
   const handleAddBalloon = () => {
     setBalloons(prev => addBalloons(prev, 1));
@@ -90,6 +110,8 @@ const PlaygroundContainer: React.FC = () => {
           sandbags={sandbags}
           value={value}
           playgroundHeight={playgroundHeight}
+          operation={operation}
+          setOperation={handleOperationChange}
           handleRemoveBalloon={handleRemoveBalloon}
           handleRemoveSandbag={handleRemoveSandbag}
         />
@@ -103,6 +125,7 @@ const PlaygroundContainer: React.FC = () => {
           onRemoveSandbag={handleRemoveSandbag}
           balloons={balloons}
           sandbags={sandbags}
+          operation={operation}
         />
         
         <Guidance message={hint} />

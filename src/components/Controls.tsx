@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus } from 'lucide-react';
+import { OperationType, formatExpression } from '@/utils/mathUtils';
 
 interface ControlsProps {
   onAddBalloon: () => void;
@@ -11,6 +12,7 @@ interface ControlsProps {
   onRemoveSandbag: () => void;
   balloons: number;
   sandbags: number;
+  operation: OperationType;
 }
 
 const Controls: React.FC<ControlsProps> = ({
@@ -19,8 +21,37 @@ const Controls: React.FC<ControlsProps> = ({
   onAddSandbag,
   onRemoveSandbag,
   balloons,
-  sandbags
+  sandbags,
+  operation
 }) => {
+  // Get operation symbol for display
+  const getOperationSymbol = (op: OperationType): string => {
+    switch (op) {
+      case 'addition': return '+';
+      case 'subtraction': return '-';
+      case 'multiplication': return '×';
+      case 'division': return '÷';
+      default: return '';
+    }
+  };
+
+  // Get item labels based on operation
+  const getItemLabels = (): { balloonLabel: string, sandbagLabel: string } => {
+    switch (operation) {
+      case 'addition':
+        return { balloonLabel: 'First Number', sandbagLabel: 'Second Number' };
+      case 'multiplication':
+        return { balloonLabel: 'First Factor', sandbagLabel: 'Second Factor' };
+      case 'division':
+        return { balloonLabel: 'Dividend', sandbagLabel: 'Divisor' };
+      case 'subtraction':
+      default:
+        return { balloonLabel: 'Balloons (Positive)', sandbagLabel: 'Sandbags (Negative)' };
+    }
+  };
+
+  const { balloonLabel, sandbagLabel } = getItemLabels();
+
   return (
     <div className="flex flex-col space-y-6">
       <motion.div 
@@ -29,7 +60,7 @@ const Controls: React.FC<ControlsProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h3 className="text-lg font-medium mb-3">Balloons (Positive)</h3>
+        <h3 className="text-lg font-medium mb-3">{balloonLabel}</h3>
         <div className="flex items-center space-x-3">
           <Button 
             variant="outline" 
@@ -58,7 +89,7 @@ const Controls: React.FC<ControlsProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        <h3 className="text-lg font-medium mb-3">Sandbags (Negative)</h3>
+        <h3 className="text-lg font-medium mb-3">{sandbagLabel}</h3>
         <div className="flex items-center space-x-3">
           <Button 
             variant="outline" 
@@ -89,13 +120,7 @@ const Controls: React.FC<ControlsProps> = ({
       >
         <h3 className="text-lg font-medium mb-2">My Expression</h3>
         <div className="text-3xl font-bold text-center py-2">
-          {balloons > 0 && sandbags > 0 
-            ? `${balloons} - ${sandbags} = ${balloons - sandbags}` 
-            : balloons > 0 
-              ? balloons 
-              : sandbags > 0 
-                ? `-${sandbags}` 
-                : "0"}
+          {formatExpression(balloons, sandbags, operation)}
         </div>
       </motion.div>
     </div>
