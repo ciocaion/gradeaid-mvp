@@ -10,6 +10,7 @@ import Onboarding from "./pages/Onboarding";
 import Features from "./pages/Features";
 import FinalOnboarding from "./pages/FinalOnboarding";
 import Settings from "./pages/Settings";
+import FunZone from "./pages/FunZone";
 import { UserPreferencesProvider } from "./contexts/UserPreferencesContext";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/onboarding/final" element={<FinalOnboarding />} />
             <Route path="/app" element={<Index />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/funzone" element={<FunZone />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
