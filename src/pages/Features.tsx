@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -112,136 +111,135 @@ const Features = () => {
     }
   ];
 
-  const themeBackground = preferences.theme !== 'default' 
-    ? getThemeBackgroundStyle(preferences.theme)
-    : {};
-
   return (
-    <div 
-      className={`min-h-screen ${preferences.theme === 'default' ? `bg-gradient-to-b ${gradientClass}` : ''} flex flex-col p-4 md:p-8`}
-      style={themeBackground}
-    >
-      <motion.header 
-        className="flex justify-between items-center mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <motion.div 
-          className="flex-1"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
+    <div className="themed-content-container">
+      {preferences.theme !== 'default' && (
+        <div className="theme-background" style={getThemeBackgroundStyle(preferences.theme)} />
+      )}
+      
+      <div className={`min-h-screen ${preferences.theme === 'default' ? `bg-gradient-to-b ${gradientClass}` : ''} flex flex-col p-4 md:p-8`}>
+        <motion.header 
+          className="flex justify-between items-center mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight">
-            Awesome Features
-          </h1>
-          <motion.p 
-            className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            Choose how you want to learn today! Each feature is designed to help you learn in a way that works best for you.
-          </motion.p>
-        </motion.div>
-
-        {preferences.hasCompletedOnboarding && (
           <motion.div 
-            className="bg-primary/10 px-3 py-1.5 rounded-full flex items-center"
-            initial={{ opacity: 0, x: 20 }}
+            className="flex-1"
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.2 }}
           >
-            <Star className="h-5 w-5 mr-1.5 text-primary" />
-            <span className="font-bold">{preferences.points}</span>
-          </motion.div>
-        )}
-      </motion.header>
-      
-      <motion.div 
-        className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 glass"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
-      >
-        {features.map((feature, index) => (
-          <motion.div 
-            key={feature.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + (index * 0.1) }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Card 
-              className={`cursor-pointer h-full transition-all bg-white/90 backdrop-blur-sm ${
-                selectedFeature === feature.id 
-                  ? 'border-primary shadow-lg' 
-                  : 'hover:border-gray-300'
-              }`}
-              onClick={() => handleFeatureSelect(feature.id)}
+            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight">
+              Awesome Features
+            </h1>
+            <motion.p 
+              className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
             >
-              <CardContent className="p-6 flex flex-col h-full">
-                <div className={`rounded-full p-3 w-fit mb-4 ${feature.color}`}>
-                  {feature.icon}
-                </div>
-                
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold">{feature.title}</h3>
-                  {feature.new && (
-                    <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                      NEW
-                    </span>
-                  )}
-                </div>
-                
-                <p className="text-gray-600 flex-grow">
-                  {feature.description}
-                </p>
-                
-                <div className="mt-4 flex justify-end">
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="group text-primary" 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleFeatureSelect(feature.id);
-                    }}
-                  >
-                    Try it
-                    <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              Choose how you want to learn today! Each feature is designed to help you learn in a way that works best for you.
+            </motion.p>
           </motion.div>
-        ))}
-      </motion.div>
-      
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="flex justify-center mt-auto"
-      >
-        <div className="glass bg-white/70 rounded-lg">
-          <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
-        </div>
-      </motion.div>
-      
-      <motion.div 
-        className="flex justify-center mt-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <Button onClick={handleContinue} className="px-8" size="lg">
-          Continue 
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
-      </motion.div>
+
+          {preferences.hasCompletedOnboarding && (
+            <motion.div 
+              className="bg-primary/10 px-3 py-1.5 rounded-full flex items-center"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Star className="h-5 w-5 mr-1.5 text-primary" />
+              <span className="font-bold">{preferences.points}</span>
+            </motion.div>
+          )}
+        </motion.header>
+        
+        <motion.div 
+          className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 glass"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          {features.map((feature, index) => (
+            <motion.div 
+              key={feature.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + (index * 0.1) }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Card 
+                className={`cursor-pointer h-full transition-all bg-white/90 backdrop-blur-sm ${
+                  selectedFeature === feature.id 
+                    ? 'border-primary shadow-lg' 
+                    : 'hover:border-gray-300'
+                }`}
+                onClick={() => handleFeatureSelect(feature.id)}
+              >
+                <CardContent className="p-6 flex flex-col h-full">
+                  <div className={`rounded-full p-3 w-fit mb-4 ${feature.color}`}>
+                    {feature.icon}
+                  </div>
+                  
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-semibold">{feature.title}</h3>
+                    {feature.new && (
+                      <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                        NEW
+                      </span>
+                    )}
+                  </div>
+                  
+                  <p className="text-gray-600 flex-grow">
+                    {feature.description}
+                  </p>
+                  
+                  <div className="mt-4 flex justify-end">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="group text-primary" 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleFeatureSelect(feature.id);
+                      }}
+                    >
+                      Try it
+                      <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="flex justify-center mt-auto"
+        >
+          <div className="glass bg-white/70 rounded-lg">
+            <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          className="flex justify-center mt-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <Button onClick={handleContinue} className="px-8" size="lg">
+            Continue 
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </motion.div>
+      </div>
     </div>
   );
 };
