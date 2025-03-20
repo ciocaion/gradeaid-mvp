@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PlaygroundScene from './PlaygroundScene';
 import Controls from '../Controls';
 import Guidance from '../Guidance';
@@ -13,8 +14,11 @@ import {
   OperationType
 } from '@/utils/mathUtils';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 const PlaygroundContainer: React.FC = () => {
+  const navigate = useNavigate();
   const [balloons, setBalloons] = useState(0);
   const [sandbags, setSandbags] = useState(0);
   const [operation, setOperation] = useState<OperationType>('subtraction');
@@ -99,36 +103,53 @@ const PlaygroundContainer: React.FC = () => {
     });
   };
   
+  const goBackToFeatures = () => {
+    navigate('/features');
+  };
+  
   return (
-    <div className="flex flex-col md:flex-row gap-6 w-full h-full">
-      <div 
-        className="flex-1 relative overflow-hidden rounded-xl glass bg-gradient-to-b from-sky-200/60 to-sky/60 shadow-lg" 
-        ref={playgroundRef}
-      >
-        <PlaygroundScene 
-          balloons={balloons}
-          sandbags={sandbags}
-          value={value}
-          playgroundHeight={playgroundHeight}
-          operation={operation}
-          setOperation={handleOperationChange}
-          handleRemoveBalloon={handleRemoveBalloon}
-          handleRemoveSandbag={handleRemoveSandbag}
-        />
+    <div className="flex flex-col w-full h-full gap-4">
+      <div className="flex justify-between items-center">
+        <Button 
+          variant="outline" 
+          onClick={goBackToFeatures}
+          className="flex items-center"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to Features
+        </Button>
       </div>
       
-      <div className="md:w-72 flex flex-col space-y-6">
-        <Controls 
-          onAddBalloon={handleAddBalloon}
-          onRemoveBalloon={handleRemoveBalloon}
-          onAddSandbag={handleAddSandbag}
-          onRemoveSandbag={handleRemoveSandbag}
-          balloons={balloons}
-          sandbags={sandbags}
-          operation={operation}
-        />
+      <div className="flex flex-col md:flex-row gap-6 w-full h-full">
+        <div 
+          className="flex-1 relative overflow-hidden rounded-xl glass bg-gradient-to-b from-sky-200/60 to-sky/60 shadow-lg" 
+          ref={playgroundRef}
+        >
+          <PlaygroundScene 
+            balloons={balloons}
+            sandbags={sandbags}
+            value={value}
+            playgroundHeight={playgroundHeight}
+            operation={operation}
+            setOperation={handleOperationChange}
+            handleRemoveBalloon={handleRemoveBalloon}
+            handleRemoveSandbag={handleRemoveSandbag}
+          />
+        </div>
         
-        <Guidance message={hint} />
+        <div className="md:w-72 flex flex-col space-y-6">
+          <Controls 
+            onAddBalloon={handleAddBalloon}
+            onRemoveBalloon={handleRemoveBalloon}
+            onAddSandbag={handleAddSandbag}
+            onRemoveSandbag={handleRemoveSandbag}
+            balloons={balloons}
+            sandbags={sandbags}
+            operation={operation}
+          />
+          
+          <Guidance message={hint} />
+        </div>
       </div>
     </div>
   );

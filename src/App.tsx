@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Onboarding from "./pages/Onboarding";
+import Features from "./pages/Features";
+import FinalOnboarding from "./pages/FinalOnboarding";
 import Settings from "./pages/Settings";
 import { UserPreferencesProvider } from "./contexts/UserPreferencesContext";
 
@@ -21,6 +23,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Onboarding />} />
+            <Route path="/onboarding/theme" element={<Onboarding step={2} />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/onboarding/final" element={<FinalOnboarding />} />
             <Route path="/app" element={<Index />} />
             <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

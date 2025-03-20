@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useUserPreferences, LearningStyle, Theme } from '@/contexts/UserPreferencesContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,8 +13,11 @@ import {
 import { toast } from 'sonner';
 import { Card, CardContent } from '@/components/ui/card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Guidance from '@/components/Guidance';
+
+interface OnboardingProps {
+  step?: number;
+}
 
 const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
   const { updateName, preferences } = useUserPreferences();
@@ -215,6 +217,7 @@ const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({
 const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
   const { setTheme, preferences, addPoints, addBadge } = useUserPreferences();
   const [selectedTheme, setSelectedTheme] = useState<Theme>(preferences.theme);
+  const navigate = useNavigate();
   
   const themes: {value: Theme, label: string, description: string, bgClass: string}[] = [
     {
@@ -251,7 +254,7 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
       icon: '🏆',
       description: "Theme Explorer badge unlocked!"
     });
-    onNext();
+    navigate('/features');
   };
   
   return (
@@ -332,211 +335,10 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
   );
 };
 
-const FeaturesStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
-  const { preferences, addPoints } = useUserPreferences();
-  const [activeTab, setActiveTab] = useState("math");
-  
-  const handleNext = () => {
-    addPoints(50);
-    toast.success(`Amazing, ${preferences.name}! You earned 50 points!`, {
-      icon: '🎉',
-    });
-    onNext();
-  };
-  
-  const features = [
-    {
-      id: "math",
-      title: "Math Visualizer",
-      icon: <PaintBucket className="h-5 w-5" />,
-      description: "See math come to life with our balloon and sandbag visualizer! Add and subtract with fun animations.",
-      gifUrl: "/placeholder.svg"
-    },
-    {
-      id: "listen",
-      title: "Learning Podcasts",
-      icon: <Headphones className="h-5 w-5" />,
-      description: "Listen to fun stories about what you're learning, created just for you!",
-      gifUrl: "/placeholder.svg"
-    },
-    {
-      id: "scan",
-      title: "Homework Helper",
-      icon: <Camera className="h-5 w-5" />,
-      description: "Take a picture of your homework and get help right away.",
-      gifUrl: "/placeholder.svg"
-    },
-    {
-      id: "practice",
-      title: "Fun Practice",
-      icon: <MessageSquare className="h-5 w-5" />,
-      description: "Practice what you've learned with games and get helpful feedback.",
-      gifUrl: "/placeholder.svg"
-    }
-  ];
-  
-  return (
-    <motion.div 
-      className="max-w-md w-full text-center space-y-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-    >
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.3, type: 'spring' }}
-        className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mx-auto flex items-center justify-center"
-      >
-        <Award className="w-12 h-12 text-white" />
-      </motion.div>
-      
-      <h1 className="text-3xl font-bold text-primary">Awesome Features</h1>
-      <p className="text-lg text-gray-600">Check out all the cool things you can do!</p>
-      
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid grid-cols-4 mb-4">
-          {features.map(feature => (
-            <TabsTrigger 
-              key={feature.id} 
-              value={feature.id}
-              className="flex-col py-2 gap-1"
-            >
-              {feature.icon}
-              <span className="text-xs">{feature.title.split(' ')[0]}</span>
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        
-        {features.map(feature => (
-          <TabsContent key={feature.id} value={feature.id} className="mt-0">
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 mb-4">{feature.description}</p>
-                <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
-                  <img 
-                    src={feature.gifUrl} 
-                    alt={feature.title} 
-                    className="max-h-full rounded-md"
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        ))}
-      </Tabs>
-      
-      <div className="flex gap-4 mt-6">
-        <Button
-          onClick={onBack}
-          variant="outline"
-          className="flex-1 text-lg py-6"
-        >
-          <ArrowLeft className="mr-2 h-5 w-5" /> Back
-        </Button>
-        
-        <Button
-          onClick={handleNext}
-          className="flex-1 text-lg py-6"
-        >
-          Next <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
-      </div>
-      
-      <Guidance message="These are just some of the features you'll be able to use. We'll be adding more based on what you like!" />
-    </motion.div>
-  );
-};
-
-const FinalStep: React.FC<{onComplete: () => void, onBack: () => void}> = ({ onComplete, onBack }) => {
-  const { preferences, completeOnboarding } = useUserPreferences();
-  const [isAnimating, setIsAnimating] = useState(false);
-  
-  const handleComplete = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      completeOnboarding();
-      onComplete();
-    }, 1500);
-  };
-  
-  return (
-    <motion.div 
-      className="max-w-md w-full text-center space-y-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-    >
-      <motion.div
-        animate={{ 
-          y: isAnimating ? [0, -20, 0] : 0,
-          scale: isAnimating ? [1, 1.2, 1] : 1
-        }}
-        transition={{ duration: 1.5, times: [0, 0.5, 1] }}
-        className="w-32 h-32 bg-gradient-to-br from-primary to-primary-foreground rounded-full mx-auto flex items-center justify-center"
-      >
-        <Star className="w-16 h-16 text-white" />
-      </motion.div>
-      
-      <motion.div
-        animate={{ scale: isAnimating ? [1, 1.1, 1] : 1 }}
-        transition={{ duration: 1.5, times: [0, 0.5, 1] }}
-      >
-        <h1 className="text-3xl font-bold text-primary">You're All Set, {preferences.name}!</h1>
-        <p className="text-lg text-gray-600 mt-2">
-          You've earned <span className="font-bold text-primary">{preferences.points} points</span> and 
-          <span className="font-bold text-primary"> {preferences.badges.length} badge</span> already!
-        </p>
-      </motion.div>
-      
-      <div className="bg-primary/10 rounded-xl p-6">
-        <h3 className="font-semibold text-lg mb-2">Your learning profile:</h3>
-        <ul className="space-y-2 text-left">
-          <li className="flex items-center">
-            <UserRound className="h-5 w-5 mr-2 text-primary" />
-            <span>Name: <span className="font-medium">{preferences.name}</span></span>
-          </li>
-          <li className="flex items-center">
-            <Brain className="h-5 w-5 mr-2 text-primary" />
-            <span>Learning styles: <span className="font-medium">
-              {preferences.learningStyles.length === 0 ? 'All styles' : preferences.learningStyles.join(', ')}
-            </span></span>
-          </li>
-          <li className="flex items-center">
-            <Gamepad2 className="h-5 w-5 mr-2 text-primary" />
-            <span>Theme: <span className="font-medium">{preferences.theme}</span></span>
-          </li>
-        </ul>
-      </div>
-      
-      <div className="flex gap-4 mt-6">
-        <Button
-          onClick={onBack}
-          variant="outline"
-          className="flex-1 text-lg py-6"
-        >
-          <ArrowLeft className="mr-2 h-5 w-5" /> Back
-        </Button>
-        
-        <Button
-          onClick={handleComplete}
-          className="flex-1 text-lg py-6"
-          variant="default"
-        >
-          Start Learning!
-        </Button>
-      </div>
-      
-      <Guidance message="You can always update your preferences later. Now let's start your learning adventure!" />
-    </motion.div>
-  );
-};
-
-const Onboarding: React.FC = () => {
+const Onboarding: React.FC<OnboardingProps> = ({ step = 0 }) => {
   const navigate = useNavigate();
   const { preferences } = useUserPreferences();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(step);
   
   const goToPreviousStep = () => {
     if (currentStep > 0) {
@@ -553,9 +355,7 @@ const Onboarding: React.FC = () => {
   const steps = [
     <WelcomeStep onNext={() => setCurrentStep(1)} key="welcome" />,
     <LearningStyleStep onNext={() => setCurrentStep(2)} onBack={goToPreviousStep} key="learning" />,
-    <ThemeSelectionStep onNext={() => setCurrentStep(3)} onBack={goToPreviousStep} key="theme" />,
-    <FeaturesStep onNext={() => setCurrentStep(4)} onBack={goToPreviousStep} key="features" />,
-    <FinalStep onComplete={() => navigate('/app')} onBack={goToPreviousStep} key="final" />
+    <ThemeSelectionStep onNext={() => navigate('/features')} onBack={goToPreviousStep} key="theme" />,
   ];
   
   return (
@@ -656,7 +456,7 @@ const Onboarding: React.FC = () => {
       
       <div className="fixed top-6 left-0 right-0 flex justify-center">
         <div className="flex space-x-2">
-          {steps.map((_, index) => (
+          {Array.from({ length: 5 }).map((_, index) => (
             <motion.div
               key={index}
               className={`h-2 rounded-full ${
