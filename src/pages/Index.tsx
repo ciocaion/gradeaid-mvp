@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,22 +11,23 @@ const Index = () => {
   const navigate = useNavigate();
   
   const themeStyles = {
-    minecraft: "from-green-500/30 to-emerald-200/30",
-    roblox: "from-red-500/30 to-rose-200/30",
-    fortnite: "from-blue-500/30 to-purple-200/30",
-    default: "from-sky/30 to-sky-200/30",
+    minecraft: "bg-[url('/images/minecraft-bg.jpg')] bg-cover bg-center",
+    roblox: "bg-[url('/images/roblox-bg.jpg')] bg-cover bg-center",
+    fortnite: "bg-[url('/images/fortnite-bg.jpg')] bg-cover bg-center",
+    default: "bg-gradient-to-b from-sky/30 to-sky-200/30",
   };
 
-  const gradientClass = themeStyles[preferences.theme] || themeStyles.default;
+  const overlayClass = preferences.theme !== 'default' ? 'bg-black/20' : '';
+  const themeClass = themeStyles[preferences.theme] || themeStyles.default;
   
   const goBackToLearningMaterials = () => {
     navigate('/features');
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b ${gradientClass} flex flex-col p-4 md:p-8`}>
+    <div className={`min-h-screen ${themeClass} ${overlayClass} flex flex-col p-4 md:p-8`}>
       <motion.header 
-        className="flex justify-between items-center mb-8"
+        className="flex justify-between items-center mb-8 relative z-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -42,17 +42,17 @@ const Index = () => {
             <Button 
               variant="outline" 
               size="icon" 
-              className="h-8 w-8"
+              className="h-8 w-8 bg-white/80 hover:bg-white/90"
               onClick={goBackToLearningMaterials}
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight inline-block">
+            <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight inline-block">
               Balloon & Sandbag Math
             </h1>
           </div>
           <motion.p 
-            className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"
+            className="text-lg md:text-xl text-white/90 mt-3 max-w-2xl drop-shadow-lg"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -69,12 +69,12 @@ const Index = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="bg-primary/10 px-3 py-1.5 rounded-full flex items-center">
-              <Star className="h-5 w-5 mr-1.5 text-primary" />
-              <span className="font-bold">{preferences.points}</span>
+            <div className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center">
+              <Star className="h-5 w-5 mr-1.5 text-yellow-400" />
+              <span className="font-bold text-white">{preferences.points}</span>
             </div>
             
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="outline" size="sm" asChild className="bg-white/80 hover:bg-white/90">
               <Link to="/settings" className="flex items-center gap-1">
                 <Settings className="h-4 w-4" />
                 <span>Preferences</span>
@@ -85,7 +85,7 @@ const Index = () => {
       </motion.header>
       
       <motion.div 
-        className="flex-1 rounded-xl overflow-hidden shadow-2xl max-w-6xl mx-auto w-full"
+        className="flex-1 rounded-xl overflow-hidden shadow-2xl max-w-6xl mx-auto w-full bg-white/90 backdrop-blur-sm"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.8 }}
@@ -94,7 +94,7 @@ const Index = () => {
       </motion.div>
       
       <motion.footer 
-        className="mt-8 text-center text-gray-600 text-sm"
+        className="mt-8 text-center text-white/90 text-sm drop-shadow-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}

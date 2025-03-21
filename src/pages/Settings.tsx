@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUserPreferences, LearningStyle, Theme } from '@/contexts/UserPreferencesContext';
@@ -54,7 +53,7 @@ const Settings = () => {
         icon: '🎉',
       });
     } else {
-      toast.info("No changes were made to your settings.");
+      toast.info("Settings saved successfully.");
     }
     
     // Navigate back to the app

@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -135,4 +134,18 @@
 .sandbag-string {
   width: 1px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+}
+
+/* Flashcard 3D effects */
+.perspective {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.glass {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.1);
 }

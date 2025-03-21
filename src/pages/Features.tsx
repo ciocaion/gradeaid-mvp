@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +32,8 @@ const Features = () => {
         navigate('/app');
       } else if (feature === 'funZone') {
         navigate('/funzone');
+      } else if (feature === 'imageToContent') {
+        navigate('/image-to-learning');
       } else {
         toast.info('This feature is coming soon!', {
           description: "We're working hard to bring this to you soon.",
@@ -57,13 +58,14 @@ const Features = () => {
   };
   
   const themeStyles = {
-    minecraft: "from-green-500/30 to-emerald-200/30",
-    roblox: "from-red-500/30 to-rose-200/30",
-    fortnite: "from-blue-500/30 to-purple-200/30",
-    default: "from-sky-500/30 to-sky-200/30", 
+    minecraft: "bg-[url('/images/minecraft-bg.jpg')] bg-cover bg-center",
+    roblox: "bg-[url('/images/roblox-bg.jpg')] bg-cover bg-center",
+    fortnite: "bg-[url('/images/fortnite-bg.jpg')] bg-cover bg-center",
+    default: "bg-gradient-to-b from-sky-500/30 to-sky-200/30",
   };
 
-  const gradientClass = themeStyles[preferences.theme] || themeStyles.default;
+  const overlayClass = preferences.theme !== 'default' ? 'bg-black/20' : '';
+  const themeClass = themeStyles[preferences.theme] || themeStyles.default;
   
   const features = [
     {
@@ -112,9 +114,9 @@ const Features = () => {
   ];
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b ${gradientClass} flex flex-col p-4 md:p-8`}>
+    <div className={`min-h-screen ${themeClass} ${overlayClass} flex flex-col p-4 md:p-8`}>
       <motion.header 
-        className="flex justify-between items-center mb-8"
+        className="flex justify-between items-center mb-8 relative z-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -125,11 +127,11 @@ const Features = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight">
             Awesome Features
           </h1>
           <motion.p 
-            className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"
+            className="text-lg md:text-xl text-white/90 mt-3 max-w-2xl drop-shadow-lg"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -140,13 +142,13 @@ const Features = () => {
 
         {preferences.hasCompletedOnboarding && (
           <motion.div 
-            className="bg-primary/10 px-3 py-1.5 rounded-full flex items-center"
+            className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <Star className="h-5 w-5 mr-1.5 text-primary" />
-            <span className="font-bold">{preferences.points}</span>
+            <Star className="h-5 w-5 mr-1.5 text-yellow-400" />
+            <span className="font-bold text-white">{preferences.points}</span>
           </motion.div>
         )}
       </motion.header>
@@ -167,7 +169,7 @@ const Features = () => {
             whileTap={{ scale: 0.98 }}
           >
             <Card 
-              className={`cursor-pointer h-full transition-all ${
+              className={`cursor-pointer h-full transition-all backdrop-blur-sm bg-white/90 ${
                 selectedFeature === feature.id 
                   ? 'border-primary shadow-lg' 
                   : 'hover:border-gray-300'
@@ -218,7 +220,9 @@ const Features = () => {
         transition={{ delay: 1.2 }}
         className="flex justify-center mt-auto"
       >
-        <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
+        <div className="bg-white/90 backdrop-blur-sm rounded-lg">
+          <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
+        </div>
       </motion.div>
       
       <motion.div 
@@ -227,7 +231,7 @@ const Features = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        <Button onClick={handleContinue} className="px-8" size="lg">
+        <Button onClick={handleContinue} className="px-8 bg-white/90 hover:bg-white/95" size="lg">
           Continue 
           <ArrowRight className="ml-2 h-5 w-5" />
         </Button>

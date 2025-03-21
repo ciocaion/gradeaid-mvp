@@ -1,4 +1,3 @@
-
-import PlaygroundContainer from './playground';
+import PlaygroundContainer from './playground/PlaygroundContainer';
 
 export default PlaygroundContainer;

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,7 @@ import Features from "./pages/Features";
 import FinalOnboarding from "./pages/FinalOnboarding";
 import Settings from "./pages/Settings";
 import FunZone from "./pages/FunZone";
+import ImageToLearning from "./pages/ImageToLearning";
 import { UserPreferencesProvider } from "./contexts/UserPreferencesContext";
 
 const queryClient = new QueryClient();
@@ -30,6 +30,7 @@ const App = () => (
             <Route path="/app" element={<Index />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/funzone" element={<FunZone />} />
+            <Route path="/image-to-learning" element={<ImageToLearning />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
