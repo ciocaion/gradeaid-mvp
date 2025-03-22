@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Star, UserRound, Brain, Gamepad2, ArrowLeft } from 'lucide-react';
+import { Star, UserRound, Brain, Gamepad2, ArrowLeft, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Guidance from '@/components/Guidance';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
@@ -20,7 +19,7 @@ const FinalOnboarding: React.FC = () => {
     setIsAnimating(true);
     setTimeout(() => {
       completeOnboarding();
-      navigate('/app');
+      navigate('/home');
     }, 1500);
   };
   
@@ -113,17 +112,17 @@ const FinalOnboarding: React.FC = () => {
           <Button
             onClick={handleBack}
             variant="outline"
-            className="flex-1 text-lg py-6"
+            className="flex-1 text-lg py-6 shadow-md hover:shadow-lg transition-all"
           >
             <ArrowLeft className="mr-2 h-5 w-5" /> Back
           </Button>
           
           <Button
             onClick={handleComplete}
-            className="flex-1 text-lg py-6"
+            className="flex-1 text-lg py-6 shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary/90"
             variant="default"
           >
-            Start Learning!
+            Start Learning! <Home className="ml-2 h-5 w-5" />
           </Button>
         </div>
         

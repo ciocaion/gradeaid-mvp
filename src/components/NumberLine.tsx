@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NumberLineProps {
   min?: number;
@@ -27,21 +26,46 @@ const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, heigh
     const isCurrentValue = i === value;
     
     numbers.push(
-      <div 
+      <motion.div 
         key={i} 
         className="absolute flex items-center"
-        style={{ top: position }}
+        initial={{ opacity: 0, x: -5 }}
+        animate={{ 
+          opacity: 1, 
+          x: 0,
+          top: position 
+        }}
+        transition={{ 
+          type: "spring",
+          stiffness: 50,
+          damping: 20,
+          mass: 1,
+          duration: 0.8
+        }}
       >
         {/* Line */}
-        <div 
+        <motion.div 
           className={`h-px ${isCurrentValue ? 'w-5 bg-primary' : 'w-4 bg-gray-400'}`}
+          animate={{ 
+            width: isCurrentValue ? 20 : 16,
+            backgroundColor: isCurrentValue ? "var(--primary)" : "#9ca3af" 
+          }}
+          transition={{ duration: 0.5 }}
         />
         
         {/* Number label */}
-        <div className={`ml-2 font-medium ${isCurrentValue ? 'text-lg text-primary font-bold' : 'text-sm text-gray-700'}`}>
+        <motion.div 
+          className={`ml-2 font-medium ${isCurrentValue ? 'text-lg text-primary font-bold' : 'text-sm text-gray-700'}`}
+          animate={{ 
+            fontSize: isCurrentValue ? "1.125rem" : "0.875rem",
+            fontWeight: isCurrentValue ? 700 : 500,
+            color: isCurrentValue ? "var(--primary)" : "#374151"
+          }}
+          transition={{ duration: 0.5 }}
+        >
           {i}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     );
   }
 
@@ -57,7 +81,12 @@ const NumberLine: React.FC<NumberLineProps> = ({ min = -5, max = 5, value, heigh
           style={{ top: height / 2 }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ type: 'spring', damping: 10 }}
+          transition={{ 
+            type: 'spring', 
+            damping: 12,
+            stiffness: 100,
+            duration: 0.5 
+          }}
         />
       </div>
     </div>

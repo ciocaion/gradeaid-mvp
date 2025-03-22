@@ -16,14 +16,30 @@ export interface QuizQuestion {
 interface QuizProps {
   questions: QuizQuestion[];
   title?: string;
+  onComplete?: (score: number, total: number) => void;
 }
 
-const Quiz: React.FC<QuizProps> = ({ questions, title = 'Quiz' }) => {
+const Quiz: React.FC<QuizProps> = ({ questions, title = 'Quiz', onComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [answered, setAnswered] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
   const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
+  const [showResults, setShowResults] = useState<boolean>(false);
+  
+  // Safety check for empty or undefined questions array
+  if (!questions || questions.length === 0) {
+    return (
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>No Questions Available</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-600">There are no quiz questions available. Please try regenerating the quiz or upload a new image.</p>
+        </CardContent>
+      </Card>
+    );
+  }
   
   const currentQuestion = questions[currentQuestionIndex];
   
@@ -53,11 +69,27 @@ const Quiz: React.FC<QuizProps> = ({ questions, title = 'Quiz' }) => {
     }
   };
   
+  const finishQuiz = () => {
+    if (onComplete) {
+      onComplete(score, questions.length);
+    }
+    
+    toast.success(`Quiz completed with score: ${score}/${questions.length}`, {
+      description: `You got ${Math.round((score / questions.length) * 100)}% correct!`
+    });
+    
+    // Show results
+    setShowResults(true);
+  };
+  
   const nextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
       setSelectedOption(null);
       setAnswered(false);
+    } else {
+      // Call finish quiz when all questions are answered
+      finishQuiz();
     }
   };
   
@@ -151,8 +183,13 @@ const Quiz: React.FC<QuizProps> = ({ questions, title = 'Quiz' }) => {
         <div>
           {!answered ? (
             <Button onClick={checkAnswer}>Check Answer</Button>
+          ) : currentQuestionIndex === questions.length - 1 ? (
+            <Button onClick={finishQuiz} variant="default" className="bg-green-600 hover:bg-green-700">
+              Complete Quiz
+              <Check className="h-4 w-4 ml-1" />
+            </Button>
           ) : (
-            <Button onClick={nextQuestion} disabled={currentQuestionIndex === questions.length - 1}>
+            <Button onClick={nextQuestion}>
               Next Question
               <ChevronRight className="h-4 w-4 ml-1" />
             </Button>

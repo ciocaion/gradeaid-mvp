@@ -1,0 +1,299 @@
+{
+  "common": {
+    "backToHome": "Back to Home",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "loading": "Loading...",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "cancel": "Cancel",
+    "settings": "Settings",
+    "error": "Error",
+    "success": "Success",
+    "tryAgain": "Try Again",
+    "continue": "Continue",
+    "close": "Close",
+    "saveChanges": "Save Changes"
+  },
+  "welcome": {
+    "title": "Welcome to GradeAid",
+    "subtitle": "Your interactive math learning companion",
+    "description": "GradeAid makes learning math fun and engaging through interactive exercises, real-world problems, and personalized learning paths.",
+    "startButton": "Start Your Learning Journey",
+    "chooseLanguage": "Choose your language"
+  },
+  "home": {
+    "title": "Math Helper",
+    "subtitle": "Making math fun and interactive",
+    "startLearning": "Start Learning",
+    "practiceButton": "Practice with Real Objects",
+    "imageToLearningButton": "Learn from Images",
+    "videoLearningButton": "Learn from Videos",
+    "funZoneButton": "Fun Zone",
+    "settingsButton": "Settings",
+    "welcomeBack": "Welcome back, {{name}}!",
+    "audioText": "Home Dashboard. Welcome back to your learning journey.",
+    "quickAccess": "Quick Access",
+    "recentActivity": "Recent Activity",
+    "streak": "{{count}} day streak!",
+    "points": "{{count}} points",
+    "learningJourney": {
+      "title": "Start Your Learning Journey",
+      "description": "Tell us what you want to learn today and we'll create a personalized learning path just for you!",
+      "button": "Start Learning Now"
+    },
+    "menu": {
+      "features": {
+        "title": "Learning Features",
+        "description": "Explore all available learning tools and activities"
+      },
+      "balloonSandbag": {
+        "title": "Balloon & Sandbag Math",
+        "description": "Practice integer math with our interactive 3D tools"
+      },
+      "funZone": {
+        "title": "Fun Zone",
+        "description": "Play educational games and earn rewards"
+      },
+      "profile": {
+        "title": "My Profile & Settings",
+        "description": "Update your preferences and view your progress"
+      }
+    }
+  },
+  "learning": {
+    "title": "Learning Journey",
+    "audioText": "Learning Journey. Let's learn something new today.",
+    "whatWouldYouLikeToLearn": "What would you like to learn today?",
+    "whatWouldYouLikeToLearnAudio": "What would you like to learn today? Type a topic you're interested in.",
+    "topicPlaceholder": "Example: multiplication, the solar system, dinosaurs...",
+    "thinking": "Thinking...",
+    "letsLearn": "Let's Learn!",
+    "yourLearningOverview": "Your Learning Overview",
+    "yourPersonalizedLearningPath": "Your personalized learning path:",
+    "startJourney": "Start My Learning Journey",
+    "journeyStarted": "Your Learning Journey Has Started!",
+    "journeyStartedDescription": "You're about to start learning about {{topic}}. Follow the personalized path we've created for you.",
+    "continueToFirstActivity": "Continue to First Activity",
+    "steps": {
+      "step1": "Tell us what you want to learn",
+      "step2": "Review your learning overview",
+      "step3": "Start your personalized learning journey"
+    },
+    "tools": {
+      "videoLearning": "🎥 Video Learning",
+      "balloonExercise": "🎈 Balloon Math Exercise",
+      "imageLearning": "📸 Image Learning",
+      "realLifePractice": "✏️ Real Life Practice",
+      "nextActivity": "Next Activity"
+    }
+  },
+  "realLifePractice": {
+    "title": "Real Life Practice",
+    "activitySteps": {
+      "step1": "Read the activity",
+      "step2": "Choose how to respond",
+      "step3": "Create your solution",
+      "step4": "Submit your work",
+      "step5": "Review feedback"
+    },
+    "inputMethods": {
+      "drawing": "Draw it",
+      "upload": "Take a photo",
+      "voice": "Explain it"
+    },
+    "activityDescription": "Generate a new math activity to get started!",
+    "generateActivity": "Generate Activity",
+    "generating": "Generating...",
+    "howToRespond": "How would you like to respond?",
+    "emptyDrawing": "Please draw something before submitting.",
+    "analysisError": "AI Analysis Error",
+    "tryAgain": "Please try again.",
+    "generateNewActivity": "Generate a new math activity to get started!",
+    "howWouldYouLikeToRespond": "How would you like to respond?",
+    "howWouldYouLikeToRespondDescription": "How would you like to respond? You can draw your solution, upload a photo, or explain with your voice.",
+    "drawYourSolution": "Draw your solution",
+    "drawIt": "Draw it",
+    "uploadAPhotoSolution": "Upload a photo of your solution",
+    "takeAPhoto": "Take a photo",
+    "explainYourSolutionWithVoice": "Explain your solution with voice",
+    "explainIt": "Explain it",
+    "submitYourSolution": "Submit your solution",
+    "submitting": "Submitting...",
+    "submit": "Submit",
+    "submitSolutionToSeeFeedback": "Submit your solution to see feedback!",
+    "goBackToSubmitSolution": "Go back to submit your solution",
+    "yourSubmission": "Your Submission",
+    "tabs": {
+      "activity": "Activity",
+      "feedback": "Feedback"
+    }
+  },
+  "activities": {
+    "balloonsbadge": "Balloon Sandbag Exercise",
+    "quizcompleted": "Quiz Completed",
+    "imageuploaded": "Image Analysis",
+    "dailylogin": "Daily Login",
+    "flashcardscompleted": "Flashcards Completed",
+    "reallifepractice": "Real Life Practice"
+  },
+  "imageToLearning": {
+    "title": "Learn from Images",
+    "uploadImage": "Upload an Image",
+    "takePicture": "Take a Picture",
+    "analyzeImage": "Analyze Image",
+    "analyzing": "Analyzing...",
+    "noImage": "Please upload an image first",
+    "tabs": {
+      "upload": "Upload",
+      "analysis": "Analysis",
+      "quiz": "Quiz",
+      "flashcards": "Flashcards"
+    },
+    "explanationTitle": "Explanation",
+    "quizTitle": "Math Concepts Quiz",
+    "regenerateQuiz": "New Questions",
+    "difficulty": {
+      "label": "Difficulty",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "regeneratingQuiz": "Creating new questions...",
+    "questionCount": "{{count}} questions"
+  },
+  "videoLearning": {
+    "title": "Learn from Videos",
+    "searchPlaceholder": "Search for math videos...",
+    "recommendedVideos": "Recommended Videos",
+    "watchingNow": "Currently Watching",
+    "relatedVideos": "Related Videos",
+    "noVideos": "No videos found",
+    "loading": "Loading videos..."
+  },
+  "funZone": {
+    "title": "Fun Zone",
+    "balloonGame": "Balloon Game",
+    "playButton": "Play",
+    "helpText": "Help the balloon rise by solving math problems!",
+    "scoreText": "Score: {{score}}",
+    "highScoreText": "High Score: {{score}}"
+  },
+  "settings": {
+    "title": "Settings",
+    "languageSection": "Language",
+    "language": "Language",
+    "selectLanguage": "Select language",
+    "languages": {
+      "english": "English",
+      "danish": "Danish"
+    },
+    "learningStyleSection": "Learning Style",
+    "learningStyles": {
+      "visual": {
+        "label": "Visual Learner",
+        "description": "Learn through images, diagrams, and visual aids"
+      },
+      "auditory": {
+        "label": "Auditory Learner",
+        "description": "Learn through listening and verbal explanations"
+      },
+      "kinesthetic": {
+        "label": "Hands-on Learner",
+        "description": "Learn through interactive activities and games"
+      },
+      "reading": {
+        "label": "Reading & Writing",
+        "description": "Learn through text-based materials and note-taking"
+      }
+    },
+    "themeSection": "Theme",
+    "themes": {
+      "minecraft": {
+        "label": "Minecraft",
+        "description": "Blocky and adventurous"
+      },
+      "roblox": {
+        "label": "Roblox",
+        "description": "Creative and colorful"
+      },
+      "fortnite": {
+        "label": "Fortnite",
+        "description": "Bold and energetic"
+      },
+      "default": {
+        "label": "Default",
+        "description": "Clean and simple"
+      }
+    },
+    "badgesSection": "Your Badges",
+    "noBadges": "No badges earned yet. Complete activities to earn badges!",
+    "points": "Points",
+    "streak": "Learning Streak",
+    "days": "days",
+    "resetApp": "Reset App",
+    "resetWarningTitle": "Reset All Data?",
+    "resetWarningDescription": "This will delete all your progress, badges, and preferences. This action cannot be undone."
+  },
+  "badges": {
+    "customizer": "Theme Explorer",
+    "dailylogin": "Daily Login",
+    "mathwhiz": "Math Whiz",
+    "problemsolver": "Problem Solver"
+  },
+  "notifications": {
+    "pointsEarned": "You earned {{points}} points!",
+    "badgeEarned": "New badge: {{badge}}!",
+    "challengeComplete": "Challenge completed!",
+    "sessionComplete": "Learning session complete!",
+    "streakUpdated": "Day {{count}} streak! Keep it up!",
+    "settingsUpdated": "Settings updated! You earned 10 points for customizing your experience.",
+    "settingsSaved": "Settings saved successfully.",
+    "appReset": "App has been reset. Taking you back to the start."
+  },
+  "onboarding": {
+    "title": "Welcome to Math Helper!",
+    "subtitle": "Let's get started with a few quick steps",
+    "errors": {
+      "nameRequired": "Please tell us your name so we can continue"
+    },
+    "greetings": {
+      "hello": "Nice to meet you, {{name}}!"
+    },
+    "guidance": {
+      "welcome": "This is a safe space where we'll personalize learning just for you. Take your time!",
+      "learningStyle": "There's no wrong answer here! We'll use your choices to make learning work best for you.",
+      "theme": "Your theme will make your learning space look cool! You can always change it later."
+    },
+    "steps": {
+      "step1": {
+        "title": "About You",
+        "ageLabel": "How old are you?",
+        "nameLabel": "What's your name?"
+      },
+      "step2": {
+        "title": "How do you like to learn?",
+        "difficultyLabel": "Math difficulty level",
+        "easy": "Easy",
+        "medium": "Medium",
+        "hard": "Hard"
+      },
+      "step3": {
+        "title": "Choose your theme",
+        "defaultTheme": "Default",
+        "minecraftTheme": "Minecraft",
+        "robloxTheme": "Roblox",
+        "fortniteTheme": "Fortnite"
+      }
+    },
+    "completed": "Great job! You're all set to start learning!"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Please try again",
+    "noInternet": "No internet connection",
+    "pageNotFound": "Page not found",
+    "goHome": "Go to Home page"
+  }
+} 

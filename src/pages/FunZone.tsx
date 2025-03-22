@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +5,7 @@ import { useUserPreferences } from '@/contexts/UserPreferencesContext';
 import { 
   Gamepad2, Star, ArrowLeft, Trophy, 
   Crown, Medal, Award, Sparkles, 
-  PartyPopper, Gift
+  PartyPopper, Gift, Home
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -83,7 +82,7 @@ const FunZone: React.FC = () => {
   const gradientClass = themeStyles[preferences.theme] || themeStyles.default;
   
   const goBack = () => {
-    navigate('/features');
+    navigate('/home');
   };
   
   const onSubmit = (data: FormValues) => {
@@ -126,18 +125,16 @@ const FunZone: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-3 mb-6">
             <Button 
               variant="outline" 
-              size="icon" 
-              className="h-8 w-8"
+              size="sm" 
+              className="bg-white/80 hover:bg-white/90 shadow-sm flex items-center" 
               onClick={goBack}
             >
-              <ArrowLeft className="h-4 w-4" />
+              <Home className="h-4 w-4 mr-1.5" /> Back to Home
             </Button>
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 tracking-tight inline-block">
-              Fun Zone
-            </h1>
+            <h1 className="text-3xl font-bold text-white drop-shadow-lg">Fun Zone</h1>
           </div>
           <motion.p 
             className="text-lg md:text-xl text-gray-600 mt-3 max-w-2xl"

@@ -5,28 +5,37 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
 
 export interface Flashcard {
-  term: string;
-  definition: string;
+  term?: string;
+  definition?: string;
+  front?: string;
+  back?: string;
 }
 
 interface FlashcardsProps {
-  cards: Flashcard[];
+  flashcards?: Flashcard[];
+  cards?: Flashcard[];
   title?: string;
 }
 
-const Flashcards: React.FC<FlashcardsProps> = ({ cards, title = 'Flashcards' }) => {
+const Flashcards: React.FC<FlashcardsProps> = ({ flashcards, cards, title = 'Flashcards' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   
-  const currentCard = cards[currentIndex];
+  // Use flashcards prop if provided, otherwise use cards
+  const cardsToUse = flashcards || cards || [];
+  const currentCard = cardsToUse[currentIndex];
+  
+  // Get the correct front/back text based on whichever properties are available
+  const getFrontText = (card: Flashcard): string => card.front || card.term || '';
+  const getBackText = (card: Flashcard): string => card.back || card.definition || '';
   
   const flipCard = () => {
     setFlipped(!flipped);
   };
   
   const nextCard = () => {
-    if (currentIndex < cards.length - 1) {
+    if (currentIndex < cardsToUse.length - 1) {
       setDirection('right');
       setFlipped(false);
       setTimeout(() => {
@@ -89,7 +98,7 @@ const Flashcards: React.FC<FlashcardsProps> = ({ cards, title = 'Flashcards' }) 
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-xl font-semibold">{title}</h3>
           <div className="text-sm text-gray-500">
-            {currentIndex + 1} of {cards.length}
+            {currentIndex + 1} of {cardsToUse.length}
           </div>
         </div>
         
@@ -118,7 +127,7 @@ const Flashcards: React.FC<FlashcardsProps> = ({ cards, title = 'Flashcards' }) 
                 >
                   <div className="text-center">
                     <h4 className="text-lg font-medium mb-2">Term</h4>
-                    <p className="text-2xl">{currentCard.term}</p>
+                    <p className="text-2xl" dangerouslySetInnerHTML={{ __html: getFrontText(currentCard) }}></p>
                     <p className="text-sm text-gray-500 mt-4">
                       Tap to see the definition
                     </p>
@@ -135,7 +144,7 @@ const Flashcards: React.FC<FlashcardsProps> = ({ cards, title = 'Flashcards' }) 
                 >
                   <div className="text-center">
                     <h4 className="text-lg font-medium mb-2">Definition</h4>
-                    <p>{currentCard.definition}</p>
+                    <p dangerouslySetInnerHTML={{ __html: getBackText(currentCard) }}></p>
                     <p className="text-sm text-gray-500 mt-4">
                       Tap to see the term
                     </p>
@@ -165,7 +174,7 @@ const Flashcards: React.FC<FlashcardsProps> = ({ cards, title = 'Flashcards' }) 
           variant="outline"
           size="icon"
           onClick={nextCard}
-          disabled={currentIndex === cards.length - 1}
+          disabled={currentIndex === cardsToUse.length - 1}
         >
           <ChevronRight className="h-4 w-4" />
         </Button>

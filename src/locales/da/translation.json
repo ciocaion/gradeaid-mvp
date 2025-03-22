@@ -1,0 +1,299 @@
+{
+  "common": {
+    "backToHome": "Tilbage til forsiden",
+    "submit": "Indsend",
+    "submitting": "Indsender...",
+    "loading": "Indlæser...",
+    "next": "Næste",
+    "previous": "Forrige",
+    "save": "Gem",
+    "cancel": "Annuller",
+    "settings": "Indstillinger",
+    "error": "Fejl",
+    "success": "Succes",
+    "tryAgain": "Prøv igen",
+    "continue": "Fortsæt",
+    "close": "Luk",
+    "saveChanges": "Gem ændringer"
+  },
+  "welcome": {
+    "title": "Velkommen til GradeAid",
+    "subtitle": "Din interaktive matematik læringspartner",
+    "description": "GradeAid gør matematik sjovt og engagerende gennem interaktive øvelser, virkelige problemer og personlige læringsveje.",
+    "startButton": "Start Din Læringsrejse",
+    "chooseLanguage": "Vælg dit sprog"
+  },
+  "home": {
+    "title": "Matematik Hjælper",
+    "subtitle": "Gør matematik sjovt og interaktivt",
+    "startLearning": "Start med at lære",
+    "practiceButton": "Øv med virkelige genstande",
+    "imageToLearningButton": "Lær fra billeder",
+    "videoLearningButton": "Lær fra videoer",
+    "funZoneButton": "Sjov Zone",
+    "settingsButton": "Indstillinger",
+    "welcomeBack": "Velkommen tilbage, {{name}}!",
+    "audioText": "Hjem Dashboard. Velkommen tilbage til din læringsrejse.",
+    "quickAccess": "Hurtig adgang",
+    "recentActivity": "Seneste aktivitet",
+    "streak": "{{count}} dage i træk!",
+    "points": "{{count}} point",
+    "learningJourney": {
+      "title": "Start din læringsrejse",
+      "description": "Fortæl os hvad du vil lære i dag, og vi vil skabe en personlig læringsvej kun til dig!",
+      "button": "Start med at lære nu"
+    },
+    "menu": {
+      "features": {
+        "title": "Lærings funktioner",
+        "description": "Udforsk alle tilgængelige læringsværktøjer og aktiviteter"
+      },
+      "balloonSandbag": {
+        "title": "Ballon & Sandsæk Matematik",
+        "description": "Øv heltalsmatematik med vores interaktive 3D-værktøjer"
+      },
+      "funZone": {
+        "title": "Sjov Zone",
+        "description": "Spil uddannelsesmæssige spil og tjen belønninger"
+      },
+      "profile": {
+        "title": "Min profil & Indstillinger",
+        "description": "Opdater dine præferencer og se din fremgang"
+      }
+    }
+  },
+  "learning": {
+    "title": "Læringsrejse",
+    "audioText": "Læringsrejse. Lad os lære noget nyt i dag.",
+    "whatWouldYouLikeToLearn": "Hvad vil du gerne lære i dag?",
+    "whatWouldYouLikeToLearnAudio": "Hvad vil du gerne lære i dag? Skriv et emne du er interesseret i.",
+    "topicPlaceholder": "Eksempel: multiplikation, solsystemet, dinosaurer...",
+    "thinking": "Tænker...",
+    "letsLearn": "Lad os lære!",
+    "yourLearningOverview": "Din lærings oversigt",
+    "yourPersonalizedLearningPath": "Din personlige læringsvej:",
+    "startJourney": "Start min læringsrejse",
+    "journeyStarted": "Din læringsrejse er begyndt!",
+    "journeyStartedDescription": "Du er ved at begynde at lære om {{topic}}. Følg den personlige vej, vi har lavet til dig.",
+    "continueToFirstActivity": "Fortsæt til første aktivitet",
+    "steps": {
+      "step1": "Fortæl os hvad du vil lære",
+      "step2": "Gennemgå din lærings oversigt",
+      "step3": "Start din personlige læringsrejse"
+    },
+    "tools": {
+      "videoLearning": "🎥 Video Læring",
+      "balloonExercise": "🎈 Ballon Matematik Øvelse",
+      "imageLearning": "📸 Billede Læring",
+      "realLifePractice": "✏️ Træning i Virkelige Situationer",
+      "nextActivity": "Næste Aktivitet"
+    }
+  },
+  "realLifePractice": {
+    "title": "Træning i Virkelige Situationer",
+    "activitySteps": {
+      "step1": "Læs aktiviteten",
+      "step2": "Vælg hvordan du vil svare",
+      "step3": "Lav din løsning",
+      "step4": "Indsend dit arbejde",
+      "step5": "Gennemgå feedback"
+    },
+    "inputMethods": {
+      "drawing": "Tegn det",
+      "upload": "Tag et billede",
+      "voice": "Forklar det"
+    },
+    "activityDescription": "Generer en ny matematisk aktivitet for at komme i gang!",
+    "generateActivity": "Generer aktivitet",
+    "generating": "Genererer...",
+    "howToRespond": "Hvordan vil du gerne svare?",
+    "emptyDrawing": "Tegn venligst noget før du indsender.",
+    "analysisError": "AI Analyse Fejl",
+    "tryAgain": "Prøv venligst igen.",
+    "generateNewActivity": "Generer en ny matematisk aktivitet for at komme i gang!",
+    "howWouldYouLikeToRespond": "Hvordan vil du gerne svare?",
+    "howWouldYouLikeToRespondDescription": "Hvordan vil du gerne svare? Du kan tegne din løsning, uploade et billede eller forklare med din stemme.",
+    "drawYourSolution": "Tegn din løsning",
+    "drawIt": "Tegn det",
+    "uploadAPhotoSolution": "Upload et billede af din løsning",
+    "takeAPhoto": "Tag et billede",
+    "explainYourSolutionWithVoice": "Forklar din løsning med stemme",
+    "explainIt": "Forklar det",
+    "submitYourSolution": "Indsend din løsning",
+    "submitting": "Indsender...",
+    "submit": "Indsend",
+    "submitSolutionToSeeFeedback": "Indsend din løsning for at se feedback!",
+    "goBackToSubmitSolution": "Gå tilbage for at indsende din løsning",
+    "yourSubmission": "Din indsendelse",
+    "tabs": {
+      "activity": "Aktivitet",
+      "feedback": "Feedback"
+    }
+  },
+  "activities": {
+    "balloonsbadge": "Ballon Sandsæk Øvelse",
+    "quizcompleted": "Quiz Gennemført",
+    "imageuploaded": "Billede Analyse",
+    "dailylogin": "Daglig Login",
+    "flashcardscompleted": "Flashcards Gennemført",
+    "reallifepractice": "Træning i Virkelige Situationer"
+  },
+  "imageToLearning": {
+    "title": "Lær fra Billeder",
+    "uploadImage": "Upload et billede",
+    "takePicture": "Tag et billede",
+    "analyzeImage": "Analyser billede",
+    "analyzing": "Analyserer...",
+    "noImage": "Upload venligst et billede først",
+    "tabs": {
+      "upload": "Upload",
+      "analysis": "Analyse",
+      "quiz": "Quiz",
+      "flashcards": "Flashcards"
+    },
+    "explanationTitle": "Forklaring",
+    "quizTitle": "Matematik Begreber Quiz",
+    "regenerateQuiz": "Nye spørgsmål",
+    "difficulty": {
+      "label": "Sværhedsgrad",
+      "easy": "Let",
+      "medium": "Medium",
+      "hard": "Svær"
+    },
+    "regeneratingQuiz": "Opretter nye spørgsmål...",
+    "questionCount": "{{count}} spørgsmål"
+  },
+  "videoLearning": {
+    "title": "Lær fra Videoer",
+    "searchPlaceholder": "Søg efter matematikvideoer...",
+    "recommendedVideos": "Anbefalede videoer",
+    "watchingNow": "Ser nu",
+    "relatedVideos": "Relaterede videoer",
+    "noVideos": "Ingen videoer fundet",
+    "loading": "Indlæser videoer..."
+  },
+  "funZone": {
+    "title": "Sjov Zone",
+    "balloonGame": "Ballon Spil",
+    "playButton": "Spil",
+    "helpText": "Hjælp ballonen med at stige ved at løse matematikproblemer!",
+    "scoreText": "Score: {{score}}",
+    "highScoreText": "Højeste Score: {{score}}"
+  },
+  "settings": {
+    "title": "Indstillinger",
+    "languageSection": "Sprog",
+    "language": "Sprog",
+    "selectLanguage": "Vælg sprog",
+    "languages": {
+      "english": "Engelsk",
+      "danish": "Dansk"
+    },
+    "learningStyleSection": "Læringstil",
+    "learningStyles": {
+      "visual": {
+        "label": "Visuel lærende",
+        "description": "Lær gennem billeder, diagrammer og visuelle hjælpemidler"
+      },
+      "auditory": {
+        "label": "Auditiv lærende",
+        "description": "Lær gennem lytning og mundtlige forklaringer"
+      },
+      "kinesthetic": {
+        "label": "Praktisk lærende",
+        "description": "Lær gennem interaktive aktiviteter og spil"
+      },
+      "reading": {
+        "label": "Læsning & Skrivning",
+        "description": "Lær gennem tekstbaserede materialer og notattagning"
+      }
+    },
+    "themeSection": "Tema",
+    "themes": {
+      "minecraft": {
+        "label": "Minecraft",
+        "description": "Firkantet og eventyrligt"
+      },
+      "roblox": {
+        "label": "Roblox",
+        "description": "Kreativt og farverigt"
+      },
+      "fortnite": {
+        "label": "Fortnite",
+        "description": "Dristigt og energisk"
+      },
+      "default": {
+        "label": "Standard",
+        "description": "Rent og enkelt"
+      }
+    },
+    "badgesSection": "Dine badges",
+    "noBadges": "Ingen badges optjent endnu. Gennemfør aktiviteter for at optjene badges!",
+    "points": "Point",
+    "streak": "Læringsstreak",
+    "days": "dage",
+    "resetApp": "Nulstil app",
+    "resetWarningTitle": "Nulstil alle data?",
+    "resetWarningDescription": "Dette vil slette al din fremgang, badges og præferencer. Denne handling kan ikke fortrydes."
+  },
+  "badges": {
+    "customizer": "Tema Udforsker",
+    "dailylogin": "Daglig Login",
+    "mathwhiz": "Matematik Geni",
+    "problemsolver": "Problemløser"
+  },
+  "notifications": {
+    "pointsEarned": "Du har tjent {{points}} point!",
+    "badgeEarned": "Nyt emblem: {{badge}}!",
+    "challengeComplete": "Udfordring gennemført!",
+    "sessionComplete": "Læringssession gennemført!",
+    "streakUpdated": "Dag {{count}} i træk! Bliv ved!",
+    "settingsUpdated": "Indstillinger opdateret! Du har tjent 10 point for at tilpasse din oplevelse.",
+    "settingsSaved": "Indstillinger gemt.",
+    "appReset": "Appen er blevet nulstillet. Tager dig tilbage til starten."
+  },
+  "onboarding": {
+    "title": "Velkommen til Matematik Hjælper!",
+    "subtitle": "Lad os komme i gang med nogle få hurtige trin",
+    "errors": {
+      "nameRequired": "Fortæl os venligst dit navn, så vi kan fortsætte"
+    },
+    "greetings": {
+      "hello": "Dejligt at møde dig, {{name}}!"
+    },
+    "guidance": {
+      "welcome": "Dette er et sikkert rum, hvor vi personliggør læring lige til dig. Tag dig tid!",
+      "learningStyle": "Der er intet forkert svar her! Vi bruger dine valg til at gøre læring bedst for dig.",
+      "theme": "Dit tema vil gøre dit læringsrum sejt! Du kan altid ændre det senere."
+    },
+    "steps": {
+      "step1": {
+        "title": "Om dig",
+        "ageLabel": "Hvor gammel er du?",
+        "nameLabel": "Hvad hedder du?"
+      },
+      "step2": {
+        "title": "Hvordan kan du lide at lære?",
+        "difficultyLabel": "Matematik sværhedsgrad",
+        "easy": "Let",
+        "medium": "Medium",
+        "hard": "Svær"
+      },
+      "step3": {
+        "title": "Vælg dit tema",
+        "defaultTheme": "Standard",
+        "minecraftTheme": "Minecraft",
+        "robloxTheme": "Roblox",
+        "fortniteTheme": "Fortnite"
+      }
+    },
+    "completed": "Godt arbejde! Du er klar til at begynde at lære!"
+  },
+  "error": {
+    "somethingWentWrong": "Noget gik galt",
+    "tryAgain": "Prøv igen venligst",
+    "noInternet": "Ingen internetforbindelse",
+    "pageNotFound": "Siden blev ikke fundet",
+    "goHome": "Gå til forsiden"
+  }
+} 

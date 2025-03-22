@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -39,14 +38,14 @@ const Controls: React.FC<ControlsProps> = ({
   const getItemLabels = (): { balloonLabel: string, sandbagLabel: string } => {
     switch (operation) {
       case 'addition':
-        return { balloonLabel: 'First Number', sandbagLabel: 'Second Number' };
+        return { balloonLabel: '🎈 First Number', sandbagLabel: '🎒 Second Number' };
       case 'multiplication':
-        return { balloonLabel: 'First Factor', sandbagLabel: 'Second Factor' };
+        return { balloonLabel: '🍪 First Factor', sandbagLabel: '🧸 Second Factor' };
       case 'division':
-        return { balloonLabel: 'Dividend', sandbagLabel: 'Divisor' };
+        return { balloonLabel: '🍕 Total Slices', sandbagLabel: '👫 Friends to Share With' };
       case 'subtraction':
       default:
-        return { balloonLabel: 'Balloons (Positive)', sandbagLabel: 'Sandbags (Negative)' };
+        return { balloonLabel: '🎈 Balloons (Up)', sandbagLabel: '🧱 Sandbags (Down)' };
     }
   };
 
@@ -118,7 +117,7 @@ const Controls: React.FC<ControlsProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        <h3 className="text-lg font-medium mb-2">My Expression</h3>
+        <h3 className="text-lg font-medium mb-2">✨ My Math Equation</h3>
         <div className="text-3xl font-bold text-center py-2">
           {formatExpression(balloons, sandbags, operation)}
         </div>

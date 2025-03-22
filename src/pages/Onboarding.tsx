@@ -14,12 +14,14 @@ import { toast } from 'sonner';
 import { Card, CardContent } from '@/components/ui/card';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import Guidance from '@/components/Guidance';
+import { useTranslation } from 'react-i18next';
 
 interface OnboardingProps {
   step?: number;
 }
 
 const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
+  const { t } = useTranslation();
   const { updateName, preferences } = useUserPreferences();
   const [name, setName] = useState(preferences.name);
   const [showError, setShowError] = useState(false);
@@ -40,13 +42,13 @@ const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
         <UserRound className="w-12 h-12 text-white" />
       </motion.div>
       
-      <h1 className="text-3xl font-bold text-primary">Welcome to Learning App!</h1>
-      <p className="text-lg text-gray-600">Let's get to know each other! What's your name?</p>
+      <h1 className="text-3xl font-bold text-primary">{t('onboarding.title')}</h1>
+      <p className="text-lg text-gray-600">{t('onboarding.steps.step1.nameLabel')}</p>
       
       <div className="space-y-4">
         <Input
           type="text"
-          placeholder="Your name"
+          placeholder={t('onboarding.steps.step1.nameLabel')}
           value={name}
           onChange={(e) => {
             setName(e.target.value);
@@ -62,7 +64,7 @@ const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Please tell us your name so we can continue
+            {t('onboarding.errors.nameRequired')}
           </motion.p>
         )}
         
@@ -73,23 +75,24 @@ const WelcomeStep: React.FC<{onNext: () => void}> = ({ onNext }) => {
               return;
             }
             updateName(name);
-            toast.success(`Nice to meet you, ${name}!`, {
+            toast.success(t('onboarding.greetings.hello', { name }), {
               icon: '👋',
             });
             onNext();
           }}
           className="w-full text-lg py-6"
         >
-          Next <ArrowRight className="ml-2 h-5 w-5" />
+          {t('common.next')} <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
       </div>
       
-      <Guidance message="This is a safe space where we'll personalize learning just for you. Take your time!" />
+      <Guidance message={t('onboarding.guidance.welcome')} />
     </motion.div>
   );
 };
 
 const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
+  const { t } = useTranslation();
   const { toggleLearningStyle, preferences, addPoints } = useUserPreferences();
   const [selectedStyles, setSelectedStyles] = useState<LearningStyle[]>(preferences.learningStyles);
   
@@ -105,7 +108,7 @@ const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({
     selectedStyles.forEach(style => toggleLearningStyle(style));
     if (selectedStyles.length > 0) {
       addPoints(20);
-      toast.success("You earned 20 points for sharing your preferences!", {
+      toast.success(t('notifications.pointsEarned', { points: 20 }), {
         icon: '🎉',
       });
     }
@@ -115,27 +118,27 @@ const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({
   const learningStyles: {value: LearningStyle, label: string, icon: React.ReactNode, description: string}[] = [
     {
       value: 'visual',
-      label: 'Visual',
+      label: t('settings.learningStyles.visual.label'),
       icon: <PaintBucket className="h-6 w-6" />,
-      description: 'I like pictures, videos, and seeing things'
+      description: t('settings.learningStyles.visual.description')
     },
     {
       value: 'auditory',
-      label: 'Listening',
+      label: t('settings.learningStyles.auditory.label'),
       icon: <Headphones className="h-6 w-6" />,
-      description: 'I like listening to stories and podcasts'
+      description: t('settings.learningStyles.auditory.description')
     },
     {
       value: 'kinesthetic',
-      label: 'Hands-on',
+      label: t('settings.learningStyles.kinesthetic.label'),
       icon: <Gamepad2 className="h-6 w-6" />,
-      description: 'I like building and doing activities'
+      description: t('settings.learningStyles.kinesthetic.description')
     },
     {
       value: 'reading',
-      label: 'Reading',
+      label: t('settings.learningStyles.reading.label'),
       icon: <Book className="h-6 w-6" />,
-      description: 'I like reading and writing things'
+      description: t('settings.learningStyles.reading.description')
     }
   ];
   
@@ -155,8 +158,8 @@ const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({
         <Brain className="w-12 h-12 text-white" />
       </motion.div>
       
-      <h1 className="text-3xl font-bold text-primary">How do you like to learn?</h1>
-      <p className="text-lg text-gray-600">Choose all the ways you enjoy learning the most</p>
+      <h1 className="text-3xl font-bold text-primary">{t('onboarding.steps.step2.title')}</h1>
+      <p className="text-lg text-gray-600">{t('settings.learningStyleSection')}</p>
       
       <div className="grid grid-cols-1 gap-4 mt-6">
         {learningStyles.map((style) => (
@@ -197,7 +200,7 @@ const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({
           variant="outline"
           className="flex-1 text-lg py-6"
         >
-          <ArrowLeft className="mr-2 h-5 w-5" /> Back
+          <ArrowLeft className="mr-2 h-5 w-5" /> {t('common.previous')}
         </Button>
         
         <Button
@@ -205,16 +208,17 @@ const LearningStyleStep: React.FC<{onNext: () => void, onBack: () => void}> = ({
           className="flex-1 text-lg py-6"
           disabled={selectedStyles.length === 0}
         >
-          Next <ArrowRight className="ml-2 h-5 w-5" />
+          {t('common.next')} <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
       </div>
       
-      <Guidance message="There's no wrong answer here! We'll use your choices to make learning work best for you." />
+      <Guidance message={t('onboarding.guidance.learningStyle')} />
     </motion.div>
   );
 };
 
 const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = ({ onNext, onBack }) => {
+  const { t } = useTranslation();
   const { setTheme, preferences, addPoints, addBadge } = useUserPreferences();
   const [selectedTheme, setSelectedTheme] = useState<Theme>(preferences.theme);
   const navigate = useNavigate();
@@ -222,26 +226,26 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
   const themes: {value: Theme, label: string, description: string, bgClass: string}[] = [
     {
       value: 'minecraft',
-      label: 'Minecraft',
-      description: 'Blocks, mining, and crafting adventures',
+      label: t('settings.themes.minecraft.label'),
+      description: t('settings.themes.minecraft.description'),
       bgClass: 'bg-gradient-to-r from-green-600 to-emerald-700'
     },
     {
       value: 'roblox',
-      label: 'Roblox',
-      description: 'Creative building and fun games',
+      label: t('settings.themes.roblox.label'),
+      description: t('settings.themes.roblox.description'),
       bgClass: 'bg-gradient-to-r from-red-500 to-rose-600'
     },
     {
       value: 'fortnite',
-      label: 'Fortnite',
-      description: 'Battle royale and adventure',
+      label: t('settings.themes.fortnite.label'),
+      description: t('settings.themes.fortnite.description'),
       bgClass: 'bg-gradient-to-r from-blue-500 to-purple-600'
     },
     {
       value: 'default',
-      label: 'Classic',
-      description: 'Clean and simple design',
+      label: t('settings.themes.default.label'),
+      description: t('settings.themes.default.description'),
       bgClass: 'bg-gradient-to-r from-sky-500 to-indigo-600'
     }
   ];
@@ -249,12 +253,13 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
   const handleNext = () => {
     setTheme(selectedTheme);
     addPoints(30);
-    addBadge('Theme Explorer');
-    toast.success("You earned 30 points and a badge!", {
+    addBadge('customizer');
+    toast.success(t('notifications.badgeEarned', { badge: t('badges.customizer') }), {
       icon: '🏆',
-      description: "Theme Explorer badge unlocked!"
     });
-    navigate('/features');
+    
+    // Move to home
+    onNext();
   };
   
   return (
@@ -268,13 +273,13 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.3, type: 'spring' }}
-        className="w-24 h-24 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full mx-auto flex items-center justify-center"
+        className="w-24 h-24 bg-gradient-to-br from-pink-500 to-orange-400 rounded-full mx-auto flex items-center justify-center"
       >
-        <Gamepad2 className="w-12 h-12 text-white" />
+        <PaintBucket className="w-12 h-12 text-white" />
       </motion.div>
       
-      <h1 className="text-3xl font-bold text-primary">Choose Your Theme</h1>
-      <p className="text-lg text-gray-600">Pick a theme for your learning adventure</p>
+      <h1 className="text-3xl font-bold text-primary">{t('onboarding.steps.step3.title')}</h1>
+      <p className="text-lg text-gray-600">{t('settings.themeSection')}</p>
       
       <div className="grid grid-cols-1 gap-4 mt-6">
         {themes.map((theme) => (
@@ -286,27 +291,24 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
             <Card 
               className={`cursor-pointer transition-all overflow-hidden ${
                 selectedTheme === theme.value 
-                  ? 'border-primary shadow-lg' 
+                  ? 'border-primary shadow-md' 
                   : 'hover:border-gray-300'
               }`}
               onClick={() => setSelectedTheme(theme.value)}
             >
-              <div className={`h-16 ${theme.bgClass}`}>
-                <div className="h-full w-full flex items-center justify-center">
-                  {selectedTheme === theme.value && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="bg-white rounded-full p-1"
-                    >
-                      <Star className="h-6 w-6 text-yellow-500" />
-                    </motion.div>
-                  )}
+              <div className={`h-20 ${theme.bgClass}`} />
+              <CardContent className="flex items-center p-4">
+                <div className="text-left">
+                  <h3 className="font-semibold text-lg">{theme.label}</h3>
+                  <p className="text-sm text-gray-600">{theme.description}</p>
                 </div>
-              </div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold text-lg">{theme.label}</h3>
-                <p className="text-sm text-gray-600">{theme.description}</p>
+                {selectedTheme === theme.value && (
+                  <div className="ml-auto">
+                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                      <Star className="h-4 w-4 text-white" />
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </motion.div>
@@ -319,180 +321,71 @@ const ThemeSelectionStep: React.FC<{onNext: () => void, onBack: () => void}> = (
           variant="outline"
           className="flex-1 text-lg py-6"
         >
-          <ArrowLeft className="mr-2 h-5 w-5" /> Back
+          <ArrowLeft className="mr-2 h-5 w-5" /> {t('common.previous')}
         </Button>
         
         <Button
           onClick={handleNext}
           className="flex-1 text-lg py-6"
         >
-          Next <ArrowRight className="ml-2 h-5 w-5" />
+          {t('common.continue')} <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
       </div>
       
-      <Guidance message="Your theme will make your learning space look cool! You can always change it later." />
+      <Guidance message={t('onboarding.guidance.theme')} />
     </motion.div>
   );
 };
 
 const Onboarding: React.FC<OnboardingProps> = ({ step = 0 }) => {
-  const navigate = useNavigate();
-  const { preferences } = useUserPreferences();
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(step);
+  const navigate = useNavigate();
+  const { completeOnboarding } = useUserPreferences();
   
   const goToPreviousStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+    setCurrentStep(currentStep - 1);
+  };
+  
+  const goToNextStep = () => {
+    if (currentStep === 2) {
+      // Last step, complete onboarding
+      completeOnboarding();
+      navigate('/home');
+    } else {
+      setCurrentStep(currentStep + 1);
     }
   };
   
-  useEffect(() => {
-    if (preferences.hasCompletedOnboarding) {
-      navigate('/app');
-    }
-  }, [preferences.hasCompletedOnboarding, navigate]);
-  
+  // Map steps to components
   const steps = [
-    <WelcomeStep onNext={() => setCurrentStep(1)} key="welcome" />,
-    <LearningStyleStep onNext={() => setCurrentStep(2)} onBack={goToPreviousStep} key="learning" />,
-    <ThemeSelectionStep onNext={() => navigate('/features')} onBack={goToPreviousStep} key="theme" />,
+    <WelcomeStep key="welcome" onNext={goToNextStep} />,
+    <LearningStyleStep key="learning-style" onNext={goToNextStep} onBack={goToPreviousStep} />,
+    <ThemeSelectionStep key="theme" onNext={goToNextStep} onBack={goToPreviousStep} />
   ];
   
   return (
-    <div 
-      className={`min-h-screen w-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-background/90 to-background relative overflow-hidden`}
-    >
-      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
-        {preferences.theme === 'minecraft' && (
-          <>
-            {Array.from({ length: 20 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute bg-green-600 rounded-sm"
-                initial={{ 
-                  width: Math.random() * 50 + 20,
-                  height: Math.random() * 50 + 20,
-                  x: Math.random() * window.innerWidth,
-                  y: Math.random() * window.innerHeight,
-                  opacity: 0.3 + Math.random() * 0.4
-                }}
-                animate={{
-                  y: [null, Math.random() * 100 - 50],
-                  rotate: [0, Math.random() * 180 - 90]
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                  ease: 'easeInOut',
-                  delay: Math.random() * 10
-                }}
-              />
-            ))}
-          </>
-        )}
-        
-        {preferences.theme === 'roblox' && (
-          <>
-            {Array.from({ length: 15 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute bg-red-500 rounded-full"
-                initial={{ 
-                  width: Math.random() * 60 + 20,
-                  height: Math.random() * 60 + 20,
-                  x: Math.random() * window.innerWidth,
-                  y: Math.random() * window.innerHeight,
-                  opacity: 0.3 + Math.random() * 0.4
-                }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  x: [null, Math.random() * 100 - 50],
-                }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                  ease: 'easeInOut',
-                  delay: Math.random() * 10
-                }}
-              />
-            ))}
-          </>
-        )}
-        
-        {preferences.theme === 'fortnite' && (
-          <>
-            {Array.from({ length: 15 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute bg-blue-500"
-                style={{
-                  clipPath: "polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)"
-                }}
-                initial={{ 
-                  width: Math.random() * 70 + 30,
-                  height: Math.random() * 70 + 30,
-                  x: Math.random() * window.innerWidth,
-                  y: Math.random() * window.innerHeight,
-                  opacity: 0.3 + Math.random() * 0.4
-                }}
-                animate={{
-                  rotate: [0, 360],
-                  y: [null, Math.random() * 100 - 50],
-                }}
-                transition={{
-                  duration: 25,
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                  ease: 'linear',
-                  delay: Math.random() * 10
-                }}
-              />
-            ))}
-          </>
-        )}
-      </div>
-      
-      <div className="fixed top-6 left-0 right-0 flex justify-center">
-        <div className="flex space-x-2">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <motion.div
-              key={index}
-              className={`h-2 rounded-full ${
-                index === currentStep 
-                  ? 'bg-primary w-8' 
-                  : index < currentStep 
-                    ? 'bg-primary/70 w-6' 
-                    : 'bg-gray-300 w-6'
-              }`}
-              initial={false}
-              animate={{
-                width: index === currentStep ? 32 : 24,
-                opacity: index === currentStep ? 1 : index < currentStep ? 0.7 : 0.4
-              }}
-            />
-          ))}
-        </div>
-      </div>
-      
-      {preferences.points > 0 && (
-        <motion.div 
-          className="fixed top-6 right-6 bg-primary/90 text-white px-3 py-1.5 rounded-full flex items-center"
-          initial={{ x: 100 }}
-          animate={{ x: 0 }}
-          transition={{ type: 'spring', damping: 12 }}
-        >
-          <Star className="h-5 w-5 mr-1.5" fill="white" />
-          <span className="font-bold">{preferences.points}</span>
-        </motion.div>
-      )}
-      
-      <AnimatePresence mode="wait">
-        <div className="flex items-center justify-center">
+    <div className="min-h-screen flex flex-col bg-background">
+      <div className="flex-1 flex flex-col items-center justify-center p-6">
+        <AnimatePresence mode="wait">
           {steps[currentStep]}
-        </div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
+      
+      <div className="py-6 px-6 flex justify-center gap-2">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div 
+            key={index}
+            className={`h-2 rounded-full transition-all ${
+              index === currentStep 
+                ? 'w-8 bg-primary' 
+                : index < currentStep 
+                  ? 'w-4 bg-primary/60' 
+                  : 'w-4 bg-gray-200'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,31 +1,90 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import Playground from '@/components/Playground';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
-import { Star, Settings, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ThemedBackground from '@/components/themed-backgrounds/ThemedBackground';
+import PreferencesButton from '@/components/PreferencesButton';
+import { toast } from 'sonner';
+import AudioText from '@/components/AudioText';
 
 const Index = () => {
-  const { preferences } = useUserPreferences();
+  const { preferences, addPoints } = useUserPreferences();
   const navigate = useNavigate();
   
-  const themeStyles = {
-    minecraft: "bg-[url('/images/minecraft-bg.jpg')] bg-cover bg-center",
-    roblox: "bg-[url('/images/roblox-bg.jpg')] bg-cover bg-center",
-    fortnite: "bg-[url('/images/fortnite-bg.jpg')] bg-cover bg-center",
-    default: "bg-gradient-to-b from-sky/30 to-sky-200/30",
-  };
-
-  const overlayClass = preferences.theme !== 'default' ? 'bg-black/20' : '';
-  const themeClass = themeStyles[preferences.theme] || themeStyles.default;
+  // Learning path state
+  const [isInLearningJourney, setIsInLearningJourney] = useState<boolean>(false);
+  const [learningTopic, setLearningTopic] = useState<string>('');
+  const [currentPathIndex, setCurrentPathIndex] = useState<number>(0);
+  const [learningPath, setLearningPath] = useState<string[]>([]);
   
-  const goBackToLearningMaterials = () => {
-    navigate('/features');
+  // Check if we're in a learning journey
+  useEffect(() => {
+    const storedTopic = sessionStorage.getItem('currentLearningTopic');
+    const storedPathIndex = sessionStorage.getItem('currentLearningPathIndex');
+    const storedPath = sessionStorage.getItem('currentLearningPath');
+    
+    if (storedTopic && storedPathIndex && storedPath) {
+      setLearningTopic(storedTopic);
+      setCurrentPathIndex(parseInt(storedPathIndex, 10));
+      setLearningPath(JSON.parse(storedPath));
+      setIsInLearningJourney(true);
+    }
+  }, []);
+  
+  const continueToNextActivity = () => {
+    // Update the current path index in sessionStorage
+    const nextIndex = currentPathIndex + 1;
+    
+    if (nextIndex < learningPath.length) {
+      sessionStorage.setItem('currentLearningPathIndex', nextIndex.toString());
+      navigate(learningPath[nextIndex]);
+    } else {
+      // We've completed the learning journey
+      sessionStorage.removeItem('currentLearningTopic');
+      sessionStorage.removeItem('currentLearningPath');
+      sessionStorage.removeItem('currentLearningPathIndex');
+      
+      // Add extra points for completing a full learning journey
+      addPoints(25);
+      toast.success('Learning journey complete! +25 bonus points', {
+        description: 'You\'ve completed all activities in your learning path!'
+      });
+      
+      // Navigate back to home
+      navigate('/home');
+    }
+  };
+  
+  const getNextActivityName = () => {
+    if (currentPathIndex + 1 >= learningPath.length) {
+      return 'Complete Journey';
+    }
+    
+    const nextPath = learningPath[currentPathIndex + 1];
+    switch(nextPath) {
+      case '/exercises/balloons': return '🎈 Balloon Math Exercise';
+      case '/image-to-learning': return '📸 Image Learning';
+      case '/real-life-practice': return '✏️ Real Life Practice';
+      case '/video-learning': return '🎥 Video Learning';
+      default: return 'Next Activity';
+    }
+  };
+  
+  const goBackToHome = () => {
+    navigate('/home');
   };
 
   return (
-    <div className={`min-h-screen ${themeClass} ${overlayClass} flex flex-col p-4 md:p-8`}>
+    <div className="min-h-screen flex flex-col p-4 md:p-8 relative">
+      {/* Themed animated background */}
+      <ThemedBackground theme={preferences.theme} />
+      
+      {/* Semi-transparent overlay for better readability */}
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-sm z-0"></div>
+      
       <motion.header 
         className="flex justify-between items-center mb-8 relative z-10"
         initial={{ opacity: 0, y: -20 }}
@@ -41,14 +100,14 @@ const Index = () => {
           <div className="flex items-center gap-2 mb-2">
             <Button 
               variant="outline" 
-              size="icon" 
-              className="h-8 w-8 bg-white/80 hover:bg-white/90"
-              onClick={goBackToLearningMaterials}
+              size="sm"
+              className="bg-white/80 hover:bg-white/90 shadow-sm flex items-center"
+              onClick={goBackToHome}
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-4 w-4 mr-1" /> Back to Home
             </Button>
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight inline-block">
-              Balloon & Sandbag Math
+              {isInLearningJourney ? `🎈 Balloon Math: ${learningTopic}` : 'Balloon & Sandbag Math'}
             </h1>
           </div>
           <motion.p 
@@ -63,26 +122,45 @@ const Index = () => {
         </motion.div>
 
         {preferences.hasCompletedOnboarding && (
-          <motion.div 
-            className="flex items-center space-x-4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <div className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center">
-              <Star className="h-5 w-5 mr-1.5 text-yellow-400" />
-              <span className="font-bold text-white">{preferences.points}</span>
-            </div>
-            
-            <Button variant="outline" size="sm" asChild className="bg-white/80 hover:bg-white/90">
-              <Link to="/settings" className="flex items-center gap-1">
-                <Settings className="h-4 w-4" />
-                <span>Preferences</span>
-              </Link>
-            </Button>
-          </motion.div>
+          <PreferencesButton />
         )}
       </motion.header>
+      
+      {/* Learning Journey Progress - show only if in a learning journey */}
+      {isInLearningJourney && (
+        <motion.div 
+          className="mb-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-sm border border-gray-100 relative z-10"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <h2 className="text-lg font-semibold">Learning Journey: {learningTopic}</h2>
+            <AudioText text={`Learning Journey: ${learningTopic}. You are on step ${currentPathIndex + 1} of ${learningPath.length}.`} className="ml-1" />
+          </div>
+          
+          <div className="w-full bg-gray-200 rounded-full h-2.5 mb-3">
+            <div 
+              className="bg-primary h-2.5 rounded-full" 
+              style={{ width: `${Math.round(((currentPathIndex + 1) / learningPath.length) * 100)}%` }}
+            ></div>
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-500">
+              Step {currentPathIndex + 1} of {learningPath.length}
+            </span>
+            
+            <Button 
+              size="sm"
+              variant="outline"
+              className="bg-white shadow-sm hover:shadow-md"
+              onClick={continueToNextActivity}
+            >
+              Continue to {getNextActivityName()} →
+            </Button>
+          </div>
+        </motion.div>
+      )}
       
       <motion.div 
         className="flex-1 rounded-xl overflow-hidden shadow-2xl max-w-6xl mx-auto w-full bg-white/90 backdrop-blur-sm"

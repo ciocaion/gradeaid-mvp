@@ -14,10 +14,20 @@ import {
   ChevronRight,
   Gamepad2,
   ScrollText,
-  ArrowRight
+  ArrowRight,
+  Youtube,
+  Lightbulb,
+  LineChart,
+  BookOpen,
+  Home
 } from 'lucide-react';
 import { toast } from 'sonner';
 import Guidance from '@/components/Guidance';
+import ThemedBackground from '@/components/themed-backgrounds/ThemedBackground';
+import PreferencesButton from '@/components/PreferencesButton';
+import LearningProgress from '@/components/LearningProgress';
+import AudioText from '@/components/AudioText';
+import { Badge } from '@/components/ui/badge';
 
 const Features = () => {
   const navigate = useNavigate();
@@ -29,11 +39,15 @@ const Features = () => {
     
     setTimeout(() => {
       if (feature === 'balloonSandbag') {
-        navigate('/app');
+        navigate('/exercises/balloons');
       } else if (feature === 'funZone') {
         navigate('/funzone');
       } else if (feature === 'imageToContent') {
         navigate('/image-to-learning');
+      } else if (feature === 'realLifeExercise') {
+        navigate('/real-life-practice');
+      } else if (feature === 'videoLearning') {
+        navigate('/video-learning');
       } else {
         toast.info('This feature is coming soon!', {
           description: "We're working hard to bring this to you soon.",
@@ -56,7 +70,7 @@ const Features = () => {
     
     navigate('/onboarding/final');
   };
-  
+
   const themeStyles = {
     minecraft: "bg-[url('/images/minecraft-bg.jpg')] bg-cover bg-center",
     roblox: "bg-[url('/images/roblox-bg.jpg')] bg-cover bg-center",
@@ -76,100 +90,174 @@ const Features = () => {
       color: 'bg-violet-100 text-violet-600 border-violet-200'
     },
     {
+      id: 'structuredLearning',
+      title: 'Structured Learning',
+      description: 'Learn step-by-step with visual cues, clear tasks, and feedback designed for different learning styles',
+      icon: <Lightbulb className="h-8 w-8 text-amber-600" />,
+      color: 'bg-amber-100 text-amber-600 border-amber-200',
+      new: true
+    },
+    {
       id: 'funZone',
       title: 'Fun Zone',
       description: 'Play games and earn rewards while practicing math skills',
       icon: <Gamepad2 className="h-8 w-8 text-emerald-600" />,
-      color: 'bg-emerald-100 text-emerald-600 border-emerald-200',
-      new: true
+      color: 'bg-emerald-100 text-emerald-600 border-emerald-200'
     },
     {
-      id: 'aiPodcast',
-      title: 'AI Learning Podcast',
-      description: 'Listen to personalized mini-lessons based on your interests',
-      icon: <Headphones className="h-8 w-8 text-blue-600" />,
-      color: 'bg-blue-100 text-blue-600 border-blue-200'
+      id: 'videoLearning',
+      title: 'Video Learning',
+      description: 'Watch educational videos and YouTube Shorts based on what you want to learn',
+      icon: <Youtube className="h-8 w-8 text-red-600" />,
+      color: 'bg-red-100 text-red-600 border-red-200'
+    },
+    {
+      id: 'learningPath',
+      title: 'Learning Path',
+      description: 'Follow a personalized learning journey with clear goals and visual progress tracking',
+      icon: <LineChart className="h-8 w-8 text-blue-600" />,
+      color: 'bg-blue-100 text-blue-600 border-blue-200',
+      new: true
     },
     {
       id: 'imageToContent',
       title: 'Image to Learning',
-      description: 'Take a picture of schoolwork and get interactive learning content',
+      description: 'Take a picture of schoolwork and get interactive learning content with step-by-step explanations',
       icon: <Camera className="h-8 w-8 text-rose-600" />,
-      color: 'bg-rose-100 text-rose-600 border-rose-200'
+      color: 'bg-rose-100 text-rose-600 border-rose-200',
+      enhanced: true
     },
     {
       id: 'realLifeExercise',
       title: 'Real-Life Practice',
-      description: 'Complete activities and get AI feedback on your progress',
+      description: 'Complete real-world activities with structured guidance and supportive feedback',
       icon: <MessageSquare className="h-8 w-8 text-amber-600" />,
-      color: 'bg-amber-100 text-amber-600 border-amber-200'
+      color: 'bg-amber-100 text-amber-600 border-amber-200',
+      enhanced: true
+    },
+    {
+      id: 'aiPodcast',
+      title: 'AI Learning Podcast',
+      description: 'Listen to personalized mini-lessons based on your interests with audio support for reading difficulties',
+      icon: <Headphones className="h-8 w-8 text-blue-600" />,
+      color: 'bg-blue-100 text-blue-600 border-blue-200'
     },
     {
       id: 'flashcards',
       title: 'Smart Flashcards',
-      description: 'Interactive flashcards that adapt to how you learn',
+      description: 'Interactive flashcards that adapt to how you learn with visual and audio support',
       icon: <ScrollText className="h-8 w-8 text-cyan-600" />,
-      color: 'bg-cyan-100 text-cyan-600 border-cyan-200'
+      color: 'bg-cyan-100 text-cyan-600 border-cyan-200',
+      enhanced: true
     }
   ];
 
   return (
-    <div className={`min-h-screen ${themeClass} ${overlayClass} flex flex-col p-4 md:p-8`}>
-      <motion.header 
-        className="flex justify-between items-center mb-8 relative z-10"
-        initial={{ opacity: 0, y: -20 }}
+    <div className="relative min-h-screen max-w-7xl mx-auto p-6">
+      <ThemedBackground theme={preferences.theme} className="fixed inset-0 z-[-1]" />
+      
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+          <BookOpen className="h-6 w-6" />
+          Learning Features
+          <AudioText 
+            text="Learning Features. Choose how you want to learn today."
+            className="ml-2"
+          />
+        </h1>
+        
+        <div className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="bg-white/80 hover:bg-white/90 shadow-sm" 
+            onClick={() => navigate('/home')}
+          >
+            <Home className="h-4 w-4 mr-1.5" /> Home
+          </Button>
+          
+          {preferences.hasCompletedOnboarding && (
+            <PreferencesButton />
+          )}
+        </div>
+      </div>
+      
+      {/* Personalized Learning Journey Card - NEW */}
+      <motion.div 
+        className="mb-8"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.div 
-          className="flex-1"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight">
-            Awesome Features
-          </h1>
-          <motion.p 
-            className="text-lg md:text-xl text-white/90 mt-3 max-w-2xl drop-shadow-lg"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            Choose how you want to learn today! Each feature is designed to help you learn in a way that works best for you.
-          </motion.p>
-        </motion.div>
+        <Card className="bg-gradient-to-r from-blue-500/90 to-purple-500/90 text-white shadow-lg overflow-hidden">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="max-w-lg">
+                <h2 className="text-2xl font-bold mb-2">Try Our Personalized Learning Journey!</h2>
+                <p className="mb-4 opacity-90">
+                  Get a customized learning path based on your learning style preferences. Tell us what you want to learn!
+                </p>
+                <Button 
+                  onClick={() => navigate('/learning')}
+                  variant="neuro"
+                  className="px-6 py-6 text-primary hover:bg-white/90"
+                  size="lg"
+                >
+                  Start Personalized Learning <ChevronRight className="ml-1.5 h-4 w-4" />
+                </Button>
+              </div>
+              <div className="hidden md:block">
+                <Lightbulb className="h-24 w-24 opacity-80" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
-        {preferences.hasCompletedOnboarding && (
-          <motion.div 
-            className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <Star className="h-5 w-5 mr-1.5 text-yellow-400" />
-            <span className="font-bold text-white">{preferences.points}</span>
-          </motion.div>
-        )}
-      </motion.header>
+      {/* Learning Progress Card */}
+      <div className="mb-8">
+        <LearningProgress 
+          totalPoints={preferences.points}
+          badges={preferences.badges}
+          streak={preferences.streak || 0}
+          completedActivities={preferences.completedActivities?.length || 0}
+          lastActivity={preferences.lastActivityDate ? new Date(preferences.lastActivityDate) : undefined}
+          showDetailedStats={true}
+        />
+      </div>
+      
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
+          <Star className="h-5 w-5 text-amber-500" />
+          Features for All Learning Styles
+          <AudioText 
+            text="Features for all learning styles. Choose the one that works best for you."
+            className="ml-2"
+          />
+        </h2>
+        <p className="text-gray-600">
+          Our learning tools are designed to support different ways of learning, 
+          with special focus on neurodivergent friendly approaches.
+        </p>
+      </div>
       
       <motion.div 
-        className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-        initial={{ opacity: 0, y: 40 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
+        transition={{ duration: 0.5 }}
       >
         {features.map((feature, index) => (
           <motion.div 
             key={feature.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + (index * 0.1) }}
-            whileHover={{ scale: 1.03 }}
+            transition={{ delay: 0.1 + (index * 0.05) }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
             <Card 
-              className={`cursor-pointer h-full transition-all backdrop-blur-sm bg-white/90 ${
+              className={`cursor-pointer h-full transition-all bg-white/95 backdrop-blur-sm ${
                 selectedFeature === feature.id 
                   ? 'border-primary shadow-lg' 
                   : 'hover:border-gray-300'
@@ -177,18 +265,29 @@ const Features = () => {
               onClick={() => handleFeatureSelect(feature.id)}
             >
               <CardContent className="p-6 flex flex-col h-full">
-                <div className={`rounded-full p-3 w-fit mb-4 ${feature.color}`}>
-                  {feature.icon}
+                <div className="flex justify-between items-start mb-2">
+                  <div className={`rounded-full p-3 w-fit ${feature.color}`}>
+                    {feature.icon}
+                  </div>
+                  
+                  <div className="flex gap-1.5">
+                    {feature.new && (
+                      <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                        NEW
+                      </Badge>
+                    )}
+                    {feature.enhanced && (
+                      <Badge variant="outline" className="border-blue-500 text-blue-600">
+                        ENHANCED
+                      </Badge>
+                    )}
+                  </div>
                 </div>
                 
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-semibold">{feature.title}</h3>
-                  {feature.new && (
-                    <span className="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                      NEW
-                    </span>
-                  )}
-                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  {feature.title}
+                  <AudioText text={feature.title} className="ml-2" />
+                </h3>
                 
                 <p className="text-gray-600 flex-grow">
                   {feature.description}
@@ -196,9 +295,9 @@ const Features = () => {
                 
                 <div className="mt-4 flex justify-end">
                   <Button 
-                    variant="ghost" 
+                    variant="default" 
                     size="sm" 
-                    className="group text-primary" 
+                    className="group shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary/90" 
                     onClick={(e) => {
                       e.stopPropagation();
                       handleFeatureSelect(feature.id);
@@ -214,28 +313,23 @@ const Features = () => {
         ))}
       </motion.div>
       
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="flex justify-center mt-auto"
-      >
-        <div className="bg-white/90 backdrop-blur-sm rounded-lg">
-          <Guidance message="Choose any feature that looks fun to you! You can always come back to try the others later." />
-        </div>
-      </motion.div>
-      
-      <motion.div 
-        className="flex justify-center mt-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <Button onClick={handleContinue} className="px-8 bg-white/90 hover:bg-white/95" size="lg">
-          Continue 
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
-      </motion.div>
+      {!preferences.hasCompletedOnboarding && (
+        <motion.div 
+          className="mt-auto flex justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          <Button 
+            onClick={handleContinue} 
+            className="px-8 shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary/90" 
+            size="lg"
+          >
+            Continue to Dashboard
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </motion.div>
+      )}
     </div>
   );
 };
