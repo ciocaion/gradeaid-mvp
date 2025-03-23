@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
+import { useLearningJourney } from '@/contexts/LearningJourneyContext';
 import { 
   Brain, 
   Home as HomeIcon,
@@ -30,6 +31,7 @@ const Learning = () => {
   const navigate = useNavigate();
   const { preferences } = useUserPreferences();
   const { t, i18n } = useTranslation();
+  const { setLearningJourney } = useLearningJourney();
   const [learningTopic, setLearningTopic] = useState('');
   const [learningOverview, setLearningOverview] = useState('');
   const [isGeneratingOverview, setIsGeneratingOverview] = useState(false);
@@ -101,10 +103,8 @@ const Learning = () => {
   };
 
   const startLearningJourney = () => {
-    // Save learning topic and current path to sessionStorage
-    sessionStorage.setItem('currentLearningTopic', learningTopic);
-    sessionStorage.setItem('currentLearningPath', JSON.stringify(learningPath));
-    sessionStorage.setItem('currentLearningPathIndex', '0');
+    // Set the learning journey in the context instead of sessionStorage
+    setLearningJourney(learningTopic, learningPath);
     
     // Navigate to the first tool in the learning path
     navigate(learningPath[0]);

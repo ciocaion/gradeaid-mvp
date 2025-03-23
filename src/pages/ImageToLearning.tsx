@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import ThemedBackground from '@/components/themed-backgrounds/ThemedBackground';
 import PreferencesButton from '@/components/PreferencesButton';
 import { useTranslation } from 'react-i18next';
+import { useExerciseIntroModal } from '@/components/ExerciseIntroModal';
 
 import ImageUploader from '@/components/image-to-learning/ImageUploader';
 import Quiz from '@/components/image-to-learning/Quiz';
@@ -23,6 +24,7 @@ import AudioText from '@/components/AudioText';
 import { generateStructuredExplanation, generateTaskBreakdown } from '@/services/structuredLearningService';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { InfoIcon } from 'lucide-react';
+import { useLearningJourney } from '@/contexts/LearningJourneyContext';
 
 // Default empty data for when no analysis is available yet
 const emptyQuiz = [{ question: "No questions yet", options: ["Please analyze an image"], answer: "Please analyze an image" }];
@@ -33,6 +35,14 @@ const ImageToLearning: React.FC = () => {
   const navigate = useNavigate();
   const { preferences, addPoints } = useUserPreferences();
   const { t } = useTranslation();
+  const { 
+    isInLearningJourney, 
+    learningTopic, 
+    currentPathIndex, 
+    learningPath,
+    completeCurrentActivity 
+  } = useLearningJourney();
+  
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
@@ -49,11 +59,12 @@ const ImageToLearning: React.FC = () => {
   const [currentTaskStep, setCurrentTaskStep] = useState<number>(1);
   const [conceptBreakdown, setConceptBreakdown] = useState<any>(null);
   
-  // Learning path state
-  const [isInLearningJourney, setIsInLearningJourney] = useState<boolean>(false);
-  const [learningTopic, setLearningTopic] = useState<string>('');
-  const [currentPathIndex, setCurrentPathIndex] = useState<number>(0);
-  const [learningPath, setLearningPath] = useState<string[]>([]);
+  // Exercise intro modal setup
+  const { IntroModal, HelpIcon } = useExerciseIntroModal(
+    t('exerciseIntro.activities.imageToLearning.title'),
+    t('exerciseIntro.activities.imageToLearning.description'),
+    '📸'
+  );
   
   const themeStyles = {
     default: "",
@@ -66,20 +77,6 @@ const ImageToLearning: React.FC = () => {
   
   const overlayClass = preferences.theme !== 'default' ? 'bg-black/20' : '';
   const themeClass = themeStyles[preferences.theme] || themeStyles.default;
-  
-  // Check if we're in a learning journey
-  useEffect(() => {
-    const storedTopic = sessionStorage.getItem('currentLearningTopic');
-    const storedPathIndex = sessionStorage.getItem('currentLearningPathIndex');
-    const storedPath = sessionStorage.getItem('currentLearningPath');
-    
-    if (storedTopic && storedPathIndex && storedPath) {
-      setLearningTopic(storedTopic);
-      setCurrentPathIndex(parseInt(storedPathIndex, 10));
-      setLearningPath(JSON.parse(storedPath));
-      setIsInLearningJourney(true);
-    }
-  }, []);
   
   const handleImageSelected = (imageData: File | null) => {
     setSelectedImage(imageData);
@@ -454,52 +451,35 @@ Your response MUST follow this exact JSON structure:
   };
   
   const continueToNextActivity = () => {
-    // Update the current path index in sessionStorage
-    const nextIndex = currentPathIndex + 1;
-    
-    if (nextIndex < learningPath.length) {
-      sessionStorage.setItem('currentLearningPathIndex', nextIndex.toString());
-      navigate(learningPath[nextIndex]);
-    } else {
-      // We've completed the learning journey
-      sessionStorage.removeItem('currentLearningTopic');
-      sessionStorage.removeItem('currentLearningPath');
-      sessionStorage.removeItem('currentLearningPathIndex');
-      
-      // Add extra points for completing a full learning journey
-      addPoints(25);
-      toast.success('Learning journey complete! +25 bonus points', {
-        description: 'You\'ve completed all activities in your learning path!'
-      });
-      
-      // Navigate back to home
-      navigate('/home');
-    }
+    completeCurrentActivity();
   };
   
   const getNextActivityName = () => {
     if (currentPathIndex + 1 >= learningPath.length) {
-      return 'Complete Journey';
+      return t('learning.completeJourney');
     }
     
     const nextPath = learningPath[currentPathIndex + 1];
     switch(nextPath) {
-      case '/exercises/balloons': return '🎈 Balloon Math Exercise';
-      case '/image-to-learning': return '📸 Image Learning';
-      case '/real-life-practice': return '✏️ Real Life Practice';
-      case '/video-learning': return '🎥 Video Learning';
-      default: return 'Next Activity';
+      case '/exercises/balloons': return t('learning.tools.balloonExercise');
+      case '/image-to-learning': return t('learning.tools.imageLearning');
+      case '/real-life-practice': return t('learning.tools.realLifePractice');
+      case '/video-learning': return t('learning.tools.videoLearning');
+      default: return t('learning.tools.nextActivity');
     }
   };
   
   return (
-    <div className="min-h-screen flex flex-col p-4 md:p-8 relative">
+    <div className="relative min-h-screen max-w-7xl mx-auto p-4 md:p-6">
       <ThemedBackground theme={preferences.theme} className="fixed inset-0 z-[-1]" />
       
-      {/* Semi-transparent overlay for better readability */}
-      <div className="absolute inset-0 bg-white/30 backdrop-blur-sm z-0"></div>
+      {/* Help Icon for re-opening the modal */}
+      <HelpIcon />
       
-      <div className="w-full max-w-6xl mx-auto relative z-10">
+      {/* Intro Modal */}
+      <IntroModal theme={preferences.theme} />
+      
+      <div className="flex flex-col space-y-6">
         <header className="mb-6">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">

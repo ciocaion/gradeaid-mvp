@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import Playground from '@/components/Playground';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
-import { ArrowLeft, Home } from 'lucide-react';
+import { useLearningJourney } from '@/contexts/LearningJourneyContext';
+import { ArrowLeft, Home, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemedBackground from '@/components/themed-backgrounds/ThemedBackground';
 import PreferencesButton from '@/components/PreferencesButton';
@@ -11,12 +12,30 @@ import { toast } from 'sonner';
 import AudioText from '@/components/AudioText';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
+import { useExerciseIntroModal } from '@/components/ExerciseIntroModal';
 
 const Index = () => {
   const { t, i18n } = useTranslation();
   const { preferences, addPoints } = useUserPreferences();
   const navigate = useNavigate();
   const [forceUpdate, setForceUpdate] = useState(0);
+  
+  // Get learning journey from context
+  const { 
+    isInLearningJourney, 
+    learningTopic, 
+    currentPathIndex, 
+    learningPath,
+    completeCurrentActivity 
+  } = useLearningJourney();
+  
+  // Set up the exercise intro modal
+  const { IntroModal, HelpIcon } = useExerciseIntroModal(
+    t('balloonGame.introModal.title'),
+    t('balloonGame.introModal.description'),
+    '🎈',
+    preferences.theme
+  );
   
   // Force re-render when language changes
   useEffect(() => {
@@ -31,48 +50,8 @@ const Index = () => {
     };
   }, [i18n]);
   
-  // Learning path state
-  const [isInLearningJourney, setIsInLearningJourney] = useState<boolean>(false);
-  const [learningTopic, setLearningTopic] = useState<string>('');
-  const [currentPathIndex, setCurrentPathIndex] = useState<number>(0);
-  const [learningPath, setLearningPath] = useState<string[]>([]);
-  
-  // Check if we're in a learning journey
-  useEffect(() => {
-    const storedTopic = sessionStorage.getItem('currentLearningTopic');
-    const storedPathIndex = sessionStorage.getItem('currentLearningPathIndex');
-    const storedPath = sessionStorage.getItem('currentLearningPath');
-    
-    if (storedTopic && storedPathIndex && storedPath) {
-      setLearningTopic(storedTopic);
-      setCurrentPathIndex(parseInt(storedPathIndex, 10));
-      setLearningPath(JSON.parse(storedPath));
-      setIsInLearningJourney(true);
-    }
-  }, []);
-  
   const continueToNextActivity = () => {
-    // Update the current path index in sessionStorage
-    const nextIndex = currentPathIndex + 1;
-    
-    if (nextIndex < learningPath.length) {
-      sessionStorage.setItem('currentLearningPathIndex', nextIndex.toString());
-      navigate(learningPath[nextIndex]);
-    } else {
-      // We've completed the learning journey
-      sessionStorage.removeItem('currentLearningTopic');
-      sessionStorage.removeItem('currentLearningPath');
-      sessionStorage.removeItem('currentLearningPathIndex');
-      
-      // Add extra points for completing a full learning journey
-      addPoints(25);
-      toast.success(t('learning.journeyComplete'), {
-        description: t('learning.journeyCompleteDescription')
-      });
-      
-      // Navigate back to home
-      navigate('/home');
-    }
+    completeCurrentActivity();
   };
   
   const getNextActivityName = () => {
@@ -102,6 +81,9 @@ const Index = () => {
       {/* Semi-transparent overlay for better readability */}
       <div className="absolute inset-0 bg-white/30 backdrop-blur-sm z-0"></div>
       
+      {/* Intro Modal */}
+      <IntroModal />
+      
       <motion.header 
         className="flex justify-between items-center mb-8 relative z-10"
         initial={{ opacity: 0, y: -20 }}
@@ -126,6 +108,7 @@ const Index = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight inline-block">
               {isInLearningJourney ? `🎈 ${t('home.menu.balloonSandbag.title')}: ${learningTopic}` : t('home.menu.balloonSandbag.title')}
             </h1>
+            <HelpIcon className="ml-2" />
           </div>
           <motion.p 
             className="text-lg md:text-xl text-white/90 mt-3 max-w-2xl drop-shadow-lg"

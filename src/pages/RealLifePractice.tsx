@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
+import { useLearningJourney } from '@/contexts/LearningJourneyContext';
 import { useTranslation } from 'react-i18next';
 import { generateMathActivity, analyzeDrawing, analyzeImage, analyzeVoiceText } from '@/services/realLifeActivityService';
 import DrawingCanvas, { DrawingCanvasRef } from '@/components/real-life-practice/DrawingCanvas';
@@ -38,12 +39,21 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { useExerciseIntroModal } from '@/components/ExerciseIntroModal';
 
 const RealLifePractice: React.FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { preferences, addPoints, addBadge } = useUserPreferences();
   const { t } = useTranslation();
+  const { isInLearningJourney, learningTopic } = useLearningJourney();
+  
+  // Exercise intro modal setup
+  const { HelpIcon, IntroModal } = useExerciseIntroModal(
+    t('exerciseIntro.activities.realLifePractice.title'),
+    t('exerciseIntro.activities.realLifePractice.description'),
+    '🏠'
+  );
 
   const [activity, setActivity] = useState(null);
   const [feedback, setFeedback] = useState(null);
@@ -211,6 +221,13 @@ const RealLifePractice: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col p-4 bg-slate-50 relative">
       <ThemedBackground theme={preferences.theme} className="fixed inset-0 z-[-1]" />
+      
+      {/* Help Icon for re-opening the modal */}
+      <HelpIcon />
+      
+      {/* Intro Modal */}
+      <IntroModal theme={preferences.theme} />
+      
       <div className="w-full max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">

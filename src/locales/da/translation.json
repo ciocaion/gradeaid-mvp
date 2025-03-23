@@ -389,6 +389,10 @@
       "multiplication": "Multiplikation",
       "division": "Division"
     },
+    "introModal": {
+      "title": "Velkommen til Ballon & Sandsæk Matematik!",
+      "description": "I denne interaktive aktivitet lærer du, hvordan tal fungerer ved hjælp af balloner og sandsække! Balloner får kurven til at stige (positive tal), mens sandsække får den til at synke (negative tal). Tilføj eller fjern dem for at se, hvordan matematiske operationer fungerer i virkeligheden. Du kan prøve addition, subtraktion, multiplikation og division ved at ændre operationstypen. God fornøjelse med at eksperimentere!"
+    },
     "operationChanged": "Skiftet til {{operation}}stilstand!",
     "balloonAdded": "Ballon tilføjet! Din kurv stiger højere.",
     "balloonRemoved": "Ballon fjernet! Kurven føles lidt tungere nu.",
@@ -598,5 +602,30 @@
       }
     },
     "continueDashboard": "Fortsæt til Dashboard"
+  },
+  "exerciseIntro": {
+    "startButton": "Lad os starte",
+    "activities": {
+      "balloonSandbag": {
+        "title": "Ballon & Sandsæk Matematik",
+        "description": "Leg med balloner og sandsække for at lære matematik! 🎈 Flyt ting for at se hvordan tal ændrer sig."
+      },
+      "imageToLearning": {
+        "title": "Billede til Læring",
+        "description": "Tag et billede af matematikopgaver og lær fra det! 📸 Appen vil lave sjove quizzer kun til dig."
+      },
+      "videoLearning": {
+        "title": "Video Læring",
+        "description": "Se sjove videoer for at lære nye ting! 🎬 Find videoer om emner du vil forstå bedre."
+      },
+      "realLifePractice": {
+        "title": "Praksis i Virkeligheden",
+        "description": "Løs matematikopgaver fra hverdagen! 🏠 Tegn, tag billeder eller forklar dine svar."
+      },
+      "funZone": {
+        "title": "Sjov Zone",
+        "description": "Spil spil mens du lærer matematik! 🎮 Hav det sjovt med tal og optjen point."
+      }
+    }
   }
 } 

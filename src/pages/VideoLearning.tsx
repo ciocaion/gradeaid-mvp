@@ -5,6 +5,7 @@ import { ArrowLeft, Search, Loader2, Play, Youtube, AlertCircle, Home } from 'lu
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
+import { useLearningJourney } from '@/contexts/LearningJourneyContext';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
@@ -15,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import AudioText from '@/components/AudioText';
 import { useTranslation } from 'react-i18next';
+import { useExerciseIntroModal } from '@/components/ExerciseIntroModal';
 
 const VideoLearning: React.FC = () => {
   const navigate = useNavigate();
@@ -26,32 +28,31 @@ const VideoLearning: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('all');
   const [usingDemoContent, setUsingDemoContent] = useState<boolean>(false);
   
-  // Learning path state
-  const [isInLearningJourney, setIsInLearningJourney] = useState<boolean>(false);
-  const [learningTopic, setLearningTopic] = useState<string>('');
-  const [currentPathIndex, setCurrentPathIndex] = useState<number>(0);
-  const [learningPath, setLearningPath] = useState<string[]>([]);
+  // Get learning journey state from context
+  const { 
+    isInLearningJourney, 
+    learningTopic, 
+    currentPathIndex, 
+    learningPath,
+    completeCurrentActivity 
+  } = useLearningJourney();
 
   const { t } = useTranslation();
+  
+  // Exercise intro modal setup
+  const { HelpIcon, IntroModal } = useExerciseIntroModal(
+    t('exerciseIntro.activities.videoLearning.title'),
+    t('exerciseIntro.activities.videoLearning.description'),
+    '🎬'
+  );
 
   // Check if we're in a learning journey
+  // Auto-populate search term from learning topic
   useEffect(() => {
-    const storedTopic = sessionStorage.getItem('currentLearningTopic');
-    const storedPathIndex = sessionStorage.getItem('currentLearningPathIndex');
-    const storedPath = sessionStorage.getItem('currentLearningPath');
-    
-    if (storedTopic && storedPathIndex && storedPath) {
-      setLearningTopic(storedTopic);
-      setCurrentPathIndex(parseInt(storedPathIndex, 10));
-      setLearningPath(JSON.parse(storedPath));
-      setIsInLearningJourney(true);
-      
-      // Auto-populate search term from learning topic
-      if (!searchTerm) {
-        setSearchTerm(storedTopic);
-      }
+    if (isInLearningJourney && learningTopic && !searchTerm) {
+      setSearchTerm(learningTopic);
     }
-  }, [searchTerm]);
+  }, [isInLearningJourney, learningTopic, searchTerm]);
 
   // Filter videos based on active tab
   const filteredVideos = videos.filter(video => {
@@ -122,41 +123,21 @@ const VideoLearning: React.FC = () => {
   };
   
   const continueToNextActivity = () => {
-    // Update the current path index in sessionStorage
-    const nextIndex = currentPathIndex + 1;
-    
-    if (nextIndex < learningPath.length) {
-      sessionStorage.setItem('currentLearningPathIndex', nextIndex.toString());
-      navigate(learningPath[nextIndex]);
-    } else {
-      // We've completed the learning journey
-      sessionStorage.removeItem('currentLearningTopic');
-      sessionStorage.removeItem('currentLearningPath');
-      sessionStorage.removeItem('currentLearningPathIndex');
-      
-      // Add extra points for completing a full learning journey
-      addPoints(25);
-      toast.success('Learning journey complete! +25 bonus points', {
-        description: 'You\'ve completed all activities in your learning path!'
-      });
-      
-      // Navigate back to home
-      navigate('/home');
-    }
+    completeCurrentActivity();
   };
   
   const getNextActivityName = () => {
     if (currentPathIndex + 1 >= learningPath.length) {
-      return 'Complete Journey';
+      return t('learning.completeJourney');
     }
     
     const nextPath = learningPath[currentPathIndex + 1];
     switch(nextPath) {
-      case '/exercises/balloons': return '🎈 Balloon Math Exercise';
-      case '/image-to-learning': return '📸 Image Learning';
-      case '/real-life-practice': return '✏️ Real Life Practice';
-      case '/video-learning': return '🎥 Video Learning';
-      default: return 'Next Activity';
+      case '/exercises/balloons': return t('learning.tools.balloonExercise');
+      case '/image-to-learning': return t('learning.tools.imageLearning');
+      case '/real-life-practice': return t('learning.tools.realLifePractice');
+      case '/video-learning': return t('learning.tools.videoLearning');
+      default: return t('learning.tools.nextActivity');
     }
   };
 
@@ -165,15 +146,20 @@ const VideoLearning: React.FC = () => {
     if (isInLearningJourney && learningTopic && !videos.length && !isSearching) {
       handleSearch();
     }
-  }, [isInLearningJourney, learningTopic, videos.length]);
+  }, [isInLearningJourney, learningTopic, videos.length, isSearching]);
 
   return (
-    <div className="min-h-screen flex flex-col p-4 md:p-8 relative">
-      {/* Themed animated background */}
-      <ThemedBackground theme={preferences.theme} />
+    <div className="min-h-screen p-4 md:p-8 relative">
+      <ThemedBackground theme={preferences.theme} className="fixed inset-0 z-[-1]" />
       
       {/* Semi-transparent overlay for better readability */}
       <div className="absolute inset-0 bg-white/30 backdrop-blur-sm z-0"></div>
+      
+      {/* Help Icon for re-opening the modal */}
+      <HelpIcon />
+      
+      {/* Intro Modal */}
+      <IntroModal theme={preferences.theme} />
       
       <div className="w-full max-w-6xl mx-auto relative z-10">
         <header className="mb-6">

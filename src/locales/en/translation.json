@@ -389,6 +389,10 @@
       "multiplication": "Multiplication",
       "division": "Division"
     },
+    "introModal": {
+      "title": "Welcome to Balloon & Sandbag Math!",
+      "description": "In this interactive activity, you'll learn how numbers work using balloons and sandbags! Balloons make the basket rise (positive numbers), while sandbags make it sink (negative numbers). Add or remove them to see how math operations work in real life. You can try addition, subtraction, multiplication, and division by changing the operation type. Have fun experimenting!"
+    },
     "operationChanged": "Switched to {{operation}} mode!",
     "balloonAdded": "Balloon added! Your basket rises higher.",
     "balloonRemoved": "Balloon removed! The basket feels a bit heavier now.",
@@ -598,5 +602,30 @@
       }
     },
     "continueDashboard": "Continue to Dashboard"
+  },
+  "exerciseIntro": {
+    "startButton": "Let's Start",
+    "activities": {
+      "balloonSandbag": {
+        "title": "Balloon & Sandbag Math",
+        "description": "Play with balloons and sandbags to learn math! 🎈 Move objects to see how numbers change."
+      },
+      "imageToLearning": {
+        "title": "Image to Learning",
+        "description": "Take a picture of math problems and learn from it! 📸 The app will create fun quizzes just for you."
+      },
+      "videoLearning": {
+        "title": "Video Learning",
+        "description": "Watch fun videos to learn new things! 🎬 Find videos about topics you want to understand better."
+      },
+      "realLifePractice": {
+        "title": "Real-Life Practice",
+        "description": "Solve math problems from everyday life! 🏠 Draw, take photos, or explain your answers."
+      },
+      "funZone": {
+        "title": "Fun Zone",
+        "description": "Play games while learning math! 🎮 Have fun with numbers and earn points."
+      }
+    }
   }
 } 
