@@ -1,69 +1,122 @@
-# Welcome to your Lovable project
+# 🎓 GradeAid
 
-## Project info
+GradeAid is an AI-powered multimodal learning application designed specifically for neurodivergent children. The app adapts to individual learning styles and preferences, making education more accessible, engaging, and effective.
 
-**URL**: https://lovable.dev/projects/e378ca8f-8c34-4d02-872d-45c1000ca557
+## ✨ Features
 
-## How can I edit this code?
+- **Personalized Onboarding**: Profile setup with name, learning style preferences, and UI theme selection
+- **Multiple Learning Modalities**:
+  - 🖼️ **Image-to-Learning**: Convert any image into educational content
+  - 🎬 **Video Learning**: Extract and simplify concepts from YouTube videos
+  - 🧮 **Real-Life Math Practice**: Apply math to everyday situations
+  - 📚 **Structured Learning Paths**: Personalized learning journeys
+- **Fun Zone**: Educational games and interactive activities
+- **Multilingual Support**: Available in English and Danish
+- **Adaptive UI**: Customizable interface with high-contrast themes
+- **Progress Tracking**: Monitor learning achievements and milestones
+- **Badge System**: Gamified rewards for completed activities
 
-There are several ways of editing your application.
+## 🚀 Tech Stack
 
-**Use Lovable**
+- **Frontend**: React with TypeScript
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **State Management**: React Context API
+- **Routing**: React Router
+- **Animations**: Framer Motion
+- **Internationalization**: i18next
+- **AI Integration**: OpenAI APIs (GPT-4, DALL-E, Whisper)
+- **Build Tool**: Vite
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e378ca8f-8c34-4d02-872d-45c1000ca557) and start prompting.
+## 📁 Project Structure
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/   # Reusable UI components
+├── contexts/     # React context providers
+├── hooks/        # Custom React hooks
+├── lib/          # Utility libraries and configurations
+├── locales/      # Internationalization files (en, da)
+├── pages/        # Main application pages/screens
+├── services/     # API and service integrations
+│   ├── imageAnalysisService.ts    # Image processing with AI
+│   ├── realLifeActivityService.ts # Real-world scenarios
+│   ├── structuredLearningService.ts # Learning content generation
+│   └── youtubeService.ts          # Video content extraction
+├── types/        # TypeScript type definitions
+└── utils/        # Helper functions
 ```
 
-**Edit a file directly in GitHub**
+## 🔧 Installation and Setup
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ciocaion/gradeaid-mvp.git
+   cd gradeaid-mvp
+   ```
 
-**Use GitHub Codespaces**
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+3. **Environment setup**
+   Create a `.env` file in the root directory with:
+   ```
+   VITE_OPENAI_API_KEY=your_openai_api_key
+   ```
 
-## What technologies are used for this project?
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:8080` (or another port if 8080 is in use).
 
-This project is built with .
+## 🤖 AI Integration
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+GradeAid leverages OpenAI's APIs to deliver personalized educational content:
 
-## How can I deploy this project?
+- **GPT-4**: Powers the core learning content generation, creates personalized explanations, and adapts content difficulty based on user preferences
+- **DALL-E**: Generates visual aids and illustrations for complex concepts
+- **Whisper**: Transcribes spoken input for accessibility features
 
-Simply open [Lovable](https://lovable.dev/projects/e378ca8f-8c34-4d02-872d-45c1000ca557) and click on Share -> Publish.
+The AI integration is handled through service modules that format prompts based on the user's learning style, difficulty preference, and language selection. All prompts include specialized instructions for supporting neurodivergent learning needs.
 
-## I want to use a custom domain - is that possible?
+## 🛣️ Adaptive Learning Path
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+GradeAid creates personalized learning experiences by:
+
+1. **Initial Assessment**: Gathering preferences during onboarding
+2. **Learning Style Adaptation**: Visual, auditory, reading/writing, or kinesthetic approaches
+3. **Difficulty Scaling**: Automatically adjusting complexity based on user interaction
+4. **Multiple Modalities**: Presenting the same concept through different learning approaches
+5. **Reward System**: Providing positive reinforcement through badges and achievements
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please ensure your code follows the existing style and includes appropriate tests.
+
+## 🔮 Future Roadmap
+
+- **Enhanced AI Agent**: More proactive learning assistant capabilities
+- **Teacher Dashboard**: Tools for educators to monitor progress and customize content
+- **Expanded Multilingual Support**: Additional language options
+- **Offline Mode**: Core functionality without internet connection
+- **Parent Portal**: Progress monitoring and customization options for parents
+- **Integration with School Curricula**: Alignment with educational standards
+- **Advanced Analytics**: Deeper insights into learning patterns and progress
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+Built with ❤️ for making education accessible to all learners.
