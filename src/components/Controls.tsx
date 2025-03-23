@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus } from 'lucide-react';
 import { OperationType, formatExpression } from '@/utils/mathUtils';
+import { useTranslation } from 'react-i18next';
 
 interface ControlsProps {
   onAddBalloon: () => void;
@@ -23,6 +24,8 @@ const Controls: React.FC<ControlsProps> = ({
   sandbags,
   operation
 }) => {
+  const { t } = useTranslation();
+  
   // Get operation symbol for display
   const getOperationSymbol = (op: OperationType): string => {
     switch (op) {
@@ -38,14 +41,26 @@ const Controls: React.FC<ControlsProps> = ({
   const getItemLabels = (): { balloonLabel: string, sandbagLabel: string } => {
     switch (operation) {
       case 'addition':
-        return { balloonLabel: '🎈 First Number', sandbagLabel: '🎒 Second Number' };
+        return { 
+          balloonLabel: t('balloonGame.controls.firstNumber'), 
+          sandbagLabel: t('balloonGame.controls.secondNumber') 
+        };
       case 'multiplication':
-        return { balloonLabel: '🍪 First Factor', sandbagLabel: '🧸 Second Factor' };
+        return { 
+          balloonLabel: t('balloonGame.controls.firstFactor'), 
+          sandbagLabel: t('balloonGame.controls.secondFactor') 
+        };
       case 'division':
-        return { balloonLabel: '🍕 Total Slices', sandbagLabel: '👫 Friends to Share With' };
+        return { 
+          balloonLabel: t('balloonGame.controls.totalSlices'), 
+          sandbagLabel: t('balloonGame.controls.friendsToShareWith') 
+        };
       case 'subtraction':
       default:
-        return { balloonLabel: '🎈 Balloons (Up)', sandbagLabel: '🧱 Sandbags (Down)' };
+        return { 
+          balloonLabel: t('balloonGame.controls.balloons'), 
+          sandbagLabel: t('balloonGame.controls.sandbags') 
+        };
     }
   };
 
@@ -117,7 +132,7 @@ const Controls: React.FC<ControlsProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        <h3 className="text-lg font-medium mb-2">✨ My Math Equation</h3>
+        <h3 className="text-lg font-medium mb-2">{t('balloonGame.controls.mathEquation')}</h3>
         <div className="text-3xl font-bold text-center py-2">
           {formatExpression(balloons, sandbags, operation)}
         </div>

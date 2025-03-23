@@ -9,10 +9,27 @@ import ThemedBackground from '@/components/themed-backgrounds/ThemedBackground';
 import PreferencesButton from '@/components/PreferencesButton';
 import { toast } from 'sonner';
 import AudioText from '@/components/AudioText';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 const Index = () => {
+  const { t, i18n } = useTranslation();
   const { preferences, addPoints } = useUserPreferences();
   const navigate = useNavigate();
+  const [forceUpdate, setForceUpdate] = useState(0);
+  
+  // Force re-render when language changes
+  useEffect(() => {
+    const handleLanguageChanged = () => {
+      setForceUpdate(prev => prev + 1);
+    };
+    
+    i18n.on('languageChanged', handleLanguageChanged);
+    
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged);
+    };
+  }, [i18n]);
   
   // Learning path state
   const [isInLearningJourney, setIsInLearningJourney] = useState<boolean>(false);
@@ -49,8 +66,8 @@ const Index = () => {
       
       // Add extra points for completing a full learning journey
       addPoints(25);
-      toast.success('Learning journey complete! +25 bonus points', {
-        description: 'You\'ve completed all activities in your learning path!'
+      toast.success(t('learning.journeyComplete'), {
+        description: t('learning.journeyCompleteDescription')
       });
       
       // Navigate back to home
@@ -60,16 +77,16 @@ const Index = () => {
   
   const getNextActivityName = () => {
     if (currentPathIndex + 1 >= learningPath.length) {
-      return 'Complete Journey';
+      return t('learning.completeJourney');
     }
     
     const nextPath = learningPath[currentPathIndex + 1];
     switch(nextPath) {
-      case '/exercises/balloons': return '🎈 Balloon Math Exercise';
-      case '/image-to-learning': return '📸 Image Learning';
-      case '/real-life-practice': return '✏️ Real Life Practice';
-      case '/video-learning': return '🎥 Video Learning';
-      default: return 'Next Activity';
+      case '/exercises/balloons': return t('learning.tools.balloonExercise');
+      case '/image-to-learning': return t('learning.tools.imageLearning');
+      case '/real-life-practice': return t('learning.tools.realLifePractice');
+      case '/video-learning': return t('learning.tools.videoLearning');
+      default: return t('learning.tools.nextActivity');
     }
   };
   
@@ -104,10 +121,10 @@ const Index = () => {
               className="bg-white/80 hover:bg-white/90 shadow-sm flex items-center"
               onClick={goBackToHome}
             >
-              <ArrowLeft className="h-4 w-4 mr-1" /> Back to Home
+              <ArrowLeft className="h-4 w-4 mr-1" /> {t('common.backToHome')}
             </Button>
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg tracking-tight inline-block">
-              {isInLearningJourney ? `🎈 Balloon Math: ${learningTopic}` : 'Balloon & Sandbag Math'}
+              {isInLearningJourney ? `🎈 ${t('home.menu.balloonSandbag.title')}: ${learningTopic}` : t('home.menu.balloonSandbag.title')}
             </h1>
           </div>
           <motion.p 
@@ -116,8 +133,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Visualize integer addition and subtraction using balloons and sandbags.
-            Explore our interactive 3D environment with draggable elements!
+            {t('home.menu.balloonSandbag.description')}
           </motion.p>
         </motion.div>
 
@@ -134,8 +150,8 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <h2 className="text-lg font-semibold">Learning Journey: {learningTopic}</h2>
-            <AudioText text={`Learning Journey: ${learningTopic}. You are on step ${currentPathIndex + 1} of ${learningPath.length}.`} className="ml-1" />
+            <h2 className="text-lg font-semibold">{t('learning.yourLearningJourney')}: {learningTopic}</h2>
+            <AudioText text={`${t('learning.yourLearningJourney')}: ${learningTopic}. ${t('learning.step')} ${currentPathIndex + 1} ${t('learning.of')} ${learningPath.length}.`} className="ml-1" />
           </div>
           
           <div className="w-full bg-gray-200 rounded-full h-2.5 mb-3">
@@ -147,7 +163,7 @@ const Index = () => {
           
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-500">
-              Step {currentPathIndex + 1} of {learningPath.length}
+              {t('learning.step')} {currentPathIndex + 1} {t('learning.of')} {learningPath.length}
             </span>
             
             <Button 
@@ -156,7 +172,7 @@ const Index = () => {
               className="bg-white shadow-sm hover:shadow-md"
               onClick={continueToNextActivity}
             >
-              Continue to {getNextActivityName()} →
+              {t('learning.continueTo')} {getNextActivityName()} →
             </Button>
           </div>
         </motion.div>
@@ -178,8 +194,7 @@ const Index = () => {
         transition={{ delay: 1.2 }}
       >
         <p>
-          Click on balloons or sandbags to remove them. Use the controls to add more.
-          Try dragging the balloons and sandbags to see how they interact!
+          {t('home.menu.balloonSandbag.instructions')}
         </p>
       </motion.footer>
     </div>

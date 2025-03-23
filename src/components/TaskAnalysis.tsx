@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Circle } from 'lucide-react';
 import AudioText from './AudioText';
+import { useTranslation } from 'react-i18next';
 
 interface Step {
   step: number;
@@ -24,11 +25,13 @@ const TaskAnalysis: React.FC<TaskAnalysisProps> = ({
   onStepComplete,
   vertical = false
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-gray-100">
       <div className="flex items-center gap-2 mb-3">
-        <h2 className="text-lg font-semibold">Task Steps</h2>
-        <AudioText text="Task Steps. Follow these steps to complete the activity." className="ml-1" />
+        <h2 className="text-lg font-semibold">{t('taskAnalysis.title')}</h2>
+        <AudioText text={t('taskAnalysis.audioDescription')} className="ml-1" />
       </div>
 
       <div className="relative">
@@ -79,7 +82,7 @@ const TaskAnalysis: React.FC<TaskAnalysisProps> = ({
                       ? 'text-blue-900' 
                       : 'text-gray-500'
                 }`}>
-                  Step {step.step}: {step.text}
+                  {t('taskAnalysis.step')} {step.step}: {step.text}
                 </p>
               </div>
             </motion.div>

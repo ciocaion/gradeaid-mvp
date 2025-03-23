@@ -14,14 +14,28 @@
     "tryAgain": "Try Again",
     "continue": "Continue",
     "close": "Close",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "readAloud": "Read Aloud",
+    "preferences": "Preferences",
+    "exercise": "Exercise"
   },
   "welcome": {
     "title": "Welcome to GradeAid",
     "subtitle": "Your interactive math learning companion",
     "description": "GradeAid makes learning math fun and engaging through interactive exercises, real-world problems, and personalized learning paths.",
     "startButton": "Start Your Learning Journey",
-    "chooseLanguage": "Choose your language"
+    "chooseLanguage": "Choose your language",
+    "featureIcons": {
+      "math": "Math",
+      "learning": "Learning",
+      "interactive": "Interactive"
+    },
+    "benefitCards": {
+      "personalizedLearning": "Personalized Learning",
+      "personalizedDescription": "Content adapted to your unique learning style and preferences",
+      "interactiveExercises": "Interactive Exercises",
+      "interactiveDescription": "Engage with fun, hands-on activities that make learning enjoyable"
+    }
   },
   "home": {
     "title": "Math Helper",
@@ -41,7 +55,10 @@
     "learningJourney": {
       "title": "Start Your Learning Journey",
       "description": "Tell us what you want to learn today and we'll create a personalized learning path just for you!",
-      "button": "Start Learning Now"
+      "button": "Start Learning Now",
+      "progress": "Learning Journey Progress",
+      "currentActivity": "Current Activity",
+      "nextActivity": "Next Activity"
     },
     "menu": {
       "features": {
@@ -50,7 +67,8 @@
       },
       "balloonSandbag": {
         "title": "Balloon & Sandbag Math",
-        "description": "Practice integer math with our interactive 3D tools"
+        "description": "Practice integer addition and subtraction using balloons and sandbags. Explore our interactive 3D environment with draggable elements!",
+        "instructions": "Click on balloons or sandbags to remove them. Use the controls to add more. Try dragging the balloons and sandbags to see how they interact!"
       },
       "funZone": {
         "title": "Fun Zone",
@@ -87,7 +105,14 @@
       "imageLearning": "📸 Image Learning",
       "realLifePractice": "✏️ Real Life Practice",
       "nextActivity": "Next Activity"
-    }
+    },
+    "step": "Step",
+    "of": "of",
+    "continueTo": "Continue to",
+    "yourLearningJourney": "Learning Journey",
+    "completeJourney": "Complete Journey",
+    "journeyComplete": "Learning journey complete! +25 bonus points",
+    "journeyCompleteDescription": "You've completed all activities in your learning path!"
   },
   "realLifePractice": {
     "title": "Real Life Practice",
@@ -145,23 +170,53 @@
     "analyzeImage": "Analyze Image",
     "analyzing": "Analyzing...",
     "noImage": "Please upload an image first",
-    "tabs": {
-      "upload": "Upload",
-      "analysis": "Analysis",
-      "quiz": "Quiz",
-      "flashcards": "Flashcards"
-    },
-    "explanationTitle": "Explanation",
-    "quizTitle": "Math Concepts Quiz",
-    "regenerateQuiz": "New Questions",
+    "backToHome": "Back to Home",
+    "imageLearning": "Image to Learning",
+    "learningJourney": "Learning Journey",
+    "step": "Step",
+    "of": "of",
+    "continueTo": "Continue to",
+    "regenerating": "Regenerating...",
+    "newQuestions": "New Questions",
     "difficulty": {
       "label": "Difficulty",
       "easy": "Easy",
       "medium": "Medium",
       "hard": "Hard"
     },
+    "tabs": {
+      "upload": "Upload",
+      "analysis": "Analysis",
+      "quiz": "Quiz",
+      "flashcards": "Flashcards",
+      "explanation": "Explanation",
+      "breakdown": "Step-by-Step"
+    },
+    "explanationTitle": "Explanation",
+    "quizTitle": "Math Concepts Quiz",
+    "regenerateQuiz": "New Questions",
     "regeneratingQuiz": "Creating new questions...",
-    "questionCount": "{{count}} questions"
+    "questionCount": "{{count}} questions",
+    "uploadAndAnalyze": "Upload & Analyze an Image",
+    "uploadInstructions": "Select an image on the left, then click \"Analyze Image\" to generate interactive learning content based on what's in your image.",
+    "noQuizAvailable": "No Quiz Available",
+    "noQuizInstructions": "Upload an image and analyze it to generate a quiz about the content.",
+    "noBreakdownAvailable": "No Step-by-Step Breakdown Available",
+    "noBreakdownInstructions": "We couldn't generate a detailed breakdown for this content. Try uploading a clearer image of math concepts.",
+    "checkForUnderstanding": "Check for Understanding:",
+    "demoContentAlert": "Using demonstration content",
+    "demoContentDescription": "We're showing example learning materials. Upload a clearer image of math problems for personalized content.",
+    "taskSteps": {
+      "title": "Task Steps",
+      "step1": "Upload an image",
+      "step2": "Analyze the image",
+      "step3": "Interact with content",
+      "step4": "Review your learning",
+      "hint1": "Upload a photo of math problems",
+      "hint2": "Wait for the AI to analyze it",
+      "hint3": "Try the quiz and learn from explanations",
+      "hint4": "Check your understanding"
+    }
   },
   "videoLearning": {
     "title": "Learn from Videos",
@@ -170,7 +225,9 @@
     "watchingNow": "Currently Watching",
     "relatedVideos": "Related Videos",
     "noVideos": "No videos found",
-    "loading": "Loading videos..."
+    "loading": "Loading videos...",
+    "whatToLearn": "What do you want to learn with videos today?",
+    "journeyProgress": "Learning Journey Progress"
   },
   "funZone": {
     "title": "Fun Zone",
@@ -220,74 +277,226 @@
       },
       "fortnite": {
         "label": "Fortnite",
-        "description": "Bold and energetic"
+        "description": "Battle royale inspired"
+      },
+      "princess": {
+        "label": "Princess",
+        "description": "Royal and magical"
+      },
+      "pirate": {
+        "label": "Pirate",
+        "description": "High seas adventure"
+      },
+      "space": {
+        "label": "Space",
+        "description": "Cosmic and futuristic"
       },
       "default": {
-        "label": "Default",
-        "description": "Clean and simple"
+        "label": "Default Theme",
+        "description": "Clean and simple design"
       }
     },
-    "badgesSection": "Your Badges",
-    "noBadges": "No badges earned yet. Complete activities to earn badges!",
-    "points": "Points",
-    "streak": "Learning Streak",
-    "days": "days",
-    "resetApp": "Reset App",
-    "resetWarningTitle": "Reset All Data?",
-    "resetWarningDescription": "This will delete all your progress, badges, and preferences. This action cannot be undone."
+    "audioSection": "Audio Feedback",
+    "audioSettings": {
+      "readAloud": "Read Text Aloud",
+      "soundEffects": "Sound Effects",
+      "backgroundMusic": "Background Music"
+    },
+    "accountSection": "Account",
+    "saveChanges": "Save Changes",
+    "changesSuccessfullySaved": "Your changes have been saved!"
   },
   "badges": {
-    "customizer": "Theme Explorer",
-    "dailylogin": "Daily Login",
-    "mathwhiz": "Math Whiz",
-    "problemsolver": "Problem Solver"
+    "newBadge": "New Badge Earned!",
+    "firstLogin": "First Login",
+    "fiveDayStreak": "5 Day Streak",
+    "tenDayStreak": "10 Day Streak",
+    "twentyDayStreak": "20 Day Streak",
+    "hundredPoints": "100 Points",
+    "fiveHundredPoints": "500 Points",
+    "thousandPoints": "1000 Points",
+    "firstQuizCompleted": "First Quiz",
+    "quizMaster": "Quiz Master",
+    "imageAnalysisPro": "Image Analysis Pro",
+    "realLifeMathWhiz": "Real Life Math Whiz",
+    "customizer": "Theme Customizer",
+    "viewAll": "View All Badges"
   },
   "notifications": {
     "pointsEarned": "You earned {{points}} points!",
-    "badgeEarned": "New badge: {{badge}}!",
-    "challengeComplete": "Challenge completed!",
-    "sessionComplete": "Learning session complete!",
-    "streakUpdated": "Day {{count}} streak! Keep it up!",
-    "settingsUpdated": "Settings updated! You earned 10 points for customizing your experience.",
-    "settingsSaved": "Settings saved successfully.",
-    "appReset": "App has been reset. Taking you back to the start."
+    "badgeEarned": "New badge earned: {{badge}}",
+    "welcome": "Welcome to GradeAid!",
+    "streakReminder": "Don't forget to practice today to keep your streak!",
+    "streakAchieved": "🔥 {{count}} day streak achieved!"
   },
   "onboarding": {
-    "title": "Welcome to Math Helper!",
-    "subtitle": "Let's get started with a few quick steps",
-    "errors": {
-      "nameRequired": "Please tell us your name so we can continue"
-    },
-    "greetings": {
-      "hello": "Nice to meet you, {{name}}!"
-    },
-    "guidance": {
-      "welcome": "This is a safe space where we'll personalize learning just for you. Take your time!",
-      "learningStyle": "There's no wrong answer here! We'll use your choices to make learning work best for you.",
-      "theme": "Your theme will make your learning space look cool! You can always change it later."
-    },
+    "title": "Let's Get Started",
+    "subtitle": "We'll help you set up your personalized learning experience",
+    "nameLabel": "What should we call you?",
+    "nameError": "Please enter your name",
+    "shortNameError": "Name must be at least 2 characters",
+    "greeting": "Hello, {{name}}!",
+    "guidanceMessage": "Let us know your preferences to personalize your learning experience.",
     "steps": {
       "step1": {
-        "title": "About You",
-        "ageLabel": "How old are you?",
-        "nameLabel": "What's your name?"
+        "nameLabel": "What should we call you?",
+        "title": "Let's Get Started"
       },
       "step2": {
-        "title": "How do you like to learn?",
-        "difficultyLabel": "Math difficulty level",
-        "easy": "Easy",
-        "medium": "Medium",
-        "hard": "Hard"
+        "title": "How do you like to learn?"
       },
       "step3": {
-        "title": "Choose your theme",
-        "defaultTheme": "Default",
-        "minecraftTheme": "Minecraft",
-        "robloxTheme": "Roblox",
-        "fortniteTheme": "Fortnite"
+        "title": "Choose a Theme"
       }
     },
-    "completed": "Great job! You're all set to start learning!"
+    "greetings": {
+      "hello": "Hello!"
+    },
+    "learningStyleStep": {
+      "title": "How do you like to learn?",
+      "description": "Select the option that best describes your preferred way of learning:",
+      "visualLabel": "Visual Learner",
+      "visualDescription": "I learn best through images, diagrams, and visual examples",
+      "auditoryLabel": "Auditory Learner",
+      "auditoryDescription": "I learn best through listening and verbal explanations",
+      "kinestheticLabel": "Hands-on Learner",
+      "kinestheticDescription": "I learn best through interactive activities and games",
+      "readingLabel": "Reading & Writing",
+      "readingDescription": "I learn best through text-based materials and note-taking"
+    },
+    "themeStep": {
+      "title": "Choose a Theme",
+      "description": "Make your learning experience more fun with a theme:",
+      "minecraftLabel": "Minecraft",
+      "minecraftDescription": "Blocky and adventurous",
+      "robloxLabel": "Roblox",
+      "robloxDescription": "Creative and colorful",
+      "fortniteLabel": "Fortnite",
+      "fortniteDescription": "Battle royale inspired",
+      "princessLabel": "Princess",
+      "princessDescription": "Royal and magical",
+      "pirateLabel": "Pirate",
+      "pirateDescription": "High seas adventure",
+      "spaceLabel": "Space",
+      "spaceDescription": "Cosmic and futuristic"
+    },
+    "completionMessage": "You're all set to start learning!"
+  },
+  "balloonGame": {
+    "operations": {
+      "addition": "Addition",
+      "subtraction": "Subtraction",
+      "multiplication": "Multiplication",
+      "division": "Division"
+    },
+    "operationChanged": "Switched to {{operation}} mode!",
+    "balloonAdded": "Balloon added! Your basket rises higher.",
+    "balloonRemoved": "Balloon removed! The basket feels a bit heavier now.",
+    "sandbagAdded": "Sandbag added! Your basket sinks lower.",
+    "sandbagRemoved": "Sandbag removed! The basket feels a bit lighter now.",
+    "perfectScore": "🌟 Perfect score! You're a math superstar! 🌟",
+    "goodScore": "✨ Great job! You're really good at math! ✨",
+    "keepTrying": "💪 Awesome try! Let's keep playing to get even better! 💪",
+    "hints": {
+      "addition": {
+        "bothItems": "You have {{balloons}} balloons and {{sandbags}} sandbags. When adding them together: {{balloons}} + {{sandbags}} = {{total}}",
+        "onlyBalloons": "You have {{balloons}} balloons. The total is {{total}}.",
+        "onlySandbags": "You have {{sandbags}} sandbags. The total is {{total}}."
+      },
+      "multiplication": {
+        "bothItems": "You have {{balloons}} balloons and {{sandbags}} sandbags. When multiplying them: {{balloons}} × {{sandbags}} = {{total}}",
+        "onlyBalloons": "You have {{balloons}} balloons. With no sandbags to multiply, the result is 0.",
+        "onlySandbags": "You have {{sandbags}} sandbags. With no balloons to multiply, the result is 0."
+      },
+      "division": {
+        "bothItems": "You have {{balloons}} balloons and {{sandbags}} sandbags. When dividing them: {{balloons}} ÷ {{sandbags}} = {{total}}",
+        "onlyBalloons": "You have {{balloons}} balloons. Without sandbags, division isn't possible.",
+        "onlySandbags": "You have {{sandbags}} sandbags. With no balloons, the result is 0."
+      },
+      "subtraction": {
+        "bothItems": "You have {{balloons}} balloons (positive) and {{sandbags}} sandbags (negative). The balloons pull up and the sandbags pull down. {{balloons}} - {{sandbags}} = {{total}}",
+        "onlyBalloons": "You have {{balloons}} balloons (positive). The balloons pull up, resulting in a value of {{total}}.",
+        "onlySandbags": "You have {{sandbags}} sandbags (negative). The sandbags pull down, resulting in a value of {{total}}."
+      },
+      "default": "Add balloons or sandbags to see how they interact!"
+    },
+    "controls": {
+      "firstNumber": "🎈 First Number",
+      "secondNumber": "🎒 Second Number",
+      "firstFactor": "🍪 First Factor",
+      "secondFactor": "🧸 Second Factor",
+      "totalSlices": "🍕 Total Slices",
+      "friendsToShareWith": "👫 Friends to Share With",
+      "balloons": "🎈 Balloons (Up)",
+      "sandbags": "🧱 Sandbags (Down)",
+      "mathEquation": "✨ My Math Equation"
+    },
+    "guidance": {
+      "title": "💡 Helpful Tip"
+    },
+    "prompt": {
+      "title": "🎉 Wow! You're amazing at {{operation}}!",
+      "description": "Would you like to play a fun {{operation}} game or try a different math adventure?",
+      "playQuiz": "✨ Play Quiz Game",
+      "trySubtraction": "➖ Try Subtraction",
+      "tryAddition": "➕ Try Addition",
+      "tryMultiplication": "✖️ Try Multiplication",
+      "tryDivision": "➗ Try Division"
+    },
+    "quiz": {
+      "additionTitle": "➕ Fun Addition Quiz!",
+      "subtractionTitle": "➖ Fun Subtraction Quiz!",
+      "multiplicationTitle": "✖️ Fun Multiplication Quiz!",
+      "divisionTitle": "➗ Fun Division Quiz!",
+      "progress": "Question {{current}} of {{total}} - You can do this! 💪",
+      "correctAnswer": "🎯 Yay! You got it right! You're so smart! 🌟",
+      "wrongAnswer": "❓ Oops! The answer is: {{answer}} - Let's try another! 💫",
+      "checkAnswer": "Check My Answer 🔍",
+      "nextQuestion": "Next Question ➡️",
+      "finishGame": "Finish Game 🏁",
+      "completed": "🎊 Quiz Completed! 🎊",
+      "scoreResult": "You scored {{score}} out of {{total}} - Awesome job!",
+      "perfectScoreFeedback": "🌟 Perfect score! You're a math superstar! 🌟",
+      "goodScoreFeedback": "✨ Great job! You're really good at math! ✨",
+      "tryAgainFeedback": "💪 Awesome try! Let's keep playing to get even better! 💪",
+      "keepPlaying": "Keep Playing 🎮",
+      "addition": {
+        "q1": "🎈 If you have {{balloons}} balloons and get {{sandbags}} more, how many balloons do you have now?",
+        "q2": "🍦 You have {{count}} ice cream scoops. Your friend gives you 3 more. How many scoops do you have?",
+        "q3": "🧩 Which shows adding things together?",
+        "q3o1": "Sharing toys with friends",
+        "q3o2": "Counting all the cookies in two jars",
+        "q3o3": "Cutting a pizza into slices",
+        "q3o4": "Figuring out how many more points you need"
+      },
+      "subtraction": {
+        "q1": "🎈 You have {{balloons}} balloons. {{count}} pop! How many balloons are left?",
+        "q2": "⚖️ The basket has {{balloons}} balloons (going up) and {{sandbags}} sandbags (going down). Where does it end up?",
+        "q3": "🏄 What happens when you add more sandbags to your basket?",
+        "q3o1": "It floats higher in the sky",
+        "q3o2": "The number gets bigger",
+        "q3o3": "The number gets smaller",
+        "q3o4": "Nothing changes"
+      },
+      "multiplication": {
+        "q1": "🍪 You have {{balloons}} plates with {{sandbags}} cookies on each plate. How many cookies in total?",
+        "q2": "🚗 There are {{sandbags}} toy cars. Each car has {{balloons}} wheels. How many wheels altogether?",
+        "q3": "🍭 Which is like multiplication?",
+        "q3o1": "Adding the same number over and over",
+        "q3o2": "Taking some away from a group",
+        "q3o3": "Sharing candy equally",
+        "q3o4": "Putting two numbers together"
+      },
+      "division": {
+        "q1": "🍕 You have {{count}} pizza slices to share with {{sandbags}} friends. How many slices does each friend get?",
+        "q2": "🧸 You need to put {{count}} teddy bears in {{balloons}} equal rows. How many bears in each row?",
+        "q3": "🍦 What happens when you divide an ice cream by 1?",
+        "q3o1": "You get no ice cream",
+        "q3o2": "You get the same amount of ice cream",
+        "q3o3": "You always get 1 ice cream",
+        "q3o4": "You can't divide by 1"
+      }
+    }
   },
   "error": {
     "somethingWentWrong": "Something went wrong",
@@ -295,5 +504,28 @@
     "noInternet": "No internet connection",
     "pageNotFound": "Page not found",
     "goHome": "Go to Home page"
+  },
+  "learningProgress": {
+    "title": "Learning Journey",
+    "points": "points",
+    "toNextMilestone": "to next milestone",
+    "streak": "Streak",
+    "days": "days",
+    "activities": "Activities",
+    "earnedBadges": "Earned Badges",
+    "detailedStatistics": "Detailed Statistics",
+    "lastActivity": {
+      "today": "Last activity: Today",
+      "yesterday": "Last activity: Yesterday",
+      "daysAgo": "Last activity: {{count}} days ago"
+    },
+    "avgTime": "Avg time: {{count}} min",
+    "pointsPerActivity": "Points per activity: {{count}}",
+    "badges": "Badges: {{count}}"
+  },
+  "taskAnalysis": {
+    "title": "Task Steps",
+    "audioDescription": "Task Steps. Follow these steps to complete the activity.",
+    "step": "Step"
   }
 } 

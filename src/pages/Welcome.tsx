@@ -85,9 +85,9 @@ const Welcome = () => {
             
             <div className="grid grid-cols-3 gap-2 md:gap-4 mt-8 md:mt-12 hidden md:grid">
               {[
-                { icon: <Calculator className="h-5 w-5 md:h-6 md:w-6 text-[#9333ea]" />, label: "Math" },
-                { icon: <Lightbulb className="h-5 w-5 md:h-6 md:w-6 text-[#9333ea]" />, label: "Learning" },
-                { icon: <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-[#9333ea]" />, label: "Interactive" }
+                { icon: <Calculator className="h-5 w-5 md:h-6 md:w-6 text-[#9333ea]" />, label: t('welcome.featureIcons.math') },
+                { icon: <Lightbulb className="h-5 w-5 md:h-6 md:w-6 text-[#9333ea]" />, label: t('welcome.featureIcons.learning') },
+                { icon: <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-[#9333ea]" />, label: t('welcome.featureIcons.interactive') }
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -164,25 +164,19 @@ const Welcome = () => {
                 </motion.div>
                 
                 <div className="mt-8 grid grid-cols-1 gap-4">
-                  <div className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
-                    <div className="bg-blue-100 p-2 rounded-full mr-3">
-                      <Brain className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div className="text-left">
-                      <h4 className="font-medium">Personalized Learning</h4>
-                      <p className="text-sm text-gray-500">Adapts to your learning style</p>
-                    </div>
-                  </div>
+                  <Card className="bg-white/95 backdrop-blur-sm border border-pink-100 shadow-md">
+                    <CardContent className="p-4 md:p-6">
+                      <h3 className="text-lg md:text-xl font-bold mb-2 text-purple-800">{t('welcome.benefitCards.personalizedLearning')}</h3>
+                      <p className="text-sm md:text-base text-gray-600">{t('welcome.benefitCards.personalizedDescription')}</p>
+                    </CardContent>
+                  </Card>
                   
-                  <div className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
-                    <div className="bg-purple-100 p-2 rounded-full mr-3">
-                      <Calculator className="h-5 w-5 text-[#9333ea]" />
-                    </div>
-                    <div className="text-left">
-                      <h4 className="font-medium">Interactive Exercises</h4>
-                      <p className="text-sm text-gray-500">Learn math through fun activities</p>
-                    </div>
-                  </div>
+                  <Card className="bg-white/95 backdrop-blur-sm border border-pink-100 shadow-md">
+                    <CardContent className="p-4 md:p-6">
+                      <h3 className="text-lg md:text-xl font-bold mb-2 text-purple-800">{t('welcome.benefitCards.interactiveExercises')}</h3>
+                      <p className="text-sm md:text-base text-gray-600">{t('welcome.benefitCards.interactiveDescription')}</p>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </CardContent>

@@ -25,6 +25,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface QuizQuestion {
   question: string;
@@ -40,10 +41,11 @@ interface OperationInteractions {
 }
 
 const PlaygroundContainer: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [balloons, setBalloons] = useState(0);
   const [sandbags, setSandbags] = useState(0);
-  const [operation, setOperation] = useState<OperationType>('subtraction');
+  const [operation, setOperation] = useState<OperationType>('multiplication');
   const [hint, setHint] = useState("");
   const [playgroundHeight, setPlaygroundHeight] = useState(400);
   const [lastAction, setLastAction] = useState<'add-balloon' | 'add-sandbag' | 'remove-balloon' | 'remove-sandbag' | null>(null);
@@ -126,7 +128,7 @@ const PlaygroundContainer: React.FC = () => {
       case 'addition':
         questions = [
           {
-            question: `🎈 If you have ${balloons} balloons and get ${sandbags} more, how many balloons do you have now?`,
+            question: t('balloonGame.quiz.addition.q1', { balloons, sandbags }),
             options: [
               `${balloons + sandbags - 1}`,
               `${balloons + sandbags}`,
@@ -136,7 +138,7 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons + sandbags}`
           },
           {
-            question: `🍦 You have ${balloons} ice cream scoops. Your friend gives you 3 more. How many scoops do you have?`,
+            question: t('balloonGame.quiz.addition.q2', { count: balloons }),
             options: [
               `${balloons + 2}`,
               `${balloons + 3}`,
@@ -146,14 +148,14 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons + 3}`
           },
           {
-            question: "🧩 Which shows adding things together?",
+            question: t('balloonGame.quiz.addition.q3'),
             options: [
-              "Sharing toys with friends",
-              "Counting all the cookies in two jars",
-              "Cutting a pizza into slices",
-              "Figuring out how many more points you need"
+              t('balloonGame.quiz.addition.q3o1'),
+              t('balloonGame.quiz.addition.q3o2'),
+              t('balloonGame.quiz.addition.q3o3'),
+              t('balloonGame.quiz.addition.q3o4')
             ],
-            answer: "Counting all the cookies in two jars"
+            answer: t('balloonGame.quiz.addition.q3o2')
           }
         ];
         break;
@@ -161,7 +163,7 @@ const PlaygroundContainer: React.FC = () => {
       case 'subtraction':
         questions = [
           {
-            question: `🎈 You have ${balloons} balloons. ${Math.min(balloons, 2)} pop! How many balloons are left?`,
+            question: t('balloonGame.quiz.subtraction.q1', { balloons, count: Math.min(balloons, 2) }),
             options: [
               `${balloons - Math.min(balloons, 2) - 1}`,
               `${balloons - Math.min(balloons, 2)}`,
@@ -171,7 +173,7 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons - Math.min(balloons, 2)}`
           },
           {
-            question: `⚖️ The basket has ${balloons} balloons (going up) and ${sandbags} sandbags (going down). Where does it end up?`,
+            question: t('balloonGame.quiz.subtraction.q2', { balloons, sandbags }),
             options: [
               `${balloons - sandbags - 1}`,
               `${balloons - sandbags}`,
@@ -181,14 +183,14 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons - sandbags}`
           },
           {
-            question: "🏄 What happens when you add more sandbags to your basket?",
+            question: t('balloonGame.quiz.subtraction.q3'),
             options: [
-              "It floats higher in the sky",
-              "The number gets bigger",
-              "The number gets smaller",
-              "Nothing changes"
+              t('balloonGame.quiz.subtraction.q3o1'),
+              t('balloonGame.quiz.subtraction.q3o2'),
+              t('balloonGame.quiz.subtraction.q3o3'),
+              t('balloonGame.quiz.subtraction.q3o4')
             ],
-            answer: "The number gets smaller"
+            answer: t('balloonGame.quiz.subtraction.q3o3')
           }
         ];
         break;
@@ -196,7 +198,7 @@ const PlaygroundContainer: React.FC = () => {
       case 'multiplication':
         questions = [
           {
-            question: `🍪 You have ${balloons} plates with ${sandbags} cookies on each plate. How many cookies in total?`,
+            question: t('balloonGame.quiz.multiplication.q1', { balloons, sandbags }),
             options: [
               `${balloons * sandbags - 1}`,
               `${balloons * sandbags}`,
@@ -206,7 +208,7 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons * sandbags}`
           },
           {
-            question: `🚗 There are ${sandbags} toy cars. Each car has ${balloons} wheels. How many wheels altogether?`,
+            question: t('balloonGame.quiz.multiplication.q2', { balloons, sandbags }),
             options: [
               `${balloons * sandbags - 2}`,
               `${balloons * sandbags - 1}`,
@@ -216,14 +218,14 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons * sandbags}`
           },
           {
-            question: "🍭 Which is like multiplication?",
+            question: t('balloonGame.quiz.multiplication.q3'),
             options: [
-              "Adding the same number over and over",
-              "Taking some away from a group",
-              "Sharing candy equally",
-              "Putting two numbers together"
+              t('balloonGame.quiz.multiplication.q3o1'),
+              t('balloonGame.quiz.multiplication.q3o2'),
+              t('balloonGame.quiz.multiplication.q3o3'),
+              t('balloonGame.quiz.multiplication.q3o4')
             ],
-            answer: "Adding the same number over and over"
+            answer: t('balloonGame.quiz.multiplication.q3o1')
           }
         ];
         break;
@@ -231,7 +233,7 @@ const PlaygroundContainer: React.FC = () => {
       case 'division':
         questions = [
           {
-            question: `🍕 You have ${balloons * sandbags} pizza slices to share with ${sandbags} friends. How many slices does each friend get?`,
+            question: t('balloonGame.quiz.division.q1', { count: balloons * sandbags, sandbags }),
             options: [
               `${balloons - 1}`,
               `${balloons}`,
@@ -241,7 +243,7 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${balloons}`
           },
           {
-            question: `🧸 You need to put ${balloons * sandbags} teddy bears in ${balloons} equal rows. How many bears in each row?`,
+            question: t('balloonGame.quiz.division.q2', { count: balloons * sandbags, balloons }),
             options: [
               `${sandbags - 1}`,
               `${sandbags}`,
@@ -251,14 +253,14 @@ const PlaygroundContainer: React.FC = () => {
             answer: `${sandbags}`
           },
           {
-            question: "🍦 What happens when you divide an ice cream by 1?",
+            question: t('balloonGame.quiz.division.q3'),
             options: [
-              "You get no ice cream",
-              "You get the same amount of ice cream",
-              "You always get 1 ice cream",
-              "You can't divide by 1"
+              t('balloonGame.quiz.division.q3o1'),
+              t('balloonGame.quiz.division.q3o2'),
+              t('balloonGame.quiz.division.q3o3'),
+              t('balloonGame.quiz.division.q3o4')
             ],
-            answer: "You get the same amount of ice cream"
+            answer: t('balloonGame.quiz.division.q3o2')
           }
         ];
         break;
@@ -279,13 +281,13 @@ const PlaygroundContainer: React.FC = () => {
     
     // Show toast with operation change
     const operationNames = {
-      'addition': 'Addition',
-      'subtraction': 'Subtraction',
-      'multiplication': 'Multiplication',
-      'division': 'Division'
+      'addition': t('balloonGame.operations.addition'),
+      'subtraction': t('balloonGame.operations.subtraction'),
+      'multiplication': t('balloonGame.operations.multiplication'),
+      'division': t('balloonGame.operations.division')
     };
     
-    toast.info(`Switched to ${operationNames[newOperation]} mode!`, {
+    toast.info(t('balloonGame.operationChanged', { operation: operationNames[newOperation] }), {
       position: 'bottom-center',
       duration: 2000,
     });
@@ -306,7 +308,7 @@ const PlaygroundContainer: React.FC = () => {
     setLastAction('add-balloon');
     incrementInteraction();
     
-    toast.success('Balloon added! Your basket rises higher.', {
+    toast.success(t('balloonGame.balloonAdded'), {
       position: 'bottom-center',
       duration: 2000,
     });
@@ -318,7 +320,7 @@ const PlaygroundContainer: React.FC = () => {
       setLastAction('remove-balloon');
       incrementInteraction();
       
-      toast.info('Balloon removed! The basket feels a bit heavier now.', {
+      toast.info(t('balloonGame.balloonRemoved'), {
         position: 'bottom-center',
         duration: 2000,
       });
@@ -330,7 +332,7 @@ const PlaygroundContainer: React.FC = () => {
     setLastAction('add-sandbag');
     incrementInteraction();
     
-    toast.success('Sandbag added! Your basket sinks lower.', {
+    toast.success(t('balloonGame.sandbagAdded'), {
       position: 'bottom-center',
       duration: 2000,
     });
@@ -342,7 +344,7 @@ const PlaygroundContainer: React.FC = () => {
       setLastAction('remove-sandbag');
       incrementInteraction();
       
-      toast.info('Sandbag removed! The basket feels a bit lighter now.', {
+      toast.info(t('balloonGame.sandbagRemoved'), {
         position: 'bottom-center',
         duration: 2000,
       });
@@ -414,17 +416,17 @@ const PlaygroundContainer: React.FC = () => {
     
     // Show congratulatory message based on score
     if (score === quizQuestions.length) {
-      toast.success('🌟 Perfect score! You\'re a math superstar! 🌟', {
+      toast.success(t('balloonGame.perfectScore'), {
         position: 'bottom-center',
         duration: 3000,
       });
     } else if (score >= quizQuestions.length / 2) {
-      toast.success('✨ Great job! You\'re really good at math! ✨', {
+      toast.success(t('balloonGame.goodScore'), {
         position: 'bottom-center',
         duration: 3000,
       });
     } else {
-      toast.info('💪 Awesome try! Let\'s keep playing to get even better! 💪', {
+      toast.info(t('balloonGame.keepTrying'), {
         position: 'bottom-center',
         duration: 3000,
       });
@@ -469,35 +471,35 @@ const PlaygroundContainer: React.FC = () => {
       <Dialog open={showPrompt} onOpenChange={setShowPrompt}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>🎉 Wow! You're amazing at {operation}!</DialogTitle>
+            <DialogTitle>{t('balloonGame.prompt.title', { operation })}</DialogTitle>
             <DialogDescription>
-              Would you like to play a fun {operation} game or try a different math adventure?
+              {t('balloonGame.prompt.description', { operation })}
             </DialogDescription>
           </DialogHeader>
           
           <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-0">
             <Button variant="default" onClick={handleTakeQuiz} className="bg-primary hover:bg-primary/90">
-              ✨ Play Quiz Game
+              {t('balloonGame.prompt.playQuiz')}
             </Button>
             <div className="flex flex-col sm:flex-row gap-2">
               {operation !== 'subtraction' && (
                 <Button variant="outline" onClick={() => handleChangeOperation('subtraction')}>
-                  ➖ Try Subtraction
+                  {t('balloonGame.prompt.trySubtraction')}
                 </Button>
               )}
               {operation !== 'addition' && (
                 <Button variant="outline" onClick={() => handleChangeOperation('addition')}>
-                  ➕ Try Addition
+                  {t('balloonGame.prompt.tryAddition')}
                 </Button>
               )}
               {operation !== 'multiplication' && (
                 <Button variant="outline" onClick={() => handleChangeOperation('multiplication')}>
-                  ✖️ Try Multiplication
+                  {t('balloonGame.prompt.tryMultiplication')}
                 </Button>
               )}
               {operation !== 'division' && (
                 <Button variant="outline" onClick={() => handleChangeOperation('division')}>
-                  ➗ Try Division
+                  {t('balloonGame.prompt.tryDivision')}
                 </Button>
               )}
             </div>
@@ -512,13 +514,13 @@ const PlaygroundContainer: React.FC = () => {
             <>
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2">
-                  {operation === 'addition' && '➕ Fun Addition Quiz!'}
-                  {operation === 'subtraction' && '➖ Fun Subtraction Quiz!'}
-                  {operation === 'multiplication' && '✖️ Fun Multiplication Quiz!'}
-                  {operation === 'division' && '➗ Fun Division Quiz!'}
+                  {operation === 'addition' && t('balloonGame.quiz.additionTitle')}
+                  {operation === 'subtraction' && t('balloonGame.quiz.subtractionTitle')}
+                  {operation === 'multiplication' && t('balloonGame.quiz.multiplicationTitle')}
+                  {operation === 'division' && t('balloonGame.quiz.divisionTitle')}
                 </DialogTitle>
                 <DialogDescription>
-                  Question {currentQuestionIndex + 1} of {quizQuestions.length} - You can do this! 💪
+                  {t('balloonGame.quiz.progress', { current: currentQuestionIndex + 1, total: quizQuestions.length })}
                 </DialogDescription>
               </DialogHeader>
               
@@ -549,8 +551,8 @@ const PlaygroundContainer: React.FC = () => {
                 {isCorrect !== null && (
                   <div className={`mt-4 p-3 rounded-md ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                     {isCorrect ? 
-                      '🎯 Yay! You got it right! You\'re so smart! 🌟' : 
-                      `❓ Oops! The answer is: ${quizQuestions[currentQuestionIndex]?.answer} - Let's try another! 💫`
+                      t('balloonGame.quiz.correctAnswer') : 
+                      t('balloonGame.quiz.wrongAnswer', { answer: quizQuestions[currentQuestionIndex]?.answer })
                     }
                   </div>
                 )}
@@ -559,11 +561,14 @@ const PlaygroundContainer: React.FC = () => {
               <DialogFooter>
                 {isCorrect === null ? (
                   <Button onClick={handleCheckAnswer} disabled={!selectedAnswer} className="bg-primary hover:bg-primary/90">
-                    Check My Answer 🔍
+                    {t('balloonGame.quiz.checkAnswer')}
                   </Button>
                 ) : (
                   <Button onClick={handleNextQuestion} className="bg-primary hover:bg-primary/90">
-                    {currentQuestionIndex < quizQuestions.length - 1 ? 'Next Question ➡️' : 'Finish Game 🏁'}
+                    {currentQuestionIndex < quizQuestions.length - 1 ? 
+                      t('balloonGame.quiz.nextQuestion') : 
+                      t('balloonGame.quiz.finishGame')
+                    }
                   </Button>
                 )}
               </DialogFooter>
@@ -571,9 +576,9 @@ const PlaygroundContainer: React.FC = () => {
           ) : (
             <>
               <DialogHeader>
-                <DialogTitle>🎊 Quiz Completed! 🎊</DialogTitle>
+                <DialogTitle>{t('balloonGame.quiz.completed')}</DialogTitle>
                 <DialogDescription>
-                  You scored {score} out of {quizQuestions.length} - Awesome job!
+                  {t('balloonGame.quiz.scoreResult', { score, total: quizQuestions.length })}
                 </DialogDescription>
               </DialogHeader>
               
@@ -589,17 +594,17 @@ const PlaygroundContainer: React.FC = () => {
                 
                 <p className="text-center text-lg">
                   {score === quizQuestions.length ? 
-                    '🌟 Perfect score! You\'re a math superstar! 🌟' :
+                    t('balloonGame.quiz.perfectScoreFeedback') :
                     score >= quizQuestions.length / 2 ? 
-                      '✨ Great job! You\'re really good at math! ✨' :
-                      '💪 Awesome try! Let\'s keep playing to get even better! 💪'
+                      t('balloonGame.quiz.goodScoreFeedback') :
+                      t('balloonGame.quiz.tryAgainFeedback')
                   }
                 </p>
               </div>
               
               <DialogFooter>
                 <Button onClick={handleFinishQuiz} className="bg-primary hover:bg-primary/90">
-                  Keep Playing 🎮
+                  {t('balloonGame.quiz.keepPlaying')}
                 </Button>
               </DialogFooter>
             </>

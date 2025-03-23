@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import ThemedBackground from '@/components/themed-backgrounds/ThemedBackground';
 import PreferencesButton from '@/components/PreferencesButton';
+import { useTranslation } from 'react-i18next';
 
 import ImageUploader from '@/components/image-to-learning/ImageUploader';
 import Quiz from '@/components/image-to-learning/Quiz';
@@ -31,6 +32,7 @@ const emptyExplanation = "No explanation yet. Please analyze an image to generat
 const ImageToLearning: React.FC = () => {
   const navigate = useNavigate();
   const { preferences, addPoints } = useUserPreferences();
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
@@ -39,10 +41,10 @@ const ImageToLearning: React.FC = () => {
   const [isRegeneratingQuiz, setIsRegeneratingQuiz] = useState<boolean>(false);
   const [usingDemoContent, setUsingDemoContent] = useState<boolean>(false);
   const [taskSteps, setTaskSteps] = useState<{ step: number; text: string; icon: string; complete: boolean; hint?: string }[]>([
-    { step: 1, text: "Upload an image", icon: "📷", complete: false, hint: "Upload a photo of math problems" },
-    { step: 2, text: "Analyze the image", icon: "🔍", complete: false, hint: "Wait for the AI to analyze it" },
-    { step: 3, text: "Interact with content", icon: "🧠", complete: false, hint: "Try the quiz and learn from explanations" },
-    { step: 4, text: "Review your learning", icon: "✅", complete: false, hint: "Check your understanding" }
+    { step: 1, text: t('imageToLearning.taskSteps.step1'), icon: "📷", complete: false, hint: t('imageToLearning.taskSteps.hint1') },
+    { step: 2, text: t('imageToLearning.taskSteps.step2'), icon: "🔍", complete: false, hint: t('imageToLearning.taskSteps.hint2') },
+    { step: 3, text: t('imageToLearning.taskSteps.step3'), icon: "🧠", complete: false, hint: t('imageToLearning.taskSteps.hint3') },
+    { step: 4, text: t('imageToLearning.taskSteps.step4'), icon: "✅", complete: false, hint: t('imageToLearning.taskSteps.hint4') }
   ]);
   const [currentTaskStep, setCurrentTaskStep] = useState<number>(1);
   const [conceptBreakdown, setConceptBreakdown] = useState<any>(null);
@@ -507,11 +509,11 @@ Your response MUST follow this exact JSON structure:
                 className="bg-white/80 hover:bg-white/90 shadow-sm flex items-center" 
                 onClick={goBack}
               >
-                <Home className="h-4 w-4 mr-1.5" /> Back to Home
+                <Home className="h-4 w-4 mr-1.5" /> {t('imageToLearning.backToHome')}
               </Button>
               <h1 className="text-3xl font-bold text-primary flex items-center gap-2">
                 <Camera className="h-6 w-6 text-blue-600" />
-                {isInLearningJourney ? `📸 Image Learning: ${learningTopic}` : 'Image to Learning'}
+                {isInLearningJourney ? `📸 ${t('imageToLearning.title')}: ${learningTopic}` : t('imageToLearning.imageLearning')}
               </h1>
             </div>
             
@@ -522,8 +524,8 @@ Your response MUST follow this exact JSON structure:
           {isInLearningJourney && (
             <div className="mb-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center gap-2 mb-2">
-                <h2 className="text-lg font-semibold">Learning Journey: {learningTopic}</h2>
-                <AudioText text={`Learning Journey: ${learningTopic}. You are on step ${currentPathIndex + 1} of ${learningPath.length}.`} className="ml-1" />
+                <h2 className="text-lg font-semibold">{t('imageToLearning.learningJourney')}: {learningTopic}</h2>
+                <AudioText text={`${t('imageToLearning.learningJourney')}: ${learningTopic}. ${t('imageToLearning.step')} ${currentPathIndex + 1} ${t('imageToLearning.of')} ${learningPath.length}.`} className="ml-1" />
               </div>
               
               <div className="w-full bg-gray-200 rounded-full h-2.5 mb-3">
@@ -535,7 +537,7 @@ Your response MUST follow this exact JSON structure:
               
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">
-                  Step {currentPathIndex + 1} of {learningPath.length}
+                  {t('imageToLearning.step')} {currentPathIndex + 1} {t('imageToLearning.of')} {learningPath.length}
                 </span>
                 
                 <Button 
@@ -544,7 +546,7 @@ Your response MUST follow this exact JSON structure:
                   className="bg-white shadow-sm hover:shadow-md"
                   onClick={continueToNextActivity}
                 >
-                  Continue to {getNextActivityName()} →
+                  {t('imageToLearning.continueTo')} {getNextActivityName()} →
                 </Button>
               </div>
             </div>
@@ -567,9 +569,9 @@ Your response MUST follow this exact JSON structure:
           <div className="lg:col-span-1">
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg">
               <h2 className="text-xl font-semibold mb-4 flex items-center">
-                Upload an Image
+                {t('imageToLearning.uploadImage')}
                 <AudioText 
-                  text="Upload an image of math problems, worksheets, or concepts"
+                  text={t('imageToLearning.uploadInstructions')}
                   className="ml-2"
                 />
               </h2>
@@ -584,12 +586,12 @@ Your response MUST follow this exact JSON structure:
                   {isAnalyzing ? (
                     <>
                       <RotateCw className="mr-2 h-4 w-4 animate-spin" />
-                      Analyzing...
+                      {t('imageToLearning.analyzing')}
                     </>
                   ) : (
                     <>
                       <Zap className="mr-2 h-4 w-4" />
-                      Analyze Image
+                      {t('imageToLearning.analyzeImage')}
                     </>
                   )}
                 </Button>
@@ -604,9 +606,9 @@ Your response MUST follow this exact JSON structure:
               {usingDemoContent && analysisResult && (
                 <Alert variant="info" className="mb-4">
                   <InfoIcon className="h-4 w-4" />
-                  <AlertTitle>Using demonstration content</AlertTitle>
+                  <AlertTitle>{t('imageToLearning.demoContentAlert')}</AlertTitle>
                   <AlertDescription>
-                    We're showing example learning materials. Upload a clearer image of math problems for personalized content.
+                    {t('imageToLearning.demoContentDescription')}
                   </AlertDescription>
                 </Alert>
               )}
@@ -617,9 +619,9 @@ Your response MUST follow this exact JSON structure:
                   <div className="bg-primary/10 p-6 rounded-full mb-6">
                     <Zap className="h-12 w-12 text-primary" />
                   </div>
-                  <h2 className="text-2xl font-bold mb-3">Upload & Analyze an Image</h2>
+                  <h2 className="text-2xl font-bold mb-3">{t('imageToLearning.uploadAndAnalyze')}</h2>
                   <p className="text-gray-600 max-w-md">
-                    Select an image on the left, then click "Analyze Image" to generate interactive learning content based on what's in your image.
+                    {t('imageToLearning.uploadInstructions')}
                   </p>
                 </div>
               )}
@@ -655,28 +657,28 @@ Your response MUST follow this exact JSON structure:
                     className="w-full"
                   >
                     <TabsList className="grid w-full grid-cols-4">
-                      <TabsTrigger value="quiz">Quiz</TabsTrigger>
-                      <TabsTrigger value="flashcards">Flashcards</TabsTrigger>
-                      <TabsTrigger value="explanation">Explanation</TabsTrigger>
-                      <TabsTrigger value="breakdown">Step-by-Step</TabsTrigger>
+                      <TabsTrigger value="quiz">{t('imageToLearning.tabs.quiz')}</TabsTrigger>
+                      <TabsTrigger value="flashcards">{t('imageToLearning.tabs.flashcards')}</TabsTrigger>
+                      <TabsTrigger value="explanation">{t('imageToLearning.tabs.explanation')}</TabsTrigger>
+                      <TabsTrigger value="breakdown">{t('imageToLearning.tabs.breakdown')}</TabsTrigger>
                     </TabsList>
                     
                     {/* Quiz difficulty and regenerate controls */}
                     <TabsContent value="quiz" className="flex-grow">
                       <div className="flex justify-between items-center mb-4">
                         <div className="flex items-center space-x-2">
-                          <span className="text-sm font-medium">Difficulty:</span>
+                          <span className="text-sm font-medium">{t('imageToLearning.difficulty.label')}:</span>
                           <Select
                             value={difficulty}
                             onValueChange={(value) => setDifficulty(value as 'easy' | 'medium' | 'hard')}
                           >
                             <SelectTrigger className="w-[120px]">
-                              <SelectValue placeholder="Difficulty" />
+                              <SelectValue placeholder={t('imageToLearning.difficulty.label')} />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="easy">Easy</SelectItem>
-                              <SelectItem value="medium">Medium</SelectItem>
-                              <SelectItem value="hard">Hard</SelectItem>
+                              <SelectItem value="easy">{t('imageToLearning.difficulty.easy')}</SelectItem>
+                              <SelectItem value="medium">{t('imageToLearning.difficulty.medium')}</SelectItem>
+                              <SelectItem value="hard">{t('imageToLearning.difficulty.hard')}</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -690,12 +692,12 @@ Your response MUST follow this exact JSON structure:
                           {isRegeneratingQuiz ? (
                             <>
                               <RotateCw className="mr-2 h-3 w-3 animate-spin" />
-                              Regenerating...
+                              {t('imageToLearning.regenerating')}
                             </>
                           ) : (
                             <>
                               <RefreshCw className="mr-2 h-3 w-3" />
-                              New Questions
+                              {t('imageToLearning.newQuestions')}
                             </>
                           )}
                         </Button>
@@ -705,9 +707,9 @@ Your response MUST follow this exact JSON structure:
                         <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-md h-full flex flex-col justify-center items-center">
                           <div className="flex flex-col items-center justify-center">
                             <RefreshCw className="h-10 w-10 animate-spin text-primary mb-4" />
-                            <h3 className="text-xl font-medium mb-2">Regenerating Quiz</h3>
+                            <h3 className="text-xl font-medium mb-2">{t('imageToLearning.regeneratingQuiz')}</h3>
                             <p className="text-gray-600 text-center max-w-md">
-                              Creating new questions based on the concepts in your image...
+                              {t('imageToLearning.regeneratingQuiz')}
                             </p>
                           </div>
                         </div>
@@ -716,7 +718,7 @@ Your response MUST follow this exact JSON structure:
                       {!isRegeneratingQuiz && analysisResult && (
                         <Quiz 
                           questions={analysisResult.quiz || emptyQuiz} 
-                          title="Math Concepts Quiz"
+                          title={t('imageToLearning.quizTitle')}
                           onComplete={(score, total) => {
                             completeTaskStep(3);
                             // Award points based on score
@@ -732,9 +734,9 @@ Your response MUST follow this exact JSON structure:
                       {!analysisResult && !isAnalyzing && (
                         <div className="flex flex-col items-center justify-center p-8 text-center">
                           <Brain className="h-12 w-12 text-gray-400 mb-4" />
-                          <h3 className="text-lg font-medium mb-2">No Quiz Available</h3>
+                          <h3 className="text-lg font-medium mb-2">{t('imageToLearning.noQuizAvailable')}</h3>
                           <p className="text-gray-500">
-                            Upload an image and analyze it to generate a quiz about the content.
+                            {t('imageToLearning.noQuizInstructions')}
                           </p>
                         </div>
                       )}
@@ -780,7 +782,7 @@ Your response MUST follow this exact JSON structure:
                           </div>
                           
                           <div className="mt-6 bg-green-50 p-4 rounded-lg border border-green-100">
-                            <h3 className="font-semibold text-green-800 mb-2">Check for Understanding:</h3>
+                            <h3 className="font-semibold text-green-800 mb-2">{t('imageToLearning.checkForUnderstanding')}</h3>
                             <ul className="list-disc list-inside space-y-2">
                               {conceptBreakdown.checkForUnderstanding.map((item: string, i: number) => (
                                 <li key={i} className="text-green-700">{item}</li>
@@ -791,10 +793,9 @@ Your response MUST follow this exact JSON structure:
                       ) : (
                         <div className="flex flex-col items-center justify-center p-8 text-center">
                           <Brain className="h-12 w-12 text-gray-400 mb-4" />
-                          <h3 className="text-lg font-medium mb-2">No Step-by-Step Breakdown Available</h3>
+                          <h3 className="text-lg font-medium mb-2">{t('imageToLearning.noBreakdownAvailable')}</h3>
                           <p className="text-gray-500">
-                            We couldn't generate a detailed breakdown for this content.
-                            Try uploading a clearer image of math concepts.
+                            {t('imageToLearning.noBreakdownInstructions')}
                           </p>
                         </div>
                       )}

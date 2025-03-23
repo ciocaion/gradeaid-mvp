@@ -14,6 +14,7 @@ import { searchEducationalVideos, type YouTubeVideo } from '@/services/youtubeSe
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import AudioText from '@/components/AudioText';
+import { useTranslation } from 'react-i18next';
 
 const VideoLearning: React.FC = () => {
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ const VideoLearning: React.FC = () => {
   const [learningTopic, setLearningTopic] = useState<string>('');
   const [currentPathIndex, setCurrentPathIndex] = useState<number>(0);
   const [learningPath, setLearningPath] = useState<string[]>([]);
+
+  const { t } = useTranslation();
 
   // Check if we're in a learning journey
   useEffect(() => {
@@ -197,7 +200,7 @@ const VideoLearning: React.FC = () => {
           {isInLearningJourney && (
             <div className="mb-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-sm border border-gray-100">
               <div className="flex items-center gap-2 mb-2">
-                <h2 className="text-lg font-semibold">Learning Journey: {learningTopic}</h2>
+                <h2 className="text-lg font-semibold">{t('videoLearning.journeyProgress')}</h2>
                 <AudioText text={`Learning Journey: ${learningTopic}. You are on step ${currentPathIndex + 1} of ${learningPath.length}.`} className="ml-1" />
               </div>
               
@@ -236,13 +239,13 @@ const VideoLearning: React.FC = () => {
             <CardContent className="p-6">
               <form onSubmit={handleSearch} className="flex flex-col gap-4">
                 <label className="text-lg font-medium">
-                  What do you want to learn with videos today?
+                  {t('videoLearning.searchPlaceholder')}
                 </label>
                 
                 <div className="flex gap-2">
                   <Input 
                     type="text"
-                    placeholder="Example: math addition, dinosaurs, planets, coding for kids..."
+                    placeholder={t('videoLearning.searchPlaceholder')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="flex-1"

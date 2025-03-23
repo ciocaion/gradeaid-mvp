@@ -1,4 +1,5 @@
 import { toast } from 'sonner';
+import i18n from '@/i18n';
 
 export interface YouTubeVideo {
   id: string;
@@ -17,16 +18,18 @@ export interface YouTubeVideo {
 export const searchEducationalVideos = async (searchTerm: string): Promise<YouTubeVideo[]> => {
   try {
     const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+    const currentLanguage = i18n.language || 'en';
+    const relevanceLanguage = currentLanguage === 'da' ? 'da' : 'en';
     
     // If API key is missing, use the fallback approach
     if (!apiKey) {
       console.warn('YouTube API key is not configured. Using demonstration data instead.');
-      return getDemoVideos(searchTerm);
+      return getDemoVideos(searchTerm, currentLanguage);
     }
 
     try {
       // Enhance search term to target educational content for kids
-      const enhancedSearchTerm = `${searchTerm} educational for kids learning`;
+      const enhancedSearchTerm = `${searchTerm} ${currentLanguage === 'da' ? 'undervisning for børn læring' : 'educational for kids learning'}`;
       
       // Add timeout to prevent hanging requests
       const controller = new AbortController();
@@ -41,6 +44,7 @@ export const searchEducationalVideos = async (searchTerm: string): Promise<YouTu
         `type=video&` +
         `videoEmbeddable=true&` +
         `safeSearch=strict&` +
+        `relevanceLanguage=${relevanceLanguage}&` +
         `key=${apiKey}`;
 
       const searchResponse = await fetch(searchUrl, {
@@ -57,13 +61,13 @@ export const searchEducationalVideos = async (searchTerm: string): Promise<YouTu
         // Display the response text for debugging
         const errorText = await searchResponse.text();
         console.warn('API Error response:', errorText);
-        return getDemoVideos(searchTerm);
+        return getDemoVideos(searchTerm, currentLanguage);
       }
       
       const searchData = await searchResponse.json();
       
       if (!searchData.items || searchData.items.length === 0) {
-        return getDemoVideos(searchTerm);
+        return getDemoVideos(searchTerm, currentLanguage);
       }
       
       // Process the videos directly from the search response
@@ -99,7 +103,7 @@ export const searchEducationalVideos = async (searchTerm: string): Promise<YouTu
         });
       
       if (videos.length === 0) {
-        return getDemoVideos(searchTerm);
+        return getDemoVideos(searchTerm, currentLanguage);
       }
       
       return videos;
@@ -107,13 +111,13 @@ export const searchEducationalVideos = async (searchTerm: string): Promise<YouTu
     } catch (apiError) {
       console.warn('YouTube API error, using demonstration data:', apiError);
       // Return demonstration videos when API fails
-      return getDemoVideos(searchTerm);
+      return getDemoVideos(searchTerm, currentLanguage);
     }
     
   } catch (error) {
     console.error('Error searching YouTube videos:', error);
     toast.error('Failed to search videos. Using demo content instead.');
-    return getDemoVideos(searchTerm);
+    return getDemoVideos(searchTerm, i18n.language || 'en');
   }
 };
 
@@ -137,7 +141,7 @@ const parseDuration = (duration: string): number => {
  * Provides demonstration videos based on search term
  * Used as fallback when the YouTube API is unavailable
  */
-const getDemoVideos = (searchTerm: string): YouTubeVideo[] => {
+const getDemoVideos = (searchTerm: string, language: string = 'en'): YouTubeVideo[] => {
   const lowerTerm = searchTerm.toLowerCase();
   let videos: YouTubeVideo[] = [];
   
@@ -163,12 +167,74 @@ const getDemoVideos = (searchTerm: string): YouTubeVideo[] => {
       'CuJDgJft0OQ', // History
       'EXZx43pVoxo', // Coding
       'Qw6OVlDmvCU'  // Art
+    ],
+    danish: [
+      'O4CE0nM6L30', // Danish math
+      '7ADGq9R3WkU', // Danish science
+      'vCMdBIarJ7U', // Danish reading
+      'nLJOjEm5M1E', // Danish general education
+      'tImFsYfQmIM'  // Danish kids content
     ]
   };
   
-  // Select from reliable videos based on search term
+  // Select from reliable videos based on search term and language
   let selectedIds: string[] = [];
+  const isDanish = language === 'da';
   
+  if (isDanish) {
+    // For Danish, always use the Danish videos regardless of search term
+    selectedIds = RELIABLE_VIDEO_IDS.danish;
+    videos = [
+      {
+        id: selectedIds[0],
+        title: 'Matematik for Børn | Grundlæggende Matematik Læringsvideo',
+        description: 'Lær addition og subtraktion med sjove øvelser for begyndere',
+        thumbnail: `https://i3.ytimg.com/vi/${selectedIds[0]}/hqdefault.jpg`,
+        channelTitle: 'Lærings Kanalen',
+        publishedAt: '2020-05-15',
+        isShort: false
+      },
+      {
+        id: selectedIds[1],
+        title: 'Additions Sang for Børn | Matematik Addition Rap',
+        description: 'Sjov sang der underviser i grundlæggende addition for børnehave og indskolingselever',
+        thumbnail: `https://i3.ytimg.com/vi/${selectedIds[1]}/hqdefault.jpg`,
+        channelTitle: 'Matematik Sange',
+        publishedAt: '2021-03-22',
+        isShort: false
+      },
+      {
+        id: selectedIds[2],
+        title: 'Matematik Shorts: Addition med Klodser',
+        description: 'Hurtigt visuelt kursus om brug af klodser til addition',
+        thumbnail: `https://i3.ytimg.com/vi/${selectedIds[2]}/hqdefault.jpg`,
+        channelTitle: 'BørnMatematik',
+        publishedAt: '2022-01-10',
+        isShort: true
+      },
+      {
+        id: selectedIds[3],
+        title: 'Minecraft Matematik: Byg Talblokke',
+        description: 'Lær matematiske begreber gennem Minecraft byggeudfordringer',
+        thumbnail: `https://i3.ytimg.com/vi/${selectedIds[3]}/hqdefault.jpg`,
+        channelTitle: 'SpillerUddannelse',
+        publishedAt: '2021-11-05',
+        isShort: false
+      },
+      {
+        id: selectedIds[4],
+        title: 'Hurtige Matematik Tricks - Mental Addition',
+        description: 'Lær hurtige mentale matematikberegninger',
+        thumbnail: `https://i3.ytimg.com/vi/${selectedIds[4]}/hqdefault.jpg`,
+        channelTitle: 'HjerneBoosting',
+        publishedAt: '2022-04-18',
+        isShort: true
+      }
+    ];
+    return videos;
+  }
+  
+  // English videos sorted by topic
   // Math-related videos
   if (lowerTerm.includes('math') || lowerTerm.includes('add') || lowerTerm.includes('subtract') || 
       lowerTerm.includes('multiply') || lowerTerm.includes('divide') || lowerTerm.includes('number')) {

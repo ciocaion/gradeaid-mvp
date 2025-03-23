@@ -1,6 +1,6 @@
 {
   "common": {
-    "backToHome": "Tilbage til forsiden",
+    "backToHome": "Tilbage til Hjem",
     "submit": "Indsend",
     "submitting": "Indsender...",
     "loading": "Indlæser...",
@@ -14,51 +14,69 @@
     "tryAgain": "Prøv igen",
     "continue": "Fortsæt",
     "close": "Luk",
-    "saveChanges": "Gem ændringer"
+    "saveChanges": "Gem ændringer",
+    "readAloud": "Læs højt",
+    "preferences": "Præferencer",
+    "exercise": "Øvelse"
   },
   "welcome": {
     "title": "Velkommen til GradeAid",
-    "subtitle": "Din interaktive matematik læringspartner",
-    "description": "GradeAid gør matematik sjovt og engagerende gennem interaktive øvelser, virkelige problemer og personlige læringsveje.",
-    "startButton": "Start Din Læringsrejse",
-    "chooseLanguage": "Vælg dit sprog"
+    "subtitle": "Din interaktive matematiklæringspartner",
+    "description": "GradeAid gør matematiklæring sjov og engagerende gennem interaktive øvelser, virkelige problemer og personlige læringsstier.",
+    "startButton": "Start din læringsrejse",
+    "chooseLanguage": "Vælg dit sprog",
+    "featureIcons": {
+      "math": "Matematik",
+      "learning": "Læring",
+      "interactive": "Interaktiv"
+    },
+    "benefitCards": {
+      "personalizedLearning": "Personlig Læring",
+      "personalizedDescription": "Indhold tilpasset din unikke læringsstil og præferencer",
+      "interactiveExercises": "Interaktive Øvelser",
+      "interactiveDescription": "Engager dig med sjove, praktiske aktiviteter, der gør læring fornøjelig"
+    }
   },
   "home": {
     "title": "Matematik Hjælper",
     "subtitle": "Gør matematik sjovt og interaktivt",
-    "startLearning": "Start med at lære",
-    "practiceButton": "Øv med virkelige genstande",
+    "startLearning": "Start Læring",
+    "practiceButton": "Øv med virkelige objekter",
     "imageToLearningButton": "Lær fra billeder",
     "videoLearningButton": "Lær fra videoer",
     "funZoneButton": "Sjov Zone",
     "settingsButton": "Indstillinger",
     "welcomeBack": "Velkommen tilbage, {{name}}!",
-    "audioText": "Hjem Dashboard. Velkommen tilbage til din læringsrejse.",
+    "audioText": "Hjemmeskærm. Velkommen tilbage til din læringsrejse.",
     "quickAccess": "Hurtig adgang",
-    "recentActivity": "Seneste aktivitet",
-    "streak": "{{count}} dage i træk!",
+    "recentActivity": "Nylig aktivitet",
+    "streak": "{{count}} dages streak!",
     "points": "{{count}} point",
     "learningJourney": {
       "title": "Start din læringsrejse",
-      "description": "Fortæl os hvad du vil lære i dag, og vi vil skabe en personlig læringsvej kun til dig!",
-      "button": "Start med at lære nu"
+      "description": "Fortæl os, hvad du vil lære i dag, og vi vil skabe en personlig læringssti kun for dig!",
+      "button": "Start læring nu",
+      "progress": "Læringsrejse fremskridt",
+      "currentActivity": "Nuværende aktivitet",
+      "nextActivity": "Næste aktivitet"
     },
     "menu": {
       "features": {
-        "title": "Lærings funktioner",
+        "title": "Læringsfunktioner",
         "description": "Udforsk alle tilgængelige læringsværktøjer og aktiviteter"
       },
       "balloonSandbag": {
-        "title": "Ballon & Sandsæk Matematik",
-        "description": "Øv heltalsmatematik med vores interaktive 3D-værktøjer"
+        "title": "Ballon & Sandsæk Multiplikation",
+        "description": "Øv multiplikation og division ved hjælp af balloner og sandsække. Udforsk vores interaktive 3D-miljø med trækelementer!",
+        "instructions": "Klik på balloner eller sandsække for at fjerne dem. Brug kontrolfunktionerne til at tilføje flere. Prøv at trække ballonerne og sandsækkene for at se, hvordan de interagerer med multiplikation!"
       },
       "funZone": {
         "title": "Sjov Zone",
-        "description": "Spil uddannelsesmæssige spil og tjen belønninger"
+        "description": "Spil uddannelsesmæssige spil og optjen belønninger"
       },
       "profile": {
-        "title": "Min profil & Indstillinger",
-        "description": "Opdater dine præferencer og se din fremgang"
+        "title": "Min profil og indstillinger",
+        "description": "Opdater dine præferencer og se dine fremskridt"
       }
     }
   },
@@ -66,35 +84,42 @@
     "title": "Læringsrejse",
     "audioText": "Læringsrejse. Lad os lære noget nyt i dag.",
     "whatWouldYouLikeToLearn": "Hvad vil du gerne lære i dag?",
-    "whatWouldYouLikeToLearnAudio": "Hvad vil du gerne lære i dag? Skriv et emne du er interesseret i.",
+    "whatWouldYouLikeToLearnAudio": "Hvad vil du gerne lære i dag? Skriv et emne, du er interesseret i.",
     "topicPlaceholder": "Eksempel: multiplikation, solsystemet, dinosaurer...",
     "thinking": "Tænker...",
     "letsLearn": "Lad os lære!",
-    "yourLearningOverview": "Din lærings oversigt",
-    "yourPersonalizedLearningPath": "Din personlige læringsvej:",
+    "yourLearningOverview": "Din læringsoversigt",
+    "yourPersonalizedLearningPath": "Din personlige læringssti:",
     "startJourney": "Start min læringsrejse",
-    "journeyStarted": "Din læringsrejse er begyndt!",
-    "journeyStartedDescription": "Du er ved at begynde at lære om {{topic}}. Følg den personlige vej, vi har lavet til dig.",
+    "journeyStarted": "Din læringsrejse er startet!",
+    "journeyStartedDescription": "Du er ved at begynde at lære om {{topic}}. Følg den personlige sti, vi har lavet til dig.",
     "continueToFirstActivity": "Fortsæt til første aktivitet",
     "steps": {
-      "step1": "Fortæl os hvad du vil lære",
-      "step2": "Gennemgå din lærings oversigt",
+      "step1": "Fortæl os, hvad du vil lære",
+      "step2": "Gennemgå din læringsoversigt",
       "step3": "Start din personlige læringsrejse"
     },
     "tools": {
       "videoLearning": "🎥 Video Læring",
       "balloonExercise": "🎈 Ballon Matematik Øvelse",
       "imageLearning": "📸 Billede Læring",
-      "realLifePractice": "✏️ Træning i Virkelige Situationer",
+      "realLifePractice": "✏️ Virkelig liv øvelse",
       "nextActivity": "Næste Aktivitet"
-    }
+    },
+    "step": "Trin",
+    "of": "af",
+    "continueTo": "Fortsæt til",
+    "yourLearningJourney": "Læringsrejse",
+    "completeJourney": "Fuldfør Rejse",
+    "journeyComplete": "Læringsrejse fuldført! +25 bonuspoint",
+    "journeyCompleteDescription": "Du har fuldført alle aktiviteter i din læringssti!"
   },
   "realLifePractice": {
-    "title": "Træning i Virkelige Situationer",
+    "title": "Praksis i det virkelige liv",
     "activitySteps": {
       "step1": "Læs aktiviteten",
       "step2": "Vælg hvordan du vil svare",
-      "step3": "Lav din løsning",
+      "step3": "Opret din løsning",
       "step4": "Indsend dit arbejde",
       "step5": "Gennemgå feedback"
     },
@@ -103,14 +128,14 @@
       "upload": "Tag et billede",
       "voice": "Forklar det"
     },
-    "activityDescription": "Generer en ny matematisk aktivitet for at komme i gang!",
+    "activityDescription": "Generer en ny matematiksaktivitet for at komme i gang!",
     "generateActivity": "Generer aktivitet",
     "generating": "Genererer...",
     "howToRespond": "Hvordan vil du gerne svare?",
     "emptyDrawing": "Tegn venligst noget før du indsender.",
-    "analysisError": "AI Analyse Fejl",
-    "tryAgain": "Prøv venligst igen.",
-    "generateNewActivity": "Generer en ny matematisk aktivitet for at komme i gang!",
+    "analysisError": "AI analyse fejl",
+    "tryAgain": "Prøv igen.",
+    "generateNewActivity": "Generer en ny matematiksaktivitet for at komme i gang!",
     "howWouldYouLikeToRespond": "Hvordan vil du gerne svare?",
     "howWouldYouLikeToRespondDescription": "Hvordan vil du gerne svare? Du kan tegne din løsning, uploade et billede eller forklare med din stemme.",
     "drawYourSolution": "Tegn din løsning",
@@ -132,45 +157,77 @@
   },
   "activities": {
     "balloonsbadge": "Ballon Sandsæk Øvelse",
-    "quizcompleted": "Quiz Gennemført",
-    "imageuploaded": "Billede Analyse",
-    "dailylogin": "Daglig Login",
-    "flashcardscompleted": "Flashcards Gennemført",
-    "reallifepractice": "Træning i Virkelige Situationer"
+    "quizcompleted": "Quiz Fuldført",
+    "imageuploaded": "Billedanalyse",
+    "dailylogin": "Daglig Log ind",
+    "flashcardscompleted": "Flashcards Fuldført",
+    "reallifepractice": "Praksis i det virkelige liv"
   },
   "imageToLearning": {
-    "title": "Lær fra Billeder",
+    "title": "Lær fra billeder",
     "uploadImage": "Upload et billede",
     "takePicture": "Tag et billede",
     "analyzeImage": "Analyser billede",
     "analyzing": "Analyserer...",
     "noImage": "Upload venligst et billede først",
-    "tabs": {
-      "upload": "Upload",
-      "analysis": "Analyse",
-      "quiz": "Quiz",
-      "flashcards": "Flashcards"
-    },
-    "explanationTitle": "Forklaring",
-    "quizTitle": "Matematik Begreber Quiz",
-    "regenerateQuiz": "Nye spørgsmål",
+    "backToHome": "Tilbage til Hjem",
+    "imageLearning": "Billed til Læring",
+    "learningJourney": "Læringsrejse",
+    "step": "Trin",
+    "of": "af",
+    "continueTo": "Fortsæt til",
+    "regenerating": "Regenererer...",
+    "newQuestions": "Nye spørgsmål",
     "difficulty": {
       "label": "Sværhedsgrad",
       "easy": "Let",
       "medium": "Medium",
       "hard": "Svær"
     },
-    "regeneratingQuiz": "Opretter nye spørgsmål...",
-    "questionCount": "{{count}} spørgsmål"
+    "tabs": {
+      "upload": "Upload",
+      "analysis": "Analyse",
+      "quiz": "Quiz",
+      "flashcards": "Flashcards",
+      "explanation": "Forklaring",
+      "breakdown": "Trin-for-Trin"
+    },
+    "explanationTitle": "Forklaring",
+    "quizTitle": "Matematiske koncepter Quiz",
+    "regenerateQuiz": "Nye spørgsmål",
+    "regeneratingQuiz": "Laver nye spørgsmål...",
+    "questionCount": "{{count}} spørgsmål",
+    "uploadAndAnalyze": "Upload & Analyser et Billede",
+    "uploadInstructions": "Vælg et billede til venstre, og klik derefter på \"Analyser billede\" for at generere interaktivt læringsindhold baseret på hvad der er på dit billede.",
+    "noQuizAvailable": "Ingen Quiz Tilgængelig",
+    "noQuizInstructions": "Upload et billede og analyser det for at generere en quiz om indholdet.",
+    "noBreakdownAvailable": "Ingen Trin-for-Trin Analyse Tilgængelig",
+    "noBreakdownInstructions": "Vi kunne ikke generere en detaljeret analyse for dette indhold. Prøv at uploade et tydeligere billede af matematiske koncepter.",
+    "checkForUnderstanding": "Tjek for Forståelse:",
+    "demoContentAlert": "Bruger demonstrationsindhold",
+    "demoContentDescription": "Vi viser eksempel på læringsmaterialer. Upload et tydeligere billede af matematiske problemer for personligt indhold.",
+    "taskSteps": {
+      "title": "Opgave Trin",
+      "step1": "Upload et billede",
+      "step2": "Analyser billedet",
+      "step3": "Interager med indholdet",
+      "step4": "Gennemgå din læring",
+      "hint1": "Upload et foto af matematikopgaver",
+      "hint2": "Vent på at AI'en analyserer det",
+      "hint3": "Prøv quizzen og lær fra forklaringerne",
+      "hint4": "Tjek din forståelse"
+    }
   },
   "videoLearning": {
-    "title": "Lær fra Videoer",
+    "title": "Lær fra videoer",
     "searchPlaceholder": "Søg efter matematikvideoer...",
     "recommendedVideos": "Anbefalede videoer",
     "watchingNow": "Ser nu",
     "relatedVideos": "Relaterede videoer",
     "noVideos": "Ingen videoer fundet",
-    "loading": "Indlæser videoer..."
+    "loading": "Indlæser videoer...",
+    "whatToLearn": "Hvad vil du lære med videoer i dag?",
+    "journeyProgress": "Læringsrejse fremskridt"
   },
   "funZone": {
     "title": "Sjov Zone",
@@ -189,111 +246,286 @@
       "english": "Engelsk",
       "danish": "Dansk"
     },
-    "learningStyleSection": "Læringstil",
+    "learningStyleSection": "Læringsstil",
     "learningStyles": {
       "visual": {
-        "label": "Visuel lærende",
+        "label": "Visuel Lærende",
         "description": "Lær gennem billeder, diagrammer og visuelle hjælpemidler"
       },
       "auditory": {
-        "label": "Auditiv lærende",
-        "description": "Lær gennem lytning og mundtlige forklaringer"
+        "label": "Auditiv Lærende",
+        "description": "Lær gennem lytning og verbale forklaringer"
       },
       "kinesthetic": {
-        "label": "Praktisk lærende",
+        "label": "Hands-on Lærende",
         "description": "Lær gennem interaktive aktiviteter og spil"
       },
       "reading": {
         "label": "Læsning & Skrivning",
-        "description": "Lær gennem tekstbaserede materialer og notattagning"
+        "description": "Lær gennem tekstbaserede materialer og note-taking"
       }
     },
     "themeSection": "Tema",
     "themes": {
       "minecraft": {
         "label": "Minecraft",
-        "description": "Firkantet og eventyrligt"
+        "description": "Blokket og eventyrligt"
       },
       "roblox": {
         "label": "Roblox",
-        "description": "Kreativt og farverigt"
+        "description": "Kreativ og farverig"
       },
       "fortnite": {
         "label": "Fortnite",
-        "description": "Dristigt og energisk"
+        "description": "Inspireret af battle royale"
+      },
+      "princess": {
+        "label": "Prinsesse",
+        "description": "Kongelig og magisk"
+      },
+      "pirate": {
+        "label": "Pirat",
+        "description": "Højsøeventyr"
+      },
+      "space": {
+        "label": "Rummet",
+        "description": "Kosmisk og futuristisk"
       },
       "default": {
-        "label": "Standard",
-        "description": "Rent og enkelt"
+        "label": "Standard Tema",
+        "description": "Rent og enkelt design"
       }
     },
-    "badgesSection": "Dine badges",
-    "noBadges": "Ingen badges optjent endnu. Gennemfør aktiviteter for at optjene badges!",
-    "points": "Point",
-    "streak": "Læringsstreak",
-    "days": "dage",
-    "resetApp": "Nulstil app",
-    "resetWarningTitle": "Nulstil alle data?",
-    "resetWarningDescription": "Dette vil slette al din fremgang, badges og præferencer. Denne handling kan ikke fortrydes."
+    "audioSection": "Lydfeedback",
+    "audioSettings": {
+      "readAloud": "Læs tekst højt",
+      "soundEffects": "Lydeffekter",
+      "backgroundMusic": "Baggrundsmusik"
+    },
+    "accountSection": "Konto",
+    "saveChanges": "Gem ændringer",
+    "changesSuccessfullySaved": "Dine ændringer er blevet gemt!"
   },
   "badges": {
-    "customizer": "Tema Udforsker",
-    "dailylogin": "Daglig Login",
-    "mathwhiz": "Matematik Geni",
-    "problemsolver": "Problemløser"
+    "newBadge": "Nyt Badge Optjent!",
+    "firstLogin": "Første Login",
+    "fiveDayStreak": "5 Dages Streak",
+    "tenDayStreak": "10 Dages Streak",
+    "twentyDayStreak": "20 Dages Streak",
+    "hundredPoints": "100 Point",
+    "fiveHundredPoints": "500 Point",
+    "thousandPoints": "1000 Point",
+    "firstQuizCompleted": "Første Quiz",
+    "quizMaster": "Quiz Mester",
+    "imageAnalysisPro": "Billedanalyse Pro",
+    "realLifeMathWhiz": "Virkelig Liv Matematik Whiz",
+    "customizer": "Tema Tilpasser",
+    "viewAll": "Se alle badges"
   },
   "notifications": {
-    "pointsEarned": "Du har tjent {{points}} point!",
-    "badgeEarned": "Nyt emblem: {{badge}}!",
-    "challengeComplete": "Udfordring gennemført!",
-    "sessionComplete": "Læringssession gennemført!",
-    "streakUpdated": "Dag {{count}} i træk! Bliv ved!",
-    "settingsUpdated": "Indstillinger opdateret! Du har tjent 10 point for at tilpasse din oplevelse.",
-    "settingsSaved": "Indstillinger gemt.",
-    "appReset": "Appen er blevet nulstillet. Tager dig tilbage til starten."
+    "pointsEarned": "Du optjente {{points}} point!",
+    "badgeEarned": "Nyt badge optjent: {{badge}}",
+    "welcome": "Velkommen til GradeAid!",
+    "streakReminder": "Glem ikke at øve i dag for at holde din streak!",
+    "streakAchieved": "🔥 {{count}} dages streak opnået!"
   },
   "onboarding": {
-    "title": "Velkommen til Matematik Hjælper!",
-    "subtitle": "Lad os komme i gang med nogle få hurtige trin",
-    "errors": {
-      "nameRequired": "Fortæl os venligst dit navn, så vi kan fortsætte"
-    },
-    "greetings": {
-      "hello": "Dejligt at møde dig, {{name}}!"
-    },
-    "guidance": {
-      "welcome": "Dette er et sikkert rum, hvor vi personliggør læring lige til dig. Tag dig tid!",
-      "learningStyle": "Der er intet forkert svar her! Vi bruger dine valg til at gøre læring bedst for dig.",
-      "theme": "Dit tema vil gøre dit læringsrum sejt! Du kan altid ændre det senere."
-    },
+    "title": "Lad os komme i gang",
+    "subtitle": "Vi hjælper dig med at indstille din personlige læringsoplevelse",
+    "nameLabel": "Hvad skal vi kalde dig?",
+    "nameError": "Indtast venligst dit navn",
+    "shortNameError": "Navn skal være mindst 2 tegn",
+    "greeting": "Hej, {{name}}!",
+    "guidanceMessage": "Fortæl os om dine præferencer for at personliggøre din læringsoplevelse.",
     "steps": {
       "step1": {
-        "title": "Om dig",
-        "ageLabel": "Hvor gammel er du?",
-        "nameLabel": "Hvad hedder du?"
+        "nameLabel": "Hvad skal vi kalde dig?",
+        "title": "Lad os komme i gang"
       },
       "step2": {
-        "title": "Hvordan kan du lide at lære?",
-        "difficultyLabel": "Matematik sværhedsgrad",
-        "easy": "Let",
-        "medium": "Medium",
-        "hard": "Svær"
+        "title": "Hvordan kan du lide at lære?"
       },
       "step3": {
-        "title": "Vælg dit tema",
-        "defaultTheme": "Standard",
-        "minecraftTheme": "Minecraft",
-        "robloxTheme": "Roblox",
-        "fortniteTheme": "Fortnite"
+        "title": "Vælg et tema"
       }
     },
-    "completed": "Godt arbejde! Du er klar til at begynde at lære!"
+    "greetings": {
+      "hello": "Hej!"
+    },
+    "learningStyleStep": {
+      "title": "Hvordan kan du lide at lære?",
+      "description": "Vælg den mulighed, der bedst beskriver din foretrukne måde at lære på:",
+      "visualLabel": "Visuel Lærende",
+      "visualDescription": "Jeg lærer bedst gennem billeder, diagrammer og visuelle eksempler",
+      "auditoryLabel": "Auditiv Lærende",
+      "auditoryDescription": "Jeg lærer bedst gennem lytning og verbale forklaringer",
+      "kinestheticLabel": "Hands-on Lærende",
+      "kinestheticDescription": "Jeg lærer bedst gennem interaktive aktiviteter og spil",
+      "readingLabel": "Læsning & Skrivning",
+      "readingDescription": "Jeg lærer bedst gennem tekstbaserede materialer og note-taking"
+    },
+    "themeStep": {
+      "title": "Vælg et tema",
+      "description": "Gør din læringsoplevelse sjovere med et tema:",
+      "minecraftLabel": "Minecraft",
+      "minecraftDescription": "Blokket og eventyrligt",
+      "robloxLabel": "Roblox",
+      "robloxDescription": "Kreativ og farverig",
+      "fortniteLabel": "Fortnite",
+      "fortniteDescription": "Inspireret af battle royale",
+      "princessLabel": "Prinsesse",
+      "princessDescription": "Kongelig og magisk",
+      "pirateLabel": "Pirat",
+      "pirateDescription": "Højsøeventyr",
+      "spaceLabel": "Rummet",
+      "spaceDescription": "Kosmisk og futuristisk"
+    },
+    "completionMessage": "Du er klar til at begynde at lære!"
+  },
+  "balloonGame": {
+    "operations": {
+      "addition": "Addition",
+      "subtraction": "Subtraktion",
+      "multiplication": "Multiplikation",
+      "division": "Division"
+    },
+    "operationChanged": "Skiftet til {{operation}}stilstand!",
+    "balloonAdded": "Ballon tilføjet! Din kurv stiger højere.",
+    "balloonRemoved": "Ballon fjernet! Kurven føles lidt tungere nu.",
+    "sandbagAdded": "Sandsæk tilføjet! Din kurv synker lavere.",
+    "sandbagRemoved": "Sandsæk fjernet! Kurven føles lidt lettere nu.",
+    "perfectScore": "🌟 Perfekt score! Du er en matematik-superstjerne! 🌟",
+    "goodScore": "✨ Godt arbejde! Du er virkelig god til matematik! ✨",
+    "keepTrying": "💪 Fantastisk forsøg! Lad os fortsætte med at spille for at blive endnu bedre! 💪",
+    "hints": {
+      "addition": {
+        "bothItems": "Du har {{balloons}} balloner og {{sandbags}} sandsække. Når du lægger dem sammen: {{balloons}} + {{sandbags}} = {{total}}",
+        "onlyBalloons": "Du har {{balloons}} balloner. Det totale er {{total}}.",
+        "onlySandbags": "Du har {{sandbags}} sandsække. Det totale er {{total}}."
+      },
+      "multiplication": {
+        "bothItems": "Du har {{balloons}} balloner og {{sandbags}} sandsække. Når du ganger dem: {{balloons}} × {{sandbags}} = {{total}}",
+        "onlyBalloons": "Du har {{balloons}} balloner. Uden sandsække at gange med er resultatet 0.",
+        "onlySandbags": "Du har {{sandbags}} sandsække. Uden balloner at gange med er resultatet 0."
+      },
+      "division": {
+        "bothItems": "Du har {{balloons}} balloner og {{sandbags}} sandsække. Når du dividerer dem: {{balloons}} ÷ {{sandbags}} = {{total}}",
+        "onlyBalloons": "Du har {{balloons}} balloner. Uden sandsække er division ikke mulig.",
+        "onlySandbags": "Du har {{sandbags}} sandsække. Uden balloner er resultatet 0."
+      },
+      "subtraction": {
+        "bothItems": "Du har {{balloons}} balloner (positive) og {{sandbags}} sandsække (negative). Ballonerne trækker op og sandsækkene trækker ned. {{balloons}} - {{sandbags}} = {{total}}",
+        "onlyBalloons": "Du har {{balloons}} balloner (positive). Ballonerne trækker op, hvilket resulterer i en værdi på {{total}}.",
+        "onlySandbags": "Du har {{sandbags}} sandsække (negative). Sandsækkene trækker ned, hvilket resulterer i en værdi på {{total}}."
+      },
+      "default": "Tilføj balloner eller sandsække for at se, hvordan de interagerer!"
+    },
+    "controls": {
+      "firstNumber": "🎈 Første tal",
+      "secondNumber": "🎒 Andet tal",
+      "firstFactor": "🍪 Første faktor",
+      "secondFactor": "🧸 Anden faktor",
+      "totalSlices": "🍕 Totale stykker",
+      "friendsToShareWith": "👫 Venner at dele med",
+      "balloons": "🎈 Balloner (Op)",
+      "sandbags": "🧱 Sandsække (Ned)",
+      "mathEquation": "✨ Min matematikligning"
+    },
+    "guidance": {
+      "title": "💡 Nyttigt tip"
+    },
+    "prompt": {
+      "title": "🎉 Wow! Du er fantastisk til {{operation}}!",
+      "description": "Vil du gerne spille et sjovt {{operation}}spil eller prøve et andet matematikfventyr?",
+      "playQuiz": "✨ Spil Quiz Spil",
+      "trySubtraction": "➖ Prøv Subtraktion",
+      "tryAddition": "➕ Prøv Addition",
+      "tryMultiplication": "✖️ Prøv Multiplikation",
+      "tryDivision": "➗ Prøv Division"
+    },
+    "quiz": {
+      "additionTitle": "➕ Sjov Additions Quiz!",
+      "subtractionTitle": "➖ Sjov Subtraktions Quiz!",
+      "multiplicationTitle": "✖️ Sjov Multiplikations Quiz!",
+      "divisionTitle": "➗ Sjov Divisions Quiz!",
+      "progress": "Spørgsmål {{current}} af {{total}} - Du kan gøre det! 💪",
+      "correctAnswer": "🎯 Juhuu! Du svarede rigtigt! Du er så klog! 🌟",
+      "wrongAnswer": "❓ Ups! Svaret er: {{answer}} - Lad os prøve en anden! 💫",
+      "checkAnswer": "Tjek mit svar 🔍",
+      "nextQuestion": "Næste spørgsmål ➡️",
+      "finishGame": "Afslut spil 🏁",
+      "completed": "🎊 Quiz Fuldført! 🎊",
+      "scoreResult": "Du scorede {{score}} ud af {{total}} - Fantastisk arbejde!",
+      "perfectScoreFeedback": "🌟 Perfekt score! Du er en matematik-superstjerne! 🌟",
+      "goodScoreFeedback": "✨ Godt arbejde! Du er virkelig god til matematik! ✨",
+      "tryAgainFeedback": "💪 Fantastisk forsøg! Lad os fortsætte med at spille for at blive endnu bedre! 💪",
+      "keepPlaying": "Fortsæt med at spille 🎮",
+      "addition": {
+        "q1": "🎈 Hvis du har {{balloons}} balloner og får {{sandbags}} mere, hvor mange balloner har du nu?",
+        "q2": "🍦 Du har {{count}} isvaffelkugler. Din ven giver dig 3 mere. Hvor mange kugler har du?",
+        "q3": "🧩 Hvad viser at lægge ting sammen?",
+        "q3o1": "At dele legetøj med venner",
+        "q3o2": "At tælle alle småkagerne i to krukker",
+        "q3o3": "At skære en pizza i stykker",
+        "q3o4": "At finde ud af hvor mange flere point du har brug for"
+      },
+      "subtraction": {
+        "q1": "🎈 Du har {{balloons}} balloner. {{count}} springer! Hvor mange balloner er tilbage?",
+        "q2": "⚖️ Kurven har {{balloons}} balloner (der går op) og {{sandbags}} sandsække (der går ned). Hvor ender den?",
+        "q3": "🏄 Hvad sker der, når du tilføjer flere sandsække til din kurv?",
+        "q3o1": "Den flyder højere på himlen",
+        "q3o2": "Tallet bliver større",
+        "q3o3": "Tallet bliver mindre",
+        "q3o4": "Intet ændrer sig"
+      },
+      "multiplication": {
+        "q1": "🍪 Du har {{balloons}} tallerkener med {{sandbags}} småkager på hver tallerken. Hvor mange småkager i alt?",
+        "q2": "🚗 Der er {{sandbags}} legetøjsbiler. Hver bil har {{balloons}} hjul. Hvor mange hjul i alt?",
+        "q3": "🍭 Hvad ligner multiplikation?",
+        "q3o1": "At lægge det samme tal sammen igen og igen",
+        "q3o2": "At tage nogle væk fra en gruppe",
+        "q3o3": "At dele slik ligeligt",
+        "q3o4": "At lægge to tal sammen"
+      },
+      "division": {
+        "q1": "🍕 Du har {{count}} pizzastykker at dele med {{sandbags}} venner. Hvor mange stykker får hver ven?",
+        "q2": "🧸 Du skal lægge {{count}} teddybjørne i {{balloons}} lige rækker. Hvor mange bjørne i hver række?",
+        "q3": "🍦 Hvad sker der, når du dividerer en is med 1?",
+        "q3o1": "Du får ingen is",
+        "q3o2": "Du får samme mængde is",
+        "q3o3": "Du får altid 1 is",
+        "q3o4": "Du kan ikke dividere med 1"
+      }
+    }
   },
   "error": {
     "somethingWentWrong": "Noget gik galt",
-    "tryAgain": "Prøv igen venligst",
+    "tryAgain": "Prøv venligst igen",
     "noInternet": "Ingen internetforbindelse",
-    "pageNotFound": "Siden blev ikke fundet",
-    "goHome": "Gå til forsiden"
+    "pageNotFound": "Side ikke fundet",
+    "goHome": "Gå til hjemmesiden"
+  },
+  "learningProgress": {
+    "title": "Læringsrejse",
+    "points": "point",
+    "toNextMilestone": "til næste milepæl",
+    "streak": "Streak",
+    "days": "dage",
+    "activities": "Aktiviteter",
+    "earnedBadges": "Optjente Badges",
+    "detailedStatistics": "Detaljeret Statistik",
+    "lastActivity": {
+      "today": "Sidste aktivitet: I dag",
+      "yesterday": "Sidste aktivitet: I går",
+      "daysAgo": "Sidste aktivitet: {{count}} dage siden"
+    },
+    "avgTime": "Gns. tid: {{count}} min",
+    "pointsPerActivity": "Point pr. aktivitet: {{count}}",
+    "badges": "Badges: {{count}}"
+  },
+  "taskAnalysis": {
+    "title": "Opgavetrin",
+    "audioDescription": "Opgavetrin. Følg disse trin for at fuldføre aktiviteten.",
+    "step": "Trin"
   }
 } 

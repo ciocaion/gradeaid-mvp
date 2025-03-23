@@ -11,6 +11,7 @@ import {
   BarChart3
 } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useTranslation } from 'react-i18next';
 
 interface LearningProgressProps {
   totalPoints: number;
@@ -35,6 +36,7 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
   className = '',
   showDetailedStats = false
 }) => {
+  const { t } = useTranslation();
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const [animate, setAnimate] = useState(false);
 
@@ -70,20 +72,20 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <Trophy className="h-5 w-5 text-amber-500" />
-              Learning Journey
+              {t('learningProgress.title')}
             </h2>
             
             <div className="text-sm font-medium flex items-center gap-1 text-primary">
               <Star className="h-4 w-4" />
-              {totalPoints} points
+              {totalPoints} {t('learningProgress.points')}
             </div>
           </div>
           
           {/* Progress to next milestone */}
           <div className="mb-6">
             <div className="flex justify-between text-sm mb-1">
-              <span>{previousMilestone} points</span>
-              <span>{nextMilestone} points</span>
+              <span>{previousMilestone} {t('learningProgress.points')}</span>
+              <span>{nextMilestone} {t('learningProgress.points')}</span>
             </div>
             <div className="h-4 w-full bg-gray-100 rounded-full overflow-hidden">
               <motion.div 
@@ -97,7 +99,7 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
               />
             </div>
             <div className="text-xs text-center mt-1 text-gray-500">
-              {Math.round(progressPercentage)}% to next milestone
+              {Math.round(progressPercentage)}% {t('learningProgress.toNextMilestone')}
             </div>
           </div>
           
@@ -106,15 +108,15 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
             <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
               <div className="flex items-center gap-2 mb-1">
                 <TrendingUp className="h-4 w-4 text-amber-600" />
-                <span className="text-sm font-medium text-amber-800">Streak</span>
+                <span className="text-sm font-medium text-amber-800">{t('learningProgress.streak')}</span>
               </div>
-              <p className="text-2xl font-bold text-amber-700">{streak} days</p>
+              <p className="text-2xl font-bold text-amber-700">{streak} {t('learningProgress.days')}</p>
             </div>
             
             <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
               <div className="flex items-center gap-2 mb-1">
                 <BookOpen className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-medium text-blue-800">Activities</span>
+                <span className="text-sm font-medium text-blue-800">{t('learningProgress.activities')}</span>
               </div>
               <p className="text-2xl font-bold text-blue-700">{completedActivities}</p>
             </div>
@@ -123,7 +125,7 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
           {/* Badges */}
           {badges.length > 0 && (
             <div className="mb-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Earned Badges</h3>
+              <h3 className="text-sm font-medium text-gray-700 mb-2">{t('learningProgress.earnedBadges')}</h3>
               <div className="flex flex-wrap gap-2">
                 {badges.map((badge, index) => (
                   <motion.div
@@ -137,7 +139,7 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
                     }}
                   >
                     <Star className="h-3.5 w-3.5 text-amber-500" />
-                    <span className="text-xs font-medium text-green-800">{badge}</span>
+                    <span className="text-xs font-medium text-green-800">{t(`badges.${badge.toLowerCase()}`)}</span>
                   </motion.div>
                 ))}
               </div>
@@ -149,7 +151,7 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
             <div className="border-t border-gray-100 pt-4 mt-4">
               <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-1.5">
                 <BarChart3 className="h-4 w-4" />
-                Detailed Statistics
+                {t('learningProgress.detailedStatistics')}
               </h3>
               
               <div className="grid grid-cols-2 gap-3 text-sm">
@@ -157,31 +159,31 @@ const LearningProgress: React.FC<LearningProgressProps> = ({
                   <Calendar className="h-4 w-4 text-gray-400" />
                   <span className="text-gray-600">
                     {daysSinceLastActivity === 0 
-                      ? 'Last activity: Today' 
+                      ? t('learningProgress.lastActivity.today') 
                       : daysSinceLastActivity === 1 
-                      ? 'Last activity: Yesterday'
-                      : `Last activity: ${daysSinceLastActivity} days ago`}
+                      ? t('learningProgress.lastActivity.yesterday')
+                      : t('learningProgress.lastActivity.daysAgo', { count: daysSinceLastActivity })}
                   </span>
                 </div>
                 
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-gray-400" />
                   <span className="text-gray-600">
-                    Avg time: {Math.round(completedActivities > 0 ? (completedActivities * 5.3) / completedActivities : 0)} min
+                    {t('learningProgress.avgTime', { count: Math.round(completedActivities > 0 ? (completedActivities * 5.3) / completedActivities : 0) })}
                   </span>
                 </div>
                 
                 <div className="flex items-center gap-2">
                   <Star className="h-4 w-4 text-gray-400" />
                   <span className="text-gray-600">
-                    Points per activity: {completedActivities > 0 ? Math.round(totalPoints / completedActivities) : 0}
+                    {t('learningProgress.pointsPerActivity', { count: completedActivities > 0 ? Math.round(totalPoints / completedActivities) : 0 })}
                   </span>
                 </div>
                 
                 <div className="flex items-center gap-2">
                   <Trophy className="h-4 w-4 text-gray-400" />
                   <span className="text-gray-600">
-                    Badges: {badges.length}
+                    {t('learningProgress.badges', { count: badges.length })}
                   </span>
                 </div>
               </div>

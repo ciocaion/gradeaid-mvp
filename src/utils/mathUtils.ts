@@ -1,10 +1,11 @@
+import i18n from '../i18n';
 
 // This file contains utility functions for mathematical operations
 
 export type OperationType = 'addition' | 'subtraction' | 'multiplication' | 'division';
 
 // Calculate the final value based on operation
-export const calculateValue = (balloons: number, sandbags: number, operation: OperationType = 'subtraction'): number => {
+export const calculateValue = (balloons: number, sandbags: number, operation: OperationType = 'multiplication'): number => {
   switch (operation) {
     case 'addition':
       return balloons + sandbags;
@@ -48,63 +49,93 @@ export const removeSandbags = (current: number, amount: number): number => {
 };
 
 // Generate hint based on the current state and operation
-export const generateHint = (balloons: number, sandbags: number, operation: OperationType = 'subtraction'): string => {
+export const generateHint = (balloons: number, sandbags: number, operation: OperationType = 'multiplication'): string => {
   const total = calculateValue(balloons, sandbags, operation);
+  const t = i18n.getFixedT(i18n.language);
   
   switch (operation) {
     case 'addition':
       if (balloons > 0 && sandbags > 0) {
-        return `You have ${balloons} balloons and ${sandbags} sandbags. 
-                When adding them together: ${balloons} + ${sandbags} = ${total}`;
+        return t('balloonGame.hints.addition.bothItems', { 
+          balloons, 
+          sandbags, 
+          total
+        });
       } else if (balloons > 0) {
-        return `You have ${balloons} balloons. The total is ${total}.`;
+        return t('balloonGame.hints.addition.onlyBalloons', { 
+          balloons, 
+          total
+        });
       } else if (sandbags > 0) {
-        return `You have ${sandbags} sandbags. The total is ${total}.`;
+        return t('balloonGame.hints.addition.onlySandbags', { 
+          sandbags, 
+          total
+        });
       }
       break;
     
     case 'multiplication':
       if (balloons > 0 && sandbags > 0) {
-        return `You have ${balloons} balloons and ${sandbags} sandbags. 
-                When multiplying them: ${balloons} × ${sandbags} = ${total}`;
+        return t('balloonGame.hints.multiplication.bothItems', { 
+          balloons, 
+          sandbags, 
+          total
+        });
       } else if (balloons > 0) {
-        return `You have ${balloons} balloons. With no sandbags to multiply, the result is 0.`;
+        return t('balloonGame.hints.multiplication.onlyBalloons', { 
+          balloons
+        });
       } else if (sandbags > 0) {
-        return `You have ${sandbags} sandbags. With no balloons to multiply, the result is 0.`;
+        return t('balloonGame.hints.multiplication.onlySandbags', { 
+          sandbags
+        });
       }
       break;
       
     case 'division':
       if (balloons > 0 && sandbags > 0) {
-        return `You have ${balloons} balloons and ${sandbags} sandbags. 
-                When dividing them: ${balloons} ÷ ${sandbags} = ${total}`;
+        return t('balloonGame.hints.division.bothItems', { 
+          balloons, 
+          sandbags, 
+          total
+        });
       } else if (balloons > 0) {
-        return `You have ${balloons} balloons. Without sandbags, division isn't possible.`;
+        return t('balloonGame.hints.division.onlyBalloons', { 
+          balloons
+        });
       } else if (sandbags > 0) {
-        return `You have ${sandbags} sandbags. With no balloons, the result is 0.`;
+        return t('balloonGame.hints.division.onlySandbags', { 
+          sandbags
+        });
       }
       break;
       
     case 'subtraction':
     default:
       if (balloons > 0 && sandbags > 0) {
-        return `You have ${balloons} balloons (positive) and ${sandbags} sandbags (negative). 
-                The balloons pull up and the sandbags pull down. 
-                ${balloons} - ${sandbags} = ${total}`;
+        return t('balloonGame.hints.subtraction.bothItems', { 
+          balloons, 
+          sandbags, 
+          total
+        });
       } else if (balloons > 0) {
-        return `You have ${balloons} balloons (positive). 
-                The balloons pull up, resulting in a value of ${total}.`;
+        return t('balloonGame.hints.subtraction.onlyBalloons', { 
+          balloons, 
+          total
+        });
       } else if (sandbags > 0) {
-        return `You have ${sandbags} sandbags (negative). 
-                The sandbags pull down, resulting in a value of ${total}.`;
+        return t('balloonGame.hints.subtraction.onlySandbags', { 
+          sandbags, 
+          total
+        });
       }
   }
   
-  return "Add balloons or sandbags to see how they interact!";
+  return t('balloonGame.hints.default');
 };
 
 // Format value as an expression based on operation
-export const formatExpression = (balloons: number, sandbags: number, operation: OperationType = 'subtraction'): string => {
+export const formatExpression = (balloons: number, sandbags: number, operation: OperationType = 'multiplication'): string => {
   const total = calculateValue(balloons, sandbags, operation);
   
   if (balloons === 0 && sandbags === 0) {
