@@ -3,12 +3,14 @@ import { Upload, ImagePlus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 interface ImageUploaderProps {
   onImageSelected: (imageData: File | null) => void;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelected }) => {
+  const { t } = useTranslation();
   const [dragActive, setDragActive] = useState<boolean>(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -107,13 +109,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelected }) => {
           ) : (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <ImagePlus className="h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium mb-2">Upload an image</h3>
+              <h3 className="text-lg font-medium mb-2">{t('imageUploader.title')}</h3>
               <p className="text-sm text-gray-500 mb-6">
-                Drag and drop an image, or click to browse
+                {t('imageUploader.dragDropText')}
               </p>
               <Button onClick={openFileDialog} className="gap-2">
                 <Upload className="h-4 w-4" />
-                Browse Files
+                {t('imageUploader.browseFiles')}
               </Button>
             </div>
           )}

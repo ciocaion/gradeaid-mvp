@@ -60,11 +60,11 @@ const RealLifePractice: React.FC = () => {
   const [streak, setStreak] = useState(0);
 
   const [taskSteps, setTaskSteps] = useState([
-    { step: 1, text: "Read the activity", icon: "📖", complete: false },
-    { step: 2, text: "Choose how to respond", icon: "🔍", complete: false },
-    { step: 3, text: "Create your solution", icon: "✏️", complete: false },
-    { step: 4, text: "Submit your work", icon: "📤", complete: false },
-    { step: 5, text: "Review feedback", icon: "🎯", complete: false }
+    { step: 1, text: t('realLifePractice.activitySteps.step1'), icon: "📖", complete: false },
+    { step: 2, text: t('realLifePractice.activitySteps.step2'), icon: "🔍", complete: false },
+    { step: 3, text: t('realLifePractice.activitySteps.step3'), icon: "✏️", complete: false },
+    { step: 4, text: t('realLifePractice.activitySteps.step4'), icon: "📤", complete: false },
+    { step: 5, text: t('realLifePractice.activitySteps.step5'), icon: "🎯", complete: false }
   ]);
 
   const [currentTaskStep, setCurrentTaskStep] = useState(1);

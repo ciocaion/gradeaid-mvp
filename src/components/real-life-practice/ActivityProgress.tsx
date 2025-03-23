@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Star, TrendingUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface ActivityProgressProps {
   completedCount: number;
@@ -11,6 +12,8 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({
   completedCount, 
   streak 
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <motion.div 
       className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4 mb-4"
@@ -20,7 +23,7 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({
     >
       <h3 className="text-lg font-semibold text-indigo-900 mb-3 flex items-center gap-2">
         <Trophy className="h-5 w-5 text-yellow-500" />
-        Activity Progress
+        {t('activityProgress.title')}
       </h3>
       
       <div className="grid grid-cols-2 gap-4">
@@ -29,7 +32,7 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({
             <Star className="h-5 w-5 text-purple-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-600">Activities Completed</p>
+            <p className="text-sm text-gray-600">{t('activityProgress.activitiesCompleted')}</p>
             <p className="text-xl font-bold text-purple-700">{completedCount}</p>
           </div>
         </div>
@@ -39,8 +42,8 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({
             <TrendingUp className="h-5 w-5 text-indigo-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-600">Current Streak</p>
-            <p className="text-xl font-bold text-indigo-700">{streak} days</p>
+            <p className="text-sm text-gray-600">{t('activityProgress.currentStreak')}</p>
+            <p className="text-xl font-bold text-indigo-700">{streak} {t('activityProgress.days')}</p>
           </div>
         </div>
       </div>
@@ -53,7 +56,7 @@ const ActivityProgress: React.FC<ActivityProgressProps> = ({
           transition={{ delay: 0.3 }}
         >
           <p className="text-sm text-amber-800 font-medium">
-            🔥 Amazing! You've maintained a {streak}-day streak. Keep going!
+            🔥 {t('activityProgress.streakMessage', { streak: streak })}
           </p>
         </motion.div>
       )}

@@ -527,5 +527,76 @@
     "title": "Task Steps",
     "audioDescription": "Task Steps. Follow these steps to complete the activity.",
     "step": "Step"
+  },
+  "imageUploader": {
+    "title": "Upload an image",
+    "dragDropText": "Drag and drop an image, or click to browse",
+    "browseFiles": "Browse Files"
+  },
+  "activityProgress": {
+    "title": "Activity Progress",
+    "activitiesCompleted": "Activities Completed",
+    "currentStreak": "Current Streak",
+    "days": "days",
+    "streakMessage": "Amazing! You've maintained a {{streak}}-day streak. Keep going!"
+  },
+  "features": {
+    "pageTitle": "Learning Features",
+    "pageAudioDescription": "Learning Features. Choose how you want to learn today.",
+    "homeButton": "Home",
+    "personalizedJourney": {
+      "title": "Try Our Personalized Learning Journey!",
+      "description": "Get a customized learning path based on your learning style preferences. Tell us what you want to learn!",
+      "startButton": "Start Personalized Learning"
+    },
+    "allLearningStyles": {
+      "title": "Features for All Learning Styles",
+      "audioDescription": "Features for all learning styles. Choose the one that works best for you.",
+      "description": "Our learning tools are designed to support different ways of learning, with special focus on neurodivergent friendly approaches."
+    },
+    "featureCard": {
+      "new": "NEW",
+      "enhanced": "ENHANCED",
+      "tryItButton": "Try it"
+    },
+    "features": {
+      "balloonSandbag": {
+        "title": "Balloon & Sandbag Math",
+        "description": "Visualize integer addition and subtraction with interactive 3D objects"
+      },
+      "structuredLearning": {
+        "title": "Structured Learning",
+        "description": "Learn step-by-step with visual cues, clear tasks, and feedback designed for different learning styles"
+      },
+      "funZone": {
+        "title": "Fun Zone",
+        "description": "Play games and earn rewards while practicing math skills"
+      },
+      "videoLearning": {
+        "title": "Video Learning",
+        "description": "Watch educational videos and YouTube Shorts based on what you want to learn"
+      },
+      "learningPath": {
+        "title": "Learning Path",
+        "description": "Follow a personalized learning journey with clear goals and visual progress tracking"
+      },
+      "imageToContent": {
+        "title": "Image to Learning",
+        "description": "Take a picture of schoolwork and get interactive learning content with step-by-step explanations"
+      },
+      "realLifeExercise": {
+        "title": "Real-Life Practice",
+        "description": "Complete real-world activities with structured guidance and supportive feedback"
+      },
+      "aiPodcast": {
+        "title": "AI Learning Podcast",
+        "description": "Listen to personalized mini-lessons based on your interests with audio support for reading difficulties"
+      },
+      "flashcards": {
+        "title": "Smart Flashcards",
+        "description": "Interactive flashcards that adapt to how you learn with visual and audio support"
+      }
+    },
+    "continueDashboard": "Continue to Dashboard"
   }
 } 

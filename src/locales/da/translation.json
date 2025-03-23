@@ -527,5 +527,76 @@
     "title": "Opgavetrin",
     "audioDescription": "Opgavetrin. Følg disse trin for at fuldføre aktiviteten.",
     "step": "Trin"
+  },
+  "imageUploader": {
+    "title": "Upload et billede",
+    "dragDropText": "Træk og slip et billede, eller klik for at gennemse",
+    "browseFiles": "Gennemse filer"
+  },
+  "activityProgress": {
+    "title": "Aktivitetsfremskridt",
+    "activitiesCompleted": "Fuldførte Aktiviteter",
+    "currentStreak": "Nuværende Streak",
+    "days": "dage",
+    "streakMessage": "Fantastisk! Du har opretholdt en {{streak}}-dages streak. Fortsæt det gode arbejde!"
+  },
+  "features": {
+    "pageTitle": "Læringsfunktioner",
+    "pageAudioDescription": "Læringsfunktioner. Vælg hvordan du vil lære i dag.",
+    "homeButton": "Hjem",
+    "personalizedJourney": {
+      "title": "Prøv Vores Personlige Læringsrejse!",
+      "description": "Få en tilpasset læringssti baseret på dine læringsstilspræferencer. Fortæl os hvad du vil lære!",
+      "startButton": "Start Personlig Læring"
+    },
+    "allLearningStyles": {
+      "title": "Funktioner for Alle Læringsstile",
+      "audioDescription": "Funktioner for alle læringsstile. Vælg den der virker bedst for dig.",
+      "description": "Vores læringsværktøjer er designet til at understøtte forskellige måder at lære på, med særligt fokus på neurodivergente venlige tilgange."
+    },
+    "featureCard": {
+      "new": "NY",
+      "enhanced": "FORBEDRET",
+      "tryItButton": "Prøv det"
+    },
+    "features": {
+      "balloonSandbag": {
+        "title": "Ballon & Sandsæk Matematik",
+        "description": "Visualiser heltal addition og subtraktion med interaktive 3D-objekter"
+      },
+      "structuredLearning": {
+        "title": "Struktureret Læring",
+        "description": "Lær trin for trin med visuelle tegn, klare opgaver og feedback designet til forskellige læringsstile"
+      },
+      "funZone": {
+        "title": "Sjov Zone",
+        "description": "Spil spil og optjen belønninger, mens du øver matematikfærdigheder"
+      },
+      "videoLearning": {
+        "title": "Video Læring",
+        "description": "Se uddannelsesvideoer og YouTube Shorts baseret på hvad du vil lære"
+      },
+      "learningPath": {
+        "title": "Læringssti",
+        "description": "Følg en personlig læringsrejse med klare mål og visuel fremgangssporing"
+      },
+      "imageToContent": {
+        "title": "Billede til Læring",
+        "description": "Tag et billede af skolearbejde og få interaktivt læringsindhold med trin for trin forklaringer"
+      },
+      "realLifeExercise": {
+        "title": "Praksis i Virkeligheden",
+        "description": "Fuldfør aktiviteter fra den virkelige verden med struktureret vejledning og støttende feedback"
+      },
+      "aiPodcast": {
+        "title": "AI Læringspodcast",
+        "description": "Lyt til personlige mini-lektioner baseret på dine interesser med lydstøtte til læsevanskeligheder"
+      },
+      "flashcards": {
+        "title": "Smarte Flashcards",
+        "description": "Interaktive flashcards der tilpasser sig din måde at lære på med visuel og lydstøtte"
+      }
+    },
+    "continueDashboard": "Fortsæt til Dashboard"
   }
 } 

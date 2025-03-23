@@ -28,11 +28,13 @@ import PreferencesButton from '@/components/PreferencesButton';
 import LearningProgress from '@/components/LearningProgress';
 import AudioText from '@/components/AudioText';
 import { Badge } from '@/components/ui/badge';
+import { useTranslation } from 'react-i18next';
 
 const Features = () => {
   const navigate = useNavigate();
   const { preferences, completeOnboarding, addPoints } = useUserPreferences();
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
+  const { t } = useTranslation();
   
   const handleFeatureSelect = (feature: string) => {
     setSelectedFeature(feature);
@@ -84,68 +86,68 @@ const Features = () => {
   const features = [
     {
       id: 'balloonSandbag',
-      title: 'Balloon & Sandbag Math',
-      description: 'Visualize integer addition and subtraction with interactive 3D objects',
+      title: t('features.features.balloonSandbag.title'),
+      description: t('features.features.balloonSandbag.description'),
       icon: <Brain className="h-8 w-8 text-violet-600" />,
       color: 'bg-violet-100 text-violet-600 border-violet-200'
     },
     {
       id: 'structuredLearning',
-      title: 'Structured Learning',
-      description: 'Learn step-by-step with visual cues, clear tasks, and feedback designed for different learning styles',
+      title: t('features.features.structuredLearning.title'),
+      description: t('features.features.structuredLearning.description'),
       icon: <Lightbulb className="h-8 w-8 text-amber-600" />,
       color: 'bg-amber-100 text-amber-600 border-amber-200',
       new: true
     },
     {
       id: 'funZone',
-      title: 'Fun Zone',
-      description: 'Play games and earn rewards while practicing math skills',
+      title: t('features.features.funZone.title'),
+      description: t('features.features.funZone.description'),
       icon: <Gamepad2 className="h-8 w-8 text-emerald-600" />,
       color: 'bg-emerald-100 text-emerald-600 border-emerald-200'
     },
     {
       id: 'videoLearning',
-      title: 'Video Learning',
-      description: 'Watch educational videos and YouTube Shorts based on what you want to learn',
+      title: t('features.features.videoLearning.title'),
+      description: t('features.features.videoLearning.description'),
       icon: <Youtube className="h-8 w-8 text-red-600" />,
       color: 'bg-red-100 text-red-600 border-red-200'
     },
     {
       id: 'learningPath',
-      title: 'Learning Path',
-      description: 'Follow a personalized learning journey with clear goals and visual progress tracking',
+      title: t('features.features.learningPath.title'),
+      description: t('features.features.learningPath.description'),
       icon: <LineChart className="h-8 w-8 text-blue-600" />,
       color: 'bg-blue-100 text-blue-600 border-blue-200',
       new: true
     },
     {
       id: 'imageToContent',
-      title: 'Image to Learning',
-      description: 'Take a picture of schoolwork and get interactive learning content with step-by-step explanations',
+      title: t('features.features.imageToContent.title'),
+      description: t('features.features.imageToContent.description'),
       icon: <Camera className="h-8 w-8 text-rose-600" />,
       color: 'bg-rose-100 text-rose-600 border-rose-200',
       enhanced: true
     },
     {
       id: 'realLifeExercise',
-      title: 'Real-Life Practice',
-      description: 'Complete real-world activities with structured guidance and supportive feedback',
+      title: t('features.features.realLifeExercise.title'),
+      description: t('features.features.realLifeExercise.description'),
       icon: <MessageSquare className="h-8 w-8 text-amber-600" />,
       color: 'bg-amber-100 text-amber-600 border-amber-200',
       enhanced: true
     },
     {
       id: 'aiPodcast',
-      title: 'AI Learning Podcast',
-      description: 'Listen to personalized mini-lessons based on your interests with audio support for reading difficulties',
+      title: t('features.features.aiPodcast.title'),
+      description: t('features.features.aiPodcast.description'),
       icon: <Headphones className="h-8 w-8 text-blue-600" />,
       color: 'bg-blue-100 text-blue-600 border-blue-200'
     },
     {
       id: 'flashcards',
-      title: 'Smart Flashcards',
-      description: 'Interactive flashcards that adapt to how you learn with visual and audio support',
+      title: t('features.features.flashcards.title'),
+      description: t('features.features.flashcards.description'),
       icon: <ScrollText className="h-8 w-8 text-cyan-600" />,
       color: 'bg-cyan-100 text-cyan-600 border-cyan-200',
       enhanced: true
@@ -159,9 +161,9 @@ const Features = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
           <BookOpen className="h-6 w-6" />
-          Learning Features
+          {t('features.pageTitle')}
           <AudioText 
-            text="Learning Features. Choose how you want to learn today."
+            text={t('features.pageAudioDescription')}
             className="ml-2"
           />
         </h1>
@@ -173,7 +175,7 @@ const Features = () => {
             className="bg-white/80 hover:bg-white/90 shadow-sm" 
             onClick={() => navigate('/home')}
           >
-            <Home className="h-4 w-4 mr-1.5" /> Home
+            <Home className="h-4 w-4 mr-1.5" /> {t('features.homeButton')}
           </Button>
           
           {preferences.hasCompletedOnboarding && (
@@ -193,9 +195,9 @@ const Features = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="max-w-lg">
-                <h2 className="text-2xl font-bold mb-2">Try Our Personalized Learning Journey!</h2>
+                <h2 className="text-2xl font-bold mb-2">{t('features.personalizedJourney.title')}</h2>
                 <p className="mb-4 opacity-90">
-                  Get a customized learning path based on your learning style preferences. Tell us what you want to learn!
+                  {t('features.personalizedJourney.description')}
                 </p>
                 <Button 
                   onClick={() => navigate('/learning')}
@@ -203,7 +205,7 @@ const Features = () => {
                   className="px-6 py-6 text-primary hover:bg-white/90"
                   size="lg"
                 >
-                  Start Personalized Learning <ChevronRight className="ml-1.5 h-4 w-4" />
+                  {t('features.personalizedJourney.startButton')} <ChevronRight className="ml-1.5 h-4 w-4" />
                 </Button>
               </div>
               <div className="hidden md:block">
@@ -229,15 +231,14 @@ const Features = () => {
       <div className="mb-6">
         <h2 className="text-xl font-semibold mb-3 flex items-center gap-2">
           <Star className="h-5 w-5 text-amber-500" />
-          Features for All Learning Styles
+          {t('features.allLearningStyles.title')}
           <AudioText 
-            text="Features for all learning styles. Choose the one that works best for you."
+            text={t('features.allLearningStyles.audioDescription')}
             className="ml-2"
           />
         </h2>
         <p className="text-gray-600">
-          Our learning tools are designed to support different ways of learning, 
-          with special focus on neurodivergent friendly approaches.
+          {t('features.allLearningStyles.description')}
         </p>
       </div>
       
@@ -273,12 +274,12 @@ const Features = () => {
                   <div className="flex gap-1.5">
                     {feature.new && (
                       <Badge variant="default" className="bg-green-600 hover:bg-green-700">
-                        NEW
+                        {t('features.featureCard.new')}
                       </Badge>
                     )}
                     {feature.enhanced && (
                       <Badge variant="outline" className="border-blue-500 text-blue-600">
-                        ENHANCED
+                        {t('features.featureCard.enhanced')}
                       </Badge>
                     )}
                   </div>
@@ -303,7 +304,7 @@ const Features = () => {
                       handleFeatureSelect(feature.id);
                     }}
                   >
-                    Try it
+                    {t('features.featureCard.tryItButton')}
                     <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
@@ -325,7 +326,7 @@ const Features = () => {
             className="px-8 shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary/90" 
             size="lg"
           >
-            Continue to Dashboard
+            {t('features.continueDashboard')}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </motion.div>
